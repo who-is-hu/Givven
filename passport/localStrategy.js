@@ -15,10 +15,10 @@ module.exports = (passport) => {
                 if(result){
                     done(null, exUser);
                 } else {
-                    done(null, false, { message : "비밀번호가 일치하지 않습니다."});
+                    done(null, false, { msg : "비밀번호가 일치하지 않습니다."});
                 }    
             } else {
-                done(null, false, {message : '가입되지 않은 회원'});
+                done(null, false, {msg : '가입되지 않은 회원'});
             }
         } catch (err){
             console.error(err);

@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "19981231",
-    "database": "openstudy",
+    "password": "givven123!@#",
+    "database": "givven",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false,
@@ -10,9 +10,9 @@
   },
   "release": {
     "username": "root",
-    "password": "Openstudy123!@#",
+    "password": "given123!@#",
     "host" : "104.196.68.14",
-    "database": "openstudy",
+    "database": "givven",
     "dialect": "mysql",
     "operatorsAliases": false,
     "logging" : false
