@@ -18,7 +18,7 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('port', process.env.PORT || 8001);
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/')));
 app.use(flash());
 sequelize.sync();
 passportConfig(passport);
