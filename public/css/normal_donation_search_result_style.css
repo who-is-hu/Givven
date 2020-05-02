@@ -135,11 +135,10 @@
  }
 
 
- #carouselIndicators {
+ #donations {
     height: 400px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 15px;
     background-color:white;
- }
-
- .carousel-indicators li {
-    background-color: #6683ef;
  }

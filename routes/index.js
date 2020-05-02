@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('normal_main.html');
+  res.render('normal_donation_main.html');
 });
 router.get('/loginPage', function(req, res, next) {
   res.render('log_in.html');
