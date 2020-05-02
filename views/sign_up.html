@@ -47,17 +47,40 @@
 
 <script>
    $(function () {
+      var userType = "none";
       $('#submit').on("click", function () {
+         if(userType == "none"){
+            alert('please select user type');
+            return ;
+         }
          $.post("auth/join", {
             email: $("#email").val(),
             name: $("#name").val(),
-            password: $("#password").val()
+            password: $("#password").val(),
+            type : userType
          }, (data, status) => {
             alert(data.msg);
             if(data.res == 'fail');
             else
                window.location.href = '/';
          });
+      });
+      $('#normal_btn').on("click", function() {
+         userType = "normal";
+         $('#btn_group').children().css("background-color", "#B2D0EB");
+         $('#normal_btn').css("background-color", "#B2D000");
+
+      });
+      $('#charity_btn').on("click", function() {
+         userType = "charity";
+         $('#btn_group').children().css("background-color", "#B2D0EB");
+
+         $('#charity_btn').css("background-color", "#B2D000");
+      });
+      $('#seller_btn').on("click", function() {
+         userType = "seller";
+         $('#btn_group').children().css("background-color", "#B2D0EB");
+         $('#seller_btn').css("background-color", "#B2D000");
       });
    });
 

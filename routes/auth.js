@@ -6,12 +6,10 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
-    const {email, name, password} = req.body;
-    console.log(email, name, password);
+    const {email, name, password, type} = req.body;
     try{
         const exUser = await User.findOne({where : {email}});
         if(exUser){
-            console.log('exiost');
             return res.json({
                 res: 'fail',
                 msg: '이미 존재하는 계정'
@@ -22,9 +20,8 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             email,
             name,
             password : hash,
-            type : 'donate',
+            type,
         });
-        console.log('create');
         return res.json({
             res: 'success',
             msg: '회원가입 성공'
@@ -65,10 +62,21 @@ router.get('/logout',isLoggedIn, (req, res, next)=> {
 router.get('/isLoggedIn', (req, res, next) => {
     let result;
     if(req.isAuthenticated()){
-        result = true;
+        res.json({
+            res : true,
+            type : req.user.dataValues.type 
+        });
     } else {
-        result = false;
+        res.json({
+            res : false,
+            type : 'guest'
+        });
     }
-    res.json({res : result});
 });
+
+// router.get('/userType',  (req, res, next) => {
+//     if(req.user){
+//         res.json({userType : "guset"});
+//     }
+// });
 module.exports = router;
