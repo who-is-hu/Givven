@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             unique : true,
         },
-        nick : {
+        name : {
             type : DataTypes.STRING(15),
             allowNull : false,
         },
@@ -13,8 +13,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(100),
             allowNull: false,
         },
-        //studyId in Enroll
-        //tagId in EnrollTag
+        type : {
+            type : DataTypes.STRING(10),
+            allowNull : false,
+        }
     },{
         timestamps : true,
         paranoid : true,
