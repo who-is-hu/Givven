@@ -60,24 +60,8 @@ router.get('/logout',isLoggedIn, (req, res, next)=> {
     return res.redirect('/');
 });
 
-router.get('/isLoggedIn', (req, res, next) => {
-    let result;
-    if(req.isAuthenticated()){
-        res.json({
-            res : true,
-            type : req.user.dataValues.type 
-        });
-    } else {
-        res.json({
-            res : false,
-            type : 'guest'
-        });
-    }
+router.get('/isLoggedIn', isLoggedIn, (req, res, next) => {
+    res.json({res: true});
 });
 
-// router.get('/userType',  (req, res, next) => {
-//     if(req.user){
-//         res.json({userType : "guset"});
-//     }
-// });
 module.exports = router;
