@@ -21,6 +21,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             name,
             password : hash,
             type,
+            point : 0,
         });
         return res.json({
             res: 'success',

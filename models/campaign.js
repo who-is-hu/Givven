@@ -1,30 +1,25 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('user',{
-        id: {
-            allowNull : false,
-            autoIncrement: true,
-            primaryKey : true,
-        },
-        email: {
+    return sequelize.define('campaign',{
+        name: {
             type : DataTypes.STRING(40),
             allowNull : false,
             unique : true,
         },
-        name : {
-            type : DataTypes.STRING(15),
+        dest_money : {
+            type : DataTypes.INTEGER,
             allowNull : false,
         },
-        password : {
+        current_money : {
+            type : DataTypes.INTEGER,
+            allowNull : false,
+        },
+        content : {
             type: DataTypes.STRING(100),
             allowNull: false,
         },
-        type : {
+        due_day : {
             type : DataTypes.STRING(10),
             allowNull : false,
-        },
-        point : {
-            type : DataTypes.INTEGER(),
-            allowNull : true, 
         }
     },{
         timestamps : true,
