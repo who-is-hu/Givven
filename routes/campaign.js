@@ -17,10 +17,10 @@ router.post('/register', isLoggedIn, isUserCharity, async (req, res, next) => {
     }
 });
 
-router.get('/myCampaigns', isLoggedIn, isUserCharity, async (req, res, next)=> {
+router.get('/myCampaigns/:option', isLoggedIn, isUserCharity, async (req, res, next)=> {
     const campaignServiceInstance = new CampaignService(req.user);
     try{
-        const campaigns = await campaignServiceInstance.getMyCampaigns();
+        const campaigns = await campaignServiceInstance.getMyCampaigns(req.params.option);
         return res.json({
             data : {
                 campaigns,

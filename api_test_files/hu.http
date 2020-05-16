@@ -33,5 +33,7 @@ GET http://localhost:8001/campaign/myCampaigns HTTP/1.1
   }
 }-->
 
-### get end campaign list
-GET http://localhost:8001/campaign/endCampaigns HTTP/1.1
+### get my end campaign list ============================================================
+GET http://localhost:8001/campaign/myCampaigns/end HTTP/1.1
+### get my current campaign list
+GET http://localhost:8001/campaign/myCampaigns/ing HTTP/1.1
