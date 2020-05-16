@@ -26,6 +26,83 @@
                     <a href="normal_donation_main.html" id = "change_normal"><b>일반 전환</b></a>
                 </div>
             </div>
+
+            <div id = "state">
+                <p>물품 등록</p>
+            </div>
+
+            <div id = "input_section">
+                <div id = "back_ground">
+                    <div id = "image_container">
+                        <img src="" id="output">
+                    </div>
+                    <input type="file" id = "add_img" accept="image/*" onchange="setThumbnail(event);"/>
+                    <b class="goods_info">대표 이미지 추가</b>
+                    <b class="goods_info">제품 이름</b>
+                    <input type="text" class="text-field" placeholder="제품의 이름을 입력하세요">
+                    <b class="goods_info">제품 포인트</b>
+                    <input type="text" class="text-field" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 포인트를 입력하세요">
+                    <b class="goods_info">세부 정보</b>
+                    <textarea id="goods_detail" placeholder="제품의 상세설명을 입력하세요"></textarea>
+                    <button id="submit" class="submit-btn">등록하기</button>
+                </div>
+            </div>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+     
+        <script>
+            function setThumbnail(event)
+            {
+               $('#image_container').empty();
+                var reader = new FileReader();
+            reader.onload = function(event)
+            {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                
+                img.width = 400;
+                img.height= 300;
+                /*
+                리사이즈 나중에 더 해야될듯 지금은 걍 4:3으로 짤랐음
+                var MAX_WIDTH = 400;
+                var MAX_HEIGHT = 400;
+                var width = img.width;
+                var height = img.height;
+                var resizeWidth;
+                var resizeHeight;*/
+
+               /*if(width > maxWidth || height > maxHeight){
+                    if(width > height){
+                        resizeWidth = maxWidth;
+                        resizeHeight = Math.Round((height * resizeWidth) / width);
+                    }else{
+                        resizeHeight = maxHeight;
+                        resizeWidth = Math.Round((width * resizeHeight) / height);
+                    }
+                }else{
+                    resizeWidth = width;
+                    resizeHeight = height;
+                }
+
+                alert(resizeWidth);
+
+
+                img.width = resizeWidth;
+                img.height = resizeHeight;*/
+
+                document.querySelector("div#image_container").appendChild(img); }
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>
+        
+
     </body>
 </html>

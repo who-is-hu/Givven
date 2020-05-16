@@ -1,20 +1,21 @@
 * {
     box-sizing: border-box;
+    border-radius: 5px;
+    border : 0px;
 }
 
   body {
+    min-width: 1000px;
     text-align: center;
     background-color: #E2EEF9;
-  }
+}
 
-#wrap{
-    overflow: hidden;
-    min-width: 1190px;
+#wrap {
+    min-width: 1000px;
 }
 
 #navbar{
     width: 100%;
-    position: fixed;
 }
 
 #first_navbar{
@@ -44,6 +45,7 @@
 }
 
 #f_menu a{
+    float: right;
     color: black;
     font-size: 13px;
     text-decoration: none;
@@ -82,6 +84,7 @@
 
 #change_normal {
     height: 60px;
+    margin-right: 30px;
     line-height: 60px;
     padding-left: 20px;
     padding-right: 20px;
@@ -91,4 +94,75 @@
     background-color: #6683ef;
     font-size: 20px;
     border-radius: 10px;
+ }
+
+ #state{
+    height: 100px;
+    width: 100%;
+    font-size: 50px;
+    padding-top:30px;
+    float: left;
+}
+
+ #input_section{
+     margin-top: 170px;
+     padding-left: 100px;
+     padding-right: 100px;
+     width: 100%;
+ }
+
+ #back_ground{
+     display: block;
+     text-align: left;
+     background-color: white;
+     padding-top: 20px;
+     padding-bottom: 40px;
+ }
+
+ #image_container{
+    text-align: center;
+}
+
+ #add_img{
+     float: right;
+     margin-top: 10px;
+     margin-bottom: 20px;
+     margin-left: 20px;
+}
+
+.goods_info{
+    display: block;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.text-field{
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    width: 30%;
+    font-size:20px;
+}
+
+#goods_detail{
+    display: block;
+    resize: none;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    height: 500px;
+}
+
+ #submit{
+    display: block;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #C3D9F0;
+    border-radius: 10px;
+    
  }
