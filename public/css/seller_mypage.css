@@ -100,3 +100,20 @@
     text-align: center;
     padding: 0px 20px 0px 20px;
 }
+
+#go_mypage b{
+    color: #6683ef
+}
+
+#change_normal {
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    float: right;
+    color: white;
+    text-decoration: none;
+    background-color: #6683ef;
+    font-size: 20px;
+    border-radius: 10px;
+ }
