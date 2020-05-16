@@ -60,6 +60,7 @@ router.get('/logout',isLoggedIn, (req, res, next)=> {
     return res.redirect('/');
 });
 
+//로그인 했는지 검사
 router.get('/isLoggedIn', isLoggedIn, (req, res, next) => {
     res.json({res: true});
 });

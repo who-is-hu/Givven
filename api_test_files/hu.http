@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:8001
+
+//login
+POST {{baseUrl}}/auth/login  HTTP/1.1
+content-type: application/json
+
+{
+    "email": "charity1",
+    "password": "charity1"
+}
+
+###
+POST http://localhost:8001/campaign/register HTTP/1.1
+content-type : application/json
+
+{
+    "name" : "campaign1",
+    "dest_money" : 100000,
+    "content" : "campaign info..............",
+    "due_day" : "2020-05-16"
+}
+
+###
+GET http://localhost:8001/campaign/myCampaigns HTTP/1.1

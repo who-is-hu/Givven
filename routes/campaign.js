@@ -5,13 +5,28 @@ const { isLoggedIn, isUserCharity } = require('./middlewares');
 const CampaignService = require('../services/campaign');
 
 router.post('/register', isLoggedIn, isUserCharity, async (req, res, next) => {
-    const { campaign } = req.body;
+    const campaign = { name , dest_money, content, due_day} = req.body;
     try{
         const campaignServiceInstance = new CampaignService(req.user);
-        let result = campaignServiceInstance.register(campaign);
-
+        let result = await campaignServiceInstance.register(campaign);
+        console.log(result);
         res.json(result);
     } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+
+router.get('/myCampaigns', isLoggedIn, isUserCharity, async (req, res, next)=> {
+    const campaignServiceInstance = new CampaignService(req.user);
+    try{
+        const campaigns = await campaignServiceInstance.getMyCampaigns();
+        return res.json({
+            data : {
+                campaigns,
+            }
+        });
+    }catch(err){
         console.error(err);
         next(err);
     }
