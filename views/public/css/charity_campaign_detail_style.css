@@ -11,7 +11,6 @@
  /* 네비게이션 바 */
  #navbar{
     width: 100%;
-    position: fixed;
  }
  #top_navbar{
    width: 100%;
@@ -76,10 +75,6 @@
    color: black;
    font-size: 20px;
    text-decoration: none;
- }
-
- #make_campaign b{
-    color: #6683ef;
  }
  
  #change_normal {
