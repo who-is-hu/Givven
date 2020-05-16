@@ -13,6 +13,7 @@ const app = express();
 const pageRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const campaignRouter = require('./routes/campaign');
+const itemRouter = require('./routes/item');
 
 // middleware setup
 app.set('views', __dirname + '/views');
@@ -43,6 +44,8 @@ app.use(passport.session());
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
 app.use('/campaign', campaignRouter);
+app.use('/item', itemRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
