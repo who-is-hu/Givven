@@ -9,10 +9,14 @@ content-type : application/json
     "due_day" : "2020-05-20T06:14:26.000Z"
 }
 
-### get my end campaign list ============================================================
+//==========================================================================================
+// get my campaign list
+//==========================================================================================
+### get my end campaign list 
 GET http://localhost:8001/campaign/myCampaigns/end HTTP/1.1
 ### get my current campaign list
 GET http://localhost:8001/campaign/myCampaigns/ing HTTP/1.1
+
 <!-- response data format
 {
   "data": {
@@ -34,8 +38,14 @@ GET http://localhost:8001/campaign/myCampaigns/ing HTTP/1.1
   }
 }-->
 
-### get end campaign list ============================================================
-GET http://localhost:8001/campaign/endCampaigns HTTP/1.1
+//==========================================================================================
+// get campaign list
+//==========================================================================================
+### get end campaign list 
+GET http://localhost:8001/campaign/campaigns/end HTTP/1.1
+### get current campaign list 
+GET http://localhost:8001/campaign/campaigns/ing HTTP/1.1
+
 <!-- response data format
 {
   "data": {

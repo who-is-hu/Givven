@@ -32,13 +32,13 @@ router.get('/myCampaigns/:option', isLoggedIn, isUserCharity, async (req, res, n
     }
 });
 
-router.get('/endCampaigns', isLoggedIn, isUserCharity, async (req, res, next) => {
+router.get('/campaigns/:option', isLoggedIn, isUserCharity, async (req, res, next) => {
     const campaignServiceInstance = new CampaignService(req.user);
     try{
-        const endCampaigns = await campaignServiceInstance.getEndCampaigns();
+        const campaigns = await campaignServiceInstance.getCampaigns(req.params.option);
         return res.json({
             data : {
-                campaigns : endCampaigns,
+                campaigns,
             }
         });
     }catch(err)
