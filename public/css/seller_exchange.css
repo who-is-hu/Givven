@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+  body {
+    text-align: center;
+    background-color: #E2EEF9;
+  }
+
+#wrap{
+    overflow: hidden;
+    min-width: 1000px;
+}
+
+#navbar{
+    width: 100%;
+    position: relative;
+}
+
+#first_navbar{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+}
+
+#logo{
+    float: left;
+    line-height: 60px;
+    padding-left: 30px;
+}
+
+#logo img{
+    height: 50px;
+    vertical-align: middle;
+}
+
+#f_menu{
+    float: right;
+    padding: 0;
+    padding-right: 30px;
+    margin: 0;
+    line-height: 60px;
+    list-style-type: none;
+}
+
+#f_menu a{
+    color: black;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+#second_navbor{
+    width: 100%;
+    height: 60px;
+    background-color: #C3D9F0;
+}
+
+#s_menu{
+    float: left;
+    padding: 0;
+    padding-left: 50px;
+    margin: 0;
+    line-height: 60px;
+    list-style-type: none;
+}
+
+#s_menu li{
+    float: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#s_menu li a{
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+#go_mypage b{
+    color: #6683ef
+}
+
+#change_normal {
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    float: right;
+    color: white;
+    text-decoration: none;
+    background-color: #6683ef;
+    font-size: 20px;
+    border-radius: 10px;
+ }
+
+#state{
+    position: relative;
+    height: 100px;
+    width: 100%;
+    font-size: 50px;
+    padding-top:30px;
+    float: left;
+}
+
+#exchange_money{
+    position: relative;
+    width: 800px;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: white; 
+}
+
+#exchange_money p{
+    font-size: 25px;
+    font-weight: bold;
+    margin-top:2%;
+    margin-bottom:5%;
+}
+
+#exchange_money #point{
+    width: 400px;
+    margin-bottom:5%;
+}
+
+#exchange{
+    display: block;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #C3D9F0;
+    border-radius: 10px;
+}
