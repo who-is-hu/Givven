@@ -33,19 +33,27 @@
 
             <div id = "input_section">
                 <div id = "back_ground">
-                    <div id = "image_container">
-                        <img src="" id="output">
+                    <div id = image>
+                        <b>대표 이미지</b>
+                        <div id = "image_container">
+                            <p>사진이 없습니다</p>
+                        </div>
+                        <input type="file" id = "add_img" accept="image/*" onchange="setThumbnail(event);"/>
                     </div>
-                    <input type="file" id = "add_img" accept="image/*" onchange="setThumbnail(event);"/>
-                    <b class="goods_info">대표 이미지 추가</b>
-                    <b class="goods_info">제품 이름</b>
-                    <input type="text" class="text-field" placeholder="제품의 이름을 입력하세요">
-                    <b class="goods_info">제품 포인트</b>
-                    <input type="text" class="text-field" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 포인트를 입력하세요">
-                    <b class="goods_info">세부 정보</b>
-                    <textarea id="goods_detail" placeholder="제품의 상세설명을 입력하세요"></textarea>
+                    <div id = text>
+                        <b class="goods_info">제품 이름</b>
+                        <input type="text" class="text-field" placeholder="제품의 이름을 입력하세요">
+                        <b class="goods_info">제품 포인트</b>
+                        <input type="text" class="text-field" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 포인트를 입력하세요">
+                    </div>
+                    <div id = detail>
+                        <b class="goods_info">세부 정보</b>
+                        <textarea id="goods_detail" placeholder="제품의 상세설명을 입력하세요"></textarea>
+                    </div>
                     <button id="submit" class="submit-btn">등록하기</button>
                 </div>
+            </div>
+            <div id = last>
             </div>
         </div>
 
@@ -61,23 +69,20 @@
         <script>
             function setThumbnail(event)
             {
-               $('#image_container').empty();
+                $('#image_container').empty();
                 var reader = new FileReader();
             reader.onload = function(event)
             {
                 var img = document.createElement("img");
                 img.setAttribute("src", event.target.result);
-                
-                img.width = 400;
-                img.height= 300;
-                /*
-                리사이즈 나중에 더 해야될듯 지금은 걍 4:3으로 짤랐음
+                /*img.width = 800;
+                img.height= 400;*/
                 var MAX_WIDTH = 400;
                 var MAX_HEIGHT = 400;
                 var width = img.width;
                 var height = img.height;
                 var resizeWidth;
-                var resizeHeight;*/
+                var resizeHeight;
 
                /*if(width > maxWidth || height > maxHeight){
                     if(width > height){
