@@ -15,7 +15,10 @@ exports.isNotLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()){
         next();
     } else {
-        res.status(403).send('이미 login 돼어있음');
+        res.json({
+            result : false,
+            msg : "이미 로그인 되어있습니다."
+        });
     }
 };
 

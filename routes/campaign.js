@@ -32,4 +32,19 @@ router.get('/myCampaigns', isLoggedIn, isUserCharity, async (req, res, next)=> {
     }
 });
 
+router.get('/endCampaigns', isLoggedIn, isUserCharity, async (req, res, next) => {
+    const campaignServiceInstance = new CampaignService(req.user);
+    try{
+        const endCampaigns = await campaignServiceInstance.getEndCampaigns();
+        return res.json({
+            data : {
+                campaigns : endCampaigns,
+            }
+        });
+    }catch(err)
+    {
+        console.error(err);
+        next(err);
+    }
+});
 module.exports = router;

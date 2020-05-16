@@ -1,4 +1,5 @@
-const { Campaign, User } = require('../models');
+const { Campaign } = require('../models');
+const { Op } = require('sequelize');
 
 const CampaignService =  class {
     constructor(user){
@@ -8,17 +9,13 @@ const CampaignService =  class {
         const { name , dest_money, content, due_day} = campaign;
         try{
             let result;
-            const exCampagin = await Campaign.findOne({
-                where : {
-                    name
-                }
-            });
+            const exCampagin = await Campaign.findOne({where : { name }});
             if(!exCampagin){
                 await Campaign.create({
                     name,
                     dest_money,
                     content,
-                    due_day,
+                    due_day, //new Date(), //임시로 현재시간
                     userId : this.user.id
                 });
                 result = {success : true, msg : '성공'};
@@ -35,6 +32,18 @@ const CampaignService =  class {
     async getMyCampaigns(){
         const campaigns = await this.user.getCampaigns();
         return campaigns;
+    }
+
+    async getEndCampaigns(){
+        const end_campaigns = await Campaign.findAll({
+            where : {
+                [Op.or] : [
+                    { due_day : { [Op.gt] : new Date()} },
+                    { current_money : { [Op.gte] : sequelize.col('dest_money')} },
+                ]
+            },
+        });
+        return end_campaigns;
     }
 };
 

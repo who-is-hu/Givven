@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         due_day : {
-            type : DataTypes.STRING(20), //나중에 DATE로 바꿀것
+            type : DataTypes.DATE,
             allowNull : false,
         }
     },{
