@@ -39,3 +39,20 @@ exports.isUserCharity = async (req, res, next) => {
         console.error(err);
     }   
 };
+exports.isUserSeller = async (req, res, next) => {
+    try{
+        const exUser = await User.findOne({
+            where : {
+                id : req.user.id
+            },
+            attributes : ['type'],
+        });
+        if(exUser.type == 'seller'){
+            next();
+        } else {
+            res.json({res : false, msg: '판매자 권한을 가진 계정이 아닙니다.'});
+        }
+    }catch(err){
+        console.error(err);
+    }   
+};
