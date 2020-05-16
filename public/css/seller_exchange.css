@@ -14,7 +14,7 @@
 
 #navbar{
     width: 100%;
-    position: fixed;
+    position: relative;
 }
 
 #first_navbar{
@@ -92,3 +92,69 @@
     font-size: 20px;
     border-radius: 10px;
  }
+
+ #state{
+    position: relative;
+    height: 60px;
+    width: 100%;
+}
+
+#pocket{
+    float: right;
+    padding-right: 50px;
+    margin: 0;
+    line-height: 60px;
+    list-style-type: none;
+}
+
+#pocket li, #pocket li a{
+    float: left;
+    margin-right: 20px;
+    font-size: 20px;
+    color: black;
+}
+
+#pocket li:nth-child(1){
+    text-align: center;
+    padding: 0px 20px 0px 20px;
+}
+
+#ex{
+    float: left;
+    padding-left: 50px;
+    margin: 0;
+    line-height: 60px;
+    list-style-type: none;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#exchange_money{
+    position: relative;
+    width: 35%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: white; 
+}
+
+#exchange_money button{
+    display: block;
+    width: 250px;
+    margin-top:50px;
+    margin-bottom:50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    background-color: #C3D9F0;
+    border-radius: 10px;
+}
+
+#exchange{
+    display: block;
+    width: 150px;
+    margin-top:50px;
+    margin-left: auto;
+    margin-right: auto;
+}

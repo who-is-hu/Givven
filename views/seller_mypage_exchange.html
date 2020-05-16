@@ -21,11 +21,70 @@
                 <div id = "second_navbor">
                     <ul id = "s_menu">
                         <li><a href="seller_add_goods.html" id = "add_goods"><b>상품 등록</b></a></li>
-                        <li><a href="seller_mypage.html" id = "go_mypage"><b>My Page</b></a></li>
+                        <li><a href="seller_mypage_main.html" id = "go_mypage"><b>My Page</b></a></li>
                     </ul>
                     <a href="normal_donation_main.html" id = "change_normal"><b>일반 전환</b></a>
                 </div>
             </div>
+
+            <div id = "state">
+                <ul id = "pocket">
+                    <li>내 지갑 : ~~포인트</li>
+                </ul>
+            </div>
+
+            <div>
+                <ul id = "ex">
+                    <li>환전하기</li>
+                </ul>
+            </div>
+            
+            <div id ="exchange_money">
+                <button id = "1000p"><b>1000포인트 -> 1000원</b></button></li>
+                <button id = "5000p"><b>5000포인트 -> 5000원</b></button></li>
+                <button id = "10000p"><b>10000포인트 -> 10000원</b></button></li>
+                <button id="exchange"><b>환전하기</b></button>
+            </div>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+        <script>
+            $(function () {
+               var price = "none";
+               $('#exchange').on("click", function () {
+                  if(price == "none"){
+                     alert('please select exchange price');
+                     return ;
+                  }
+                  alert(price+'버튼을 누르셨습니다');
+               });
+               $('#1000p').on("click", function() {
+                  price = "1000p";
+                  $('#exchange_money').children().css("background-color", "#B2D0EB");
+                  $('#1000p').css("background-color", "#6683ef");
+         
+               });
+               $('#5000p').on("click", function() {
+                  price = "5000p";
+                  $('#exchange_money').children().css("background-color", "#B2D0EB");
+                  $('#5000p').css("background-color", "#6683ef");
+               });
+               $('#10000p').on("click", function() {
+                  price = "10000p";
+                  $('#exchange_money').children().css("background-color", "#B2D0EB");
+                  $('#10000p').css("background-color", "#6683ef");
+               });
+            });
+         
+         
+         </script>
+
     </body>
 </html>
