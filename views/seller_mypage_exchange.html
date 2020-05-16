@@ -28,21 +28,13 @@
             </div>
 
             <div id = "state">
-                <ul id = "pocket">
-                    <li>내 지갑 : ~~포인트</li>
-                </ul>
-            </div>
-
-            <div>
-                <ul id = "ex">
-                    <li>환전하기</li>
-                </ul>
+                <p>환전하기</p>
             </div>
             
             <div id ="exchange_money">
-                <button id = "1000p"><b>1000포인트 -> 1000원</b></button></li>
-                <button id = "5000p"><b>5000포인트 -> 5000원</b></button></li>
-                <button id = "10000p"><b>10000포인트 -> 10000원</b></button></li>
+                <p>환전을 원하는 포인트를 입력하세요</p>
+                <p>내 지갑 : ~~포인트</p>
+                <input type="text" id="point" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="포인트 입력">
                 <button id="exchange"><b>환전하기</b></button>
             </div>
         </div>
@@ -57,29 +49,13 @@
 
         <script>
             $(function () {
-               var price = "none";
                $('#exchange').on("click", function () {
-                  if(price == "none"){
-                     alert('please select exchange price');
+                var price = $('#point').val();
+                  if(price == 0){
+                     alert('환전을 원하는 포인트를 입력하세요');
                      return ;
                   }
-                  alert(price+'버튼을 누르셨습니다');
-               });
-               $('#1000p').on("click", function() {
-                  price = "1000p";
-                  $('#exchange_money').children().css("background-color", "#B2D0EB");
-                  $('#1000p').css("background-color", "#6683ef");
-         
-               });
-               $('#5000p').on("click", function() {
-                  price = "5000p";
-                  $('#exchange_money').children().css("background-color", "#B2D0EB");
-                  $('#5000p').css("background-color", "#6683ef");
-               });
-               $('#10000p').on("click", function() {
-                  price = "10000p";
-                  $('#exchange_money').children().css("background-color", "#B2D0EB");
-                  $('#10000p').css("background-color", "#6683ef");
+                  alert(price+'포인트를 환전합니다');
                });
             });
          
