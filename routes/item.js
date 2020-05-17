@@ -1,10 +1,16 @@
 var express = require('express');
 const router = express.Router();
-const { isLoggedIn } = require('./middlewares');
+const { isLoggedIn, isUserSeller } = require('./middlewares');
 
-router.post('/register', isLoggedIn, async (req, res, next) => {
+const CampaignService = require('../services/campaign');
+
+router.post('/register', isLoggedIn, isUserSeller, async (req, res, next) => {
+    const item = { name , price, content, stock} = req.body;
     try{
-        
+        const campaignServiceInstance = new CampaignService(req.user);
+        let result = await campaignServiceInstance.register(campaign);
+        console.log(result);
+        res.json(result);
     } catch (err) {
         console.error(err);
         next(err);

@@ -1,0 +1,33 @@
+@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
+//http://localhost:8080
+
+### authentication ============================================================
+POST {{baseUrl}}/auth/login  HTTP/1.1
+content-type: application/json
+
+{
+    "email": "charity1",
+    "password": "charity1"
+}
+
+### regiseer
+POST {{baseUrl}}/auth/join  HTTP/1.1
+content-type: application/json
+
+{ 
+    "name" : "hihihi",
+    "email" : "charity1",
+    "password" : "charity1",
+    "type" : "charity"
+}
+
+### logout
+GET {{baseUrl}}/auth/logout  HTTP/1.1
+
+<!-- response data format
+{
+  "res": "success",
+  "msg": "회원가입 성공"
+}->
+
+### type check ============================================================
