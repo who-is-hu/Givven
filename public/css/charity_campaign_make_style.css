@@ -3,7 +3,7 @@
  }
  
  body {
-   min-width: 1000px;
+  min-width: 1500px;
    text-align: center;
    background-color: #E2EEF9;
  }
@@ -91,7 +91,7 @@
     text-decoration: none;
     background-color: #6683ef;
     font-size: 20px;
-    margin-right: -160px;
+    margin-right: -140px;
     border-radius: 10px;
  }
 

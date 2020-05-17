@@ -3,7 +3,7 @@
  }
  
  body {
-   min-width: 1000px;
+   min-width: 1500px;
    text-align: center;
    background-color: #E2EEF9;
  }
@@ -11,7 +11,6 @@
  /* 네비게이션 바 */
  #navbar{
     width: 100%;
-    margin-top: -120px;
  }
  #top_navbar{
    width: 100%;
@@ -108,7 +107,7 @@
     background-color: white;
     height: 50px;
     line-height: 50px;
-    margin-left: 30px;
+    margin-left: -280px;
     margin-top : 10px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -147,9 +146,49 @@
 
  
  #items {
-  height: 400px;
+  padding: 30px;
+  padding-top: 50px;
+  padding-left: 40px;
   margin-left: 20px;
-  margin-right: 20px;
+  margin-right: 40px;
+  margin-bottom: 100px;
   border-radius: 15px;
   background-color:white;
+}
+
+.card{
+  width: 250px;
+  float: left;
+  display: block;
+  margin-left: 20px;
+  background-color: white;
+  border: 4px solid#6683ef;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  background-color: #C3D9F0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.card .menu{
+  padding: 10px;
+  text-align: center;
+}
+
+.card .menu h3 {
+  margin: 0;
+  
+  font-size: 16px;
+  font-weight: bold;
+}
+.card .menu p {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
