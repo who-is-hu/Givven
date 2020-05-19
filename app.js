@@ -46,6 +46,8 @@ app.use('/auth', authRouter);
 app.use('/campaign', campaignRouter);
 app.use('/item', itemRouter);
 
+//Container
+require('./containerConf')();
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

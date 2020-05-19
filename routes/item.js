@@ -5,7 +5,7 @@ const { isLoggedIn, isUserSeller } = require('./middlewares');
 const CampaignService = require('../services/campaign');
 
 router.post('/register', isLoggedIn, isUserSeller, async (req, res, next) => {
-    const item = { name , price, content, stock} = req.body;
+    const item = { name , price, content, stock, owner} = req.body;
     try{
         const campaignServiceInstance = new CampaignService(req.user);
         let result = await campaignServiceInstance.register(campaign);

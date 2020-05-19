@@ -1,11 +1,11 @@
-const { Campaign } = require('../models');
 const { Op } = require('sequelize');
 
 const CampaignService =  class {
-    constructor(user){
-        this.user = user;
+    constructor(campaignModel, userModel){
+        this.userModel = userModel;
+        this.campaignModel = campaignModel;
     }
-    async register(campaign){
+    async register(user, campaign){
         const { name , dest_money, content, due_day} = campaign;
         try{
             let result;
@@ -16,7 +16,7 @@ const CampaignService =  class {
                     dest_money,
                     content,
                     due_day, //new Date(), //임시로 현재시간
-                    userId : this.user.id
+                    userId : user.id
                 });
                 result = {success : true, msg : '성공'};
             } else 
@@ -29,34 +29,38 @@ const CampaignService =  class {
         }
     }
 
-    async getMyCampaigns(option){
+    async getUserCampaigns(user, option){
         try{
             let searchOption = {};
             if(option == 'end'){
                 searchOption = { 
                     where : {
                         [Op.or] : [
-                         { due_day : { [Op.gt] : new Date()} },
-                         { current_money : { [Op.gte] : sequelize.col('dest_money')} },
-                    ]}
+                            { due_day : { [Op.lte] : new Date()} },
+                            { current_money : { [Op.gte] : sequelize.col('dest_money')} },
+                        ],
+                        userId : user.id
+                    }
                 }
             } else if( option == 'ing'){
                 searchOption = { 
                     where : {
                         [Op.and] : [
-                         { due_day : { [Op.lte] : new Date()} },
-                         { current_money : { [Op.lt] : sequelize.col('dest_money')} },
-                    ]}
+                            { due_day : { [Op.gt] : new Date()} },
+                            { current_money : { [Op.lt] : sequelize.col('dest_money')} },
+                        ],
+                        userId : user.id
+                    }   
                 }
             }
-            const campaigns = await this.user.getCampaigns(searchOption);
+            const campaigns = await user.getCampaigns(searchOption);
             return campaigns;
         }catch(err) {
             console.error(err);
         }
     }
 
-    async getCampaigns(option){
+    async getAllCampaigns(option){
         try{
             let searchOption = {};
             if(option == 'end'){
@@ -76,7 +80,7 @@ const CampaignService =  class {
                     ]}
                 }
             }
-            const end_campaigns = await Campaign.findAll(searchOption);
+            const end_campaigns = await this.campaignModel.findAll(searchOption);
             return end_campaigns;
         } catch (err) {
             console.error(err);
