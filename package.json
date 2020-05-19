@@ -2,9 +2,6 @@
   "name": "givven",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "nodemon app"
-  },
   "dependencies": {
     "async": "^3.1.0",
     "axios": "^0.19.2",
