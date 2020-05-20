@@ -95,7 +95,7 @@
     border-radius: 10px;
  }
 
- #order{
+ #goods_detail{
      width: 1100px;
      height: 800px;
      margin: 30px auto;
@@ -104,7 +104,7 @@
      border-radius: 15px;
  }
 
- #order > p{
+ #goods_detail > p{
      width: 100%;
      height: 60px;
      font-size: 30px;
@@ -117,7 +117,7 @@
     float: right;
     width: 500px;
     height: 400px;
-    padding-top:150px;
+    padding-top:100px;
     padding-right: 20px;
 }
 
@@ -134,11 +134,9 @@
    line-height: 300px;
 }
 
-#text{
-    overflow: auto;
-   float: left;
+#simple_info{
    width: 380px;
-   height: 650px;
+   height: 450px;
    padding-top: 50px;
    padding-left: 50px;
 }
@@ -152,9 +150,20 @@
    padding: 5px 0px;
 }
 
-#text > p{
+#simple_info > p{
     text-align: left;
     font-size: 20px;
     margin-bottom: 70px;
     border-bottom: 2px solid #C3D9F0;
+}
+
+#detail_info{
+    padding-left: 50px;
+}
+
+#detail_info > p{
+    text-align: left;
+    font-size: 20px;
+    margin-bottom: 70px;
+    border: 2px solid #C3D9F0;
 }
