@@ -23,12 +23,13 @@ describe('item registration', () => {
         });
         it('get items', (done) => {
             agent
-            .get('/item/items')
+            .get('/item/detail/1')
             .expect(200)
             .end((err, response) => {
                 if(err) return done(err);
                 console.log(response.text);
+                assert(response.text, !undefined);
                 done();
             });
-        })
+        });
 });

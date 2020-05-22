@@ -16,3 +16,33 @@ content-type : application/json
 <!-- response data format
 { result : true, msg : 'success'}
 -->
+
+///////////////////////////////////////////////////////////////////
+// get item 
+///////////////////////////////////////////////////////////////////
+###  get all items
+GET {{{baseUrl}}/item/items HTTP/1.1
+content-type : application/json
+
+### get item detail
+GET {{{baseUrl}}/item/items HTTP/1.1
+content-type : application/json
+
+<!-- response
+{
+    "data":
+    [
+        {"id":1,
+        "name":"item1",
+        "title_img":"default_item.png",
+        "content":"content",
+        "price":1000,
+        "stock":100,
+        "owner":"seller1",
+        "createdAt":"2020-05-22T14:42:54.000Z",
+        "updatedAt":"2020-05-22T14:42:54.000Z",
+        "deletedAt":null,
+        "userId":2}
+    ]
+}
+-->
