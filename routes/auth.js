@@ -21,6 +21,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             name,
             password : hash,
             type,
+            point : 0,
         });
         return res.json({
             res: 'success',
@@ -40,7 +41,7 @@ router.post('/login',isNotLoggedIn,  (req, res, next) => {
             next(authError);
         }
         if(!user){
-            return res.json({res : 'fail', msg : info.msg});
+            return res.status(202).json({res : 'fail', msg : info.msg});
            
         }
         return req.login(user, (logginError) => {
@@ -48,7 +49,7 @@ router.post('/login',isNotLoggedIn,  (req, res, next) => {
                 console.error(logginError);
                 next(logginError);
             }
-            return res.json({ res : 'success', msg : 'login success'});
+            return res.status(200).json({ res : 'success', msg : 'login success'});
         });
     })(req, res, next) ;
 });
@@ -59,24 +60,9 @@ router.get('/logout',isLoggedIn, (req, res, next)=> {
     return res.redirect('/');
 });
 
-router.get('/isLoggedIn', (req, res, next) => {
-    let result;
-    if(req.isAuthenticated()){
-        res.json({
-            res : true,
-            type : req.user.dataValues.type 
-        });
-    } else {
-        res.json({
-            res : false,
-            type : 'guest'
-        });
-    }
+//로그인 했는지 검사
+router.get('/isLoggedIn', isLoggedIn, (req, res, next) => {
+    res.json({res: true});
 });
 
-// router.get('/userType',  (req, res, next) => {
-//     if(req.user){
-//         res.json({userType : "guset"});
-//     }
-// });
 module.exports = router;
