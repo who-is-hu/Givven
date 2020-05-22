@@ -1,5 +1,8 @@
+//@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
+@baseUrl = http://localhost:8001
+
 ### register campaign
-POST http://localhost:8001/campaign/register HTTP/1.1
+POST {{baseUrl}}/campaign/register HTTP/1.1
 content-type : application/json
 
 {
@@ -13,9 +16,9 @@ content-type : application/json
 // get my campaign list
 //==========================================================================================
 ### get my end campaign list 
-GET http://localhost:8001/campaign/myCampaigns/end HTTP/1.1
+GET {{baseUrl}}/campaign/myCampaigns/end HTTP/1.1
 ### get my current campaign list
-GET http://localhost:8001/campaign/myCampaigns/ing HTTP/1.1
+GET {{baseUrl}}/campaign/myCampaigns/ing HTTP/1.1
 
 <!-- response data format
 {
@@ -42,9 +45,9 @@ GET http://localhost:8001/campaign/myCampaigns/ing HTTP/1.1
 // get campaign list
 //==========================================================================================
 ### get end campaign list 
-GET http://localhost:8001/campaign/campaigns/end HTTP/1.1
+GET {{baseUrl}}/campaign/campaigns/end HTTP/1.1
 ### get current campaign list 
-GET http://localhost:8001/campaign/campaigns/ing HTTP/1.1
+GET {{baseUrl}}/campaign/campaigns/ing HTTP/1.1
 
 <!-- response data format
 {
