@@ -1,5 +1,5 @@
-//@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
-@baseUrl = http://localhost:8001
+@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
+//@baseUrl = http://localhost:8001
 
 ### register item
 POST {{baseUrl}}/campaign/register HTTP/1.1

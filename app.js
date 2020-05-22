@@ -8,7 +8,10 @@ require('dotenv').config();
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 const flash = require('connect-flash');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 const pageRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -19,7 +22,7 @@ const itemRouter = require('./routes/item');
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.set('port', process.env.PORT || 8001);
+app.set('port', process.env.PORT || 8080);
 app.use(express.static(path.join(__dirname, '/')));
 app.use(flash());
 sequelize.sync();
