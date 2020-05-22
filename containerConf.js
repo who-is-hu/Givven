@@ -9,6 +9,9 @@ const ContainerConf = () => {
     Container.register('campaignModel', [], () => {
         return Model.Campaign;
     });
+    Container.register('itemModel', [], () => {
+        return Model.Item;
+    })
     Container.register('campaignService', [
         'campaignModel','userModel'
     ], (campaignModel, userModel) => {
