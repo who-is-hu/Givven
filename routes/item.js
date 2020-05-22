@@ -2,13 +2,13 @@ var express = require('express');
 const router = express.Router();
 const { isLoggedIn, isUserSeller } = require('./middlewares');
 
-const CampaignService = require('../services/campaign');
+const Container = new (require('../Container'));
 
 router.post('/register', isLoggedIn, isUserSeller, async (req, res, next) => {
-    const item = { name , price, content, stock, owner} = req.body;
+    const item = { name , price, content, stock, owner, title_img } = req.body;
     try{
-        const campaignServiceInstance = new CampaignService(req.user);
-        let result = await campaignServiceInstance.register(campaign);
+        const itemServiceInstance = Container.get('itemService');
+        let result = await itemServiceInstance.register(req.user, item);
         console.log(result);
         res.json(result);
     } catch (err) {
@@ -16,5 +16,6 @@ router.post('/register', isLoggedIn, isUserSeller, async (req, res, next) => {
         next(err);
     }
 });
+
 
 module.exports = router;

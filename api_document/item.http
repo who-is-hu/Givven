@@ -1,0 +1,18 @@
+//@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
+@baseUrl = http://localhost:8001
+
+### register item
+POST {{baseUrl}}/campaign/register HTTP/1.1
+content-type : application/json
+
+{
+    "name" : "item1",
+    "content" : "content",
+    "price" : 1000,
+    "stock" : 100,
+    "owner" : "seller1"
+}
+
+<!-- response data format
+{ result : true, msg : 'success'}
+-->

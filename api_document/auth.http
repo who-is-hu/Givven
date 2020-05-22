@@ -16,9 +16,9 @@ content-type: application/json
 
 { 
     "name" : "hihihi",
-    "email" : "charity1",
-    "password" : "charity1",
-    "type" : "charity"
+    "email" : "seller1",
+    "password" : "seller1",
+    "type" : "seller"
 }
 
 ### logout
