@@ -28,6 +28,15 @@ const ItemService = class {
             console.error(err);
         }
     }
+    async getItemList(){
+        try{
+            const items = await this.itemModel.findAll();
+            return items;
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
+    }
 };
 
 module.exports = ItemService;
