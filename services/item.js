@@ -28,23 +28,6 @@ const ItemService = class {
             console.error(err);
         }
     }
-    async getItemList(){
-        try{
-            const items = await this.itemModel.findAll();
-            return items;
-        } catch (err) {
-            console.error(err);
-            next(err);
-        }
-    }
-    async getItem(itemId){
-        try{
-            const item = await this.itemModel.findOne({where : { id : itemId}});
-            return item;
-        } catch (err) {
-            console.error(err);
-        }
-    }
 };
 
 module.exports = ItemService;

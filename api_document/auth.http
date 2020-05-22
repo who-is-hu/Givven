@@ -1,13 +1,13 @@
-@baseUrl = http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080
-//@baseUrl = http://localhost:8001
+//@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
+@baseUrl = http://localhost:8001
 
 ### authentication ============================================================
 POST {{baseUrl}}/auth/login  HTTP/1.1
 content-type: application/json
 
 {
-    "email": "seller1",
-    "password": "seller1"
+    "email": "charity1",
+    "password": "charity1"
 }
 
 ### regiseer

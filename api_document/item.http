@@ -1,8 +1,8 @@
-@baseUrl = http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080
+@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
 //@baseUrl = http://localhost:8001
 
 ### register item
-POST {{baseUrl}}/item/register HTTP/1.1
+POST {{baseUrl}}/campaign/register HTTP/1.1
 content-type : application/json
 
 {
@@ -15,34 +15,4 @@ content-type : application/json
 
 <!-- response data format
 { result : true, msg : 'success'}
--->
-
-///////////////////////////////////////////////////////////////////
-// get item 
-///////////////////////////////////////////////////////////////////
-###  get all items
-GET {{{baseUrl}}/item/items HTTP/1.1
-content-type : application/json
-
-### get item detail
-GET {{{baseUrl}}/item/items HTTP/1.1
-content-type : application/json
-
-<!-- response
-{
-    "data":
-    [
-        {"id":1,
-        "name":"item1",
-        "title_img":"default_item.png",
-        "content":"content",
-        "price":1000,
-        "stock":100,
-        "owner":"seller1",
-        "createdAt":"2020-05-22T14:42:54.000Z",
-        "updatedAt":"2020-05-22T14:42:54.000Z",
-        "deletedAt":null,
-        "userId":2}
-    ]
-}
 -->
