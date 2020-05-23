@@ -1,4 +1,4 @@
-const Container = new (require('./Container'));
+const Container = new (require('./utils/Container.js'));
 const Model = require('./models');
 const services = require('./services');
 

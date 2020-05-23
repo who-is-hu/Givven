@@ -13,6 +13,7 @@
     "ejs": "^2.7.1",
     "express": "~4.16.1",
     "express-session": "^1.17.0",
+    "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
     "json-stringify-safe": "^5.0.1",
     "moment": "^2.24.0",

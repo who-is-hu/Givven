@@ -2,7 +2,7 @@ var express = require('express');
 const router = express.Router();
 const { isLoggedIn, isUserCharity } = require('./middlewares');
 
-const Container = new (require('../Container'));
+const Container = new (require('../utils/Container.js'));
 
 router.post('/register', isLoggedIn, isUserCharity, async (req, res, next) => {
     const campaign = { name , dest_money, content, due_day} = req.body;
