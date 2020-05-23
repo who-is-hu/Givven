@@ -7,6 +7,8 @@ const ItemService = class {
     }
     async register(user, item){
         const { name , price, content, stock, owner, title_img } = item;
+        if(title_img == null)
+            title_img = "/uploads/dafault.jpg"
         try{
             const exItem = await this.itemModel.create({
                 name,
@@ -15,6 +17,7 @@ const ItemService = class {
                 stock,
                 owner,
                 price,
+                title_img,
                 userId : user.id,
             });
             let result ={};

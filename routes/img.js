@@ -1,10 +1,30 @@
-const express = require('express');
+var express = require('express');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+const { isLoggedIn } = require('./middlewares');
 var router = express.Router();
-const imgUploader = require('../utils/imageUploader');
-//비동기 이미지 업로드 ex ) 본문 속 이미지 미리보기 기능 대비하여 만듦
 
-router.post('/', imgUploader.single('title_img'), (req, res) => {
-    //console.log(req.file);
+fs.readdir('uploads', (err) => {
+    if(err){
+        console.error('uploads 폴더가 없어서 생성');
+        fs.mkdirSync('uploads');
+    }
+});
+const upload = multer({
+    storage : multer.diskStorage({
+        destination(req, file, cb){
+            cb(null, 'uploads/');
+        },
+        filename(req, file, cb){
+            const ext = path.extname(file.originalname);
+            cb(null, path.basename(file.originalname, ext) + new Date().valueOf() +ext);
+        },
+    }),
+    limits : { fileSize : 5 * 1024 * 1024},
+});
+router.post('/', isLoggedIn, upload.single('img'), (req, res) => {
+    console.log(req.file);
     res.json({ url : `/uploads/${req.file.filename}`});
 });
 
