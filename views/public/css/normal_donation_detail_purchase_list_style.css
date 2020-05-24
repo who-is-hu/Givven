@@ -1,0 +1,192 @@
+* {
+   box-sizing: border-box;
+ }
+ 
+ body {
+   min-width: 1000px;
+   text-align: center;
+   background-color: #E2EEF9;
+ }
+ 
+ /* 네비게이션 바 */
+ #navbar{
+    width: 100%;
+ }
+ #top_navbar{
+   width: 100%;
+   height: 60px;
+   background-color: white;
+ }
+ 
+ #top_navbar #logo{
+   float: left;
+   line-height: 60px;
+   padding-left: 30px;
+ }
+ #top_navbar #logo img{
+   height: 50px;
+   vertical-align: middle;
+ }
+
+ #second_navbar{
+   width: 100%;
+   height: 60px;
+   background-color: #C3D9F0;
+ }
+ 
+ #menu{
+   float: right;
+   padding: 0;
+   padding-right: 30px;
+   margin: 0;
+   line-height: 60px;
+   list-style-type: none;
+ }
+ 
+ #menu li{
+   float: left;
+ }
+ 
+ #menu li:not(:last-child){
+   margin-right: 30px;
+ }
+ 
+ #menu li a{
+   color: black;
+   font-size: 13px;
+   text-decoration: none;
+ }
+
+ #second_navbar #menu{
+   float: left;
+   padding: 0;
+   padding-left: 50px;
+   margin: 0;
+   line-height: 60px;
+   list-style-type: none;
+ }
+ #second_navbar #menu li{
+   float: left;
+   padding-left: 20px;
+   padding-right: 20px;
+ }
+
+ #second_navbar #menu li a{
+   color: black;
+   font-size: 20px;
+   text-decoration: none;
+ }
+
+ #go_donate b{
+    color: #6683ef;
+ }
+ 
+ #container {
+  margin: 30px;
+  padding: 30px;
+  background-color: white;
+  text-align: left;
+}
+
+ 
+#container h2{
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom:3px solid #C3D9F0;
+}
+
+ 
+#container img{
+  width: 50%;
+  margin-right: 10px;
+  float: left;
+}
+
+#container .campaign_explain{
+  font-size: 18px;
+  font-weight: bold; 
+  margin-top: 60px;
+  
+}
+
+#container #campaign_name{
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#container #collect_amount{
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.progress {
+  height: 45px;
+  margin-top: 15px;
+}
+
+.submit-btn{
+  margin-top: 30px;
+  height: 60px;
+  width: 670px;
+  border: 0px;
+  border-radius: 15px;
+  background-color: #6683ef;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#container #campaign_detail {
+  margin-top: -4px;
+  height: 1000px;
+  padding: 20px;
+  border-top: 4px solid #6683ef; 
+  border-bottom: 4px solid #6683ef; 
+  border-radius: 10px;
+}
+
+#detail_switch{
+  margin-top: 90px;
+  padding-left: 60px;
+  height: 60px;
+  line-height: 60px;
+}
+
+#detail_switch #goto_detail{
+  text-align: center;
+  vertical-align: middle;
+  height: 60px;
+  line-height: 60px;
+  padding: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+  border-top-left-radius: 10px;
+  border: solid 4px #6683ef;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+
+#detail_switch #goto_purchase_list{
+  text-align: center;
+  vertical-align: middle;
+  margin-left: -8px;
+  height: 60px;
+  line-height: 60px;
+  padding: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+  border-top-right-radius: 10px;
+  background-color: white;
+  border: solid 4px #6683ef;
+  border-bottom-color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+
+ 
