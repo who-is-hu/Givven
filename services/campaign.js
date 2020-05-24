@@ -6,7 +6,9 @@ const CampaignService =  class {
         this.campaignModel = campaignModel;
     }
     async register(user, campaign){
-        const { name , dest_money, content, due_day} = campaign;
+        const { name , dest_money, content, due_day, title_img} = campaign;
+        if(title_img == null)
+            title_img = "/uploads/dafault.jpg"
         try{
             let result;
             const exCampagin = await Campaign.findOne({where : { name }});
@@ -14,6 +16,7 @@ const CampaignService =  class {
                 await Campaign.create({
                     name,
                     dest_money,
+                    title_img,
                     content,
                     due_day, //new Date(), //임시로 현재시간
                     userId : user.id
