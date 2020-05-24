@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         due_day : {
             type : DataTypes.DATE,
             allowNull : false,
+        },
+        owner : {
+            type : DataTypes.STRING(100),
+            allowNull : false,
         }
     },{
         timestamps : true,

@@ -5,7 +5,7 @@ const { isLoggedIn, isUserSeller } = require('./middlewares');
 const Container = new (require('../utils/Container.js'));
 
 router.post('/register', isLoggedIn, isUserSeller, async (req, res, next) => {
-    const item = { name , price, content, stock, owner, title_img } = req.body;
+    let item = { name , price, content, stock, title_img } = req.body;
     try{
         const itemServiceInstance = Container.get('itemService');
         let result = await itemServiceInstance.register(req.user, item);

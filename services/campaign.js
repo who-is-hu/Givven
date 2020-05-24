@@ -6,7 +6,7 @@ const CampaignService =  class {
         this.campaignModel = campaignModel;
     }
     async register(user, campaign){
-        const { name , dest_money, content, due_day, title_img} = campaign;
+        let { name , dest_money, content, due_day, title_img} = campaign;
         if(title_img == null)
             title_img = "/uploads/dafault.jpg"
         try{
@@ -18,6 +18,7 @@ const CampaignService =  class {
                     dest_money,
                     title_img,
                     content,
+                    owner : user.name,
                     due_day, //new Date(), //임시로 현재시간
                     userId : user.id
                 });

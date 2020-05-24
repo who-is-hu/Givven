@@ -26,17 +26,18 @@ describe('item registration', () => {
             .post('/item/register')
             .send(
                 {
-                    name : 'item1',
+                    name : 'item3',
                     content : 'content',
                     price : 1000,
                     stock : 100,
-                    owner : 'seller1'
+                    tilte_img : null,
                 }
             )
             .set('Accept', 'application/json')
             .expect(200)
             .end((err, response) => {
                 if(err) return done(err);
+                console.log(JSON.parse(response.text));
                 done();
             });
         })
