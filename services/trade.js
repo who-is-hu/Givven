@@ -1,6 +1,6 @@
 const { sequelize } = require('../models');
 
-const Trade = class {
+const TradeService = class {
     constructor(allModels){
         const {Item, User, Campaign, Order} = allModels;
         this.itemModel = Item;
@@ -9,7 +9,7 @@ const Trade = class {
         this.orderModel = Order;
     }
     
-    async buyItem(user, itemId, orderCount, camapaignId){
+    async buyItem(user, itemId, orderCount, campaignId){
         try{
             let result = {};
             await sequelize.transaction( async (transaction) => { 
@@ -39,7 +39,7 @@ const Trade = class {
                     itemId : item.id,
                     orderCount,
                     transactionKey : transactionId,
-                    camapaignId,
+                    campaignId,
                 }, {transaction});
               }).then(() => {
                 // Committed
@@ -56,4 +56,4 @@ const Trade = class {
     }
 };
 
-module.exports = Trade;
+module.exports = TradeService;

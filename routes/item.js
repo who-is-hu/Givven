@@ -1,10 +1,10 @@
 var express = require('express');
 const router = express.Router();
-const { isLoggedIn, isUserSeller } = require('./middlewares');
+const { isLoggedIn, isUserSeller, isUserCharity } = require('./middlewares');
 
 const Container = new (require('../utils/Container.js'));
 
-router.post('/register', isLoggedIn, isUserSeller, async (req, res, next) => {
+router.post('/register', isUserSeller, async (req, res, next) => {
     let item = { name , price, content, stock, title_img } = req.body;
     try{
         const itemServiceInstance = Container.get('itemService');
@@ -50,5 +50,17 @@ router.get('/detail/:itemId', isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.post('/buy', isUserCharity, async (req, res, next) => {
+    const { itemId, orderCount, campaignId } = req.body;
+    try{
+        const tradeInstance = Container.get('tradeService');
+        const result = await tradeInstance.buyItem(req.user, itemId, orderCount, campaignId);
+        console.log(result);
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;

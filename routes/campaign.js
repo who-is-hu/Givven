@@ -4,7 +4,7 @@ const { isLoggedIn, isUserCharity } = require('./middlewares');
 
 const Container = new (require('../utils/Container.js'));
 
-router.post('/register', isLoggedIn, isUserCharity, async (req, res, next) => {
+router.post('/register', isUserCharity, async (req, res, next) => {
     const campaign = { name , dest_money, content, due_day, title_img} = req.body;
     try{
         const campaignServiceInstance = Container.get('campaignService');
@@ -17,7 +17,7 @@ router.post('/register', isLoggedIn, isUserCharity, async (req, res, next) => {
     }
 });
 
-router.get('/myCampaigns/:option', isLoggedIn, isUserCharity, async (req, res, next)=> {
+router.get('/myCampaigns/:option', isUserCharity, async (req, res, next)=> {
     try{
         const campaignServiceInstance = Container.get('campaignService');
         const campaigns = await campaignServiceInstance.getUserCampaigns(req.user, req.params.option);
@@ -32,7 +32,7 @@ router.get('/myCampaigns/:option', isLoggedIn, isUserCharity, async (req, res, n
     }
 });
 
-router.get('/campaigns/:option', isLoggedIn, isUserCharity, async (req, res, next) => {
+router.get('/campaigns/:option', isUserCharity, async (req, res, next) => {
     const campaignServiceInstance = Container.get('campaignService');
     try{
         const campaigns = await campaignServiceInstance.getAllCampaigns(req.params.option);

@@ -22,37 +22,31 @@ exports.isNotLoggedIn = (req, res, next) => {
     }
 };
 
-exports.isUserCharity = async (req, res, next) => {
-    try{
-        const exUser = await User.findOne({
-            where : {
-                id : req.user.id
-            },
-            attributes : ['type'],
-        });
-        if(exUser.type == 'charity'){
+exports.isUserCharity = (req, res, next) => {
+    if(req.isAuthenticated()){
+        if(req.user.type == 'charity'){
             next();
-        } else {
-            res.status(403).json({res : false, msg: '자선단체 권한을 가진 계정이 아닙니다.'});
+        }else {
+            res.status(403).json({res : false, msg: 'charity 권한을 가진 계정이 아닙니다.'});
         }
-    }catch(err){
-        console.error(err);
-    }   
+    } else {
+        res.status(401).json({
+            result : false,
+            msg : "로그인이 필요합니다."
+        });
+    }
 };
-exports.isUserSeller = async (req, res, next) => {
-    try{
-        const exUser = await User.findOne({
-            where : {
-                id : req.user.id
-            },
-            attributes : ['type'],
-        });
-        if(exUser.type == 'seller'){
+exports.isUserSeller = (req, res, next) => {
+    if(req.isAuthenticated()){
+        if(req.user.type == 'seller'){
             next();
-        } else {
-            res.status(403).json({res : false, msg: '판매자 권한을 가진 계정이 아닙니다.'});
+        }else {
+            res.status(403).json({res : false, msg: 'seller 권한을 가진 계정이 아닙니다.'});
         }
-    }catch(err){
-        console.error(err);
-    }   
+    } else {
+        res.status(401).json({
+            result : false,
+            msg : "로그인이 필요합니다."
+        });
+    }
 };
