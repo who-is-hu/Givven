@@ -173,9 +173,7 @@
   padding-left: 100px;
   padding-right: 100px;
   border-top-left-radius: 10px;
-  background-color: white;
   border: solid 4px #6683ef;
-  border-bottom-color: white;
   font-size: 20px;
   font-weight: bold;
   text-decoration: none;
@@ -193,7 +191,9 @@
   padding-left: 100px;
   padding-right: 100px;
   border-top-right-radius: 10px;
+  background-color: white;
   border: solid 4px #6683ef;
+  border-bottom-color: white;
   font-size: 20px;
   font-weight: bold;
   text-decoration: none;
