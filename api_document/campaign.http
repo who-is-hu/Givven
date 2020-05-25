@@ -1,0 +1,72 @@
+//@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
+@baseUrl = http://localhost:8080
+
+### register campaign
+POST {{baseUrl}}/campaign/register HTTP/1.1
+content-type : application/json
+
+{
+    "name" : "campaign2",
+    "dest_money" : 100000,
+    "content" : "campaign info..............",
+    "due_day" : "2020-05-20T06:14:26.000Z",
+    "title_img" : null  //이미지 없으면 null, 있으면 url( 서버에서 받은 path )
+}
+
+//==========================================================================================
+// get my campaign list
+//==========================================================================================
+### get my end campaign list 
+GET {{baseUrl}}/campaign/myCampaigns/end HTTP/1.1
+### get my current campaign list
+GET {{baseUrl}}/campaign/myCampaigns/ing HTTP/1.1
+
+<!-- response data format
+{
+  "data": {
+    "campaigns": [
+      {
+        "id": 1,
+        "name": "campaign1",
+        "title_img": "default.png",
+        "dest_money": 100000,
+        "current_money": 0,
+        "content": "campaign info..............",
+        "due_day": "2020-05-16",
+        "createdAt": "2020-05-16T06:14:26.000Z",
+        "updatedAt": "2020-05-16T06:14:26.000Z",
+        "deletedAt": null,
+        "userId": 1
+      }
+    ]
+  }
+}-->
+
+//==========================================================================================
+// get campaign list
+//==========================================================================================
+### get end campaign list 
+GET {{baseUrl}}/campaign/campaigns/end HTTP/1.1
+### get current campaign list 
+GET {{baseUrl}}/campaign/campaigns/ing HTTP/1.1
+
+<!-- response data format
+{
+  "data": {
+    "campaigns": [
+      {
+        "id": 1,
+        "name": "campaign1",
+        "title_img": "default.png",
+        "dest_money": 100000,
+        "current_money": 0,
+        "content": "campaign info..............",
+        "due_day": "2020-05-16",
+        "createdAt": "2020-05-16T06:14:26.000Z",
+        "updatedAt": "2020-05-16T06:14:26.000Z",
+        "deletedAt": null,
+        "userId": 1
+      }
+    ]
+  }
+}-->

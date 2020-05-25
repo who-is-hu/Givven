@@ -1,0 +1,20 @@
+//@baseUrl = http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080
+@baseUrl = http://localhost:8080
+POST {{baseUrl}}/img/  HTTP/1.1
+content-Type: multipart/form-data; 
+content-Disposition: form-data; name="img"; filename="test.jpg"
+content-Type: image/jpeg
+
+< ./test.jpg
+
+# 브라우저선 가져온 file을 
+# {
+#      img : file
+# }
+# 로 보내면됨
+
+#반환 값
+#{
+#    url : "uploads/filename" 
+            //서버에 저장된 경로를 반환, 다른 개체와 업로드시 title_img 속성에 url 값 넣어주면 됨
+#}
