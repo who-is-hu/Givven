@@ -8,17 +8,22 @@ require('dotenv').config();
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 const flash = require('connect-flash');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 const pageRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const campaignRouter = require('./routes/campaign');
+const itemRouter = require('./routes/item');
+const imgRouter = require('./routes/img');
 
 // middleware setup
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.set('port', process.env.PORT || 8001);
+app.set('port', process.env.PORT || 8080);
 app.use(express.static(path.join(__dirname, '/')));
 app.use(flash());
 sequelize.sync();
@@ -43,6 +48,11 @@ app.use(passport.session());
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
 app.use('/campaign', campaignRouter);
+app.use('/item', itemRouter);
+app.use('/img', imgRouter);
+
+//Container
+require('./containerConf')();
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

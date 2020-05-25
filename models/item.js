@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('campaign',{
+    return sequelize.define('item',{
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -15,25 +15,20 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue : "/uploads/default.jpg",
             allowNull : true,
         },
-        dest_money : {
-            type : DataTypes.INTEGER,
-            allowNull : false,
-        },
-        current_money : {
-            type : DataTypes.INTEGER,
-            defaultValue : 0,
+        content : {
+            type : DataTypes.STRING(500),
             allowNull : true,
         },
-        content : {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-        },
-        due_day : {
-            type : DataTypes.DATE,
+        price : {
+            type : DataTypes.INTEGER,
             allowNull : false,
         },
+        stock : {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         owner : {
-            type : DataTypes.STRING(100),
+            type: DataTypes.STRING(100),
             allowNull : false,
         }
     },{
