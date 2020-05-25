@@ -11,7 +11,6 @@
  /* 네비게이션 바 */
  #navbar{
     width: 100%;
-    position: fixed;
  }
  #top_navbar{
    width: 100%;
@@ -81,3 +80,56 @@
  #go_purchase b{
     color: #6683ef;
  }
+
+ #container {
+  width: 1300px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: white;
+  text-align: left;
+}
+#container h2{
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom:3px solid #C3D9F0;
+}
+
+#container img{
+  width: 50%;
+  margin-right: 10px;
+  float: left;
+}
+#container .goods_explain{
+  font-size: 18px;
+  font-weight: bold; 
+  margin-top: 30px;
+  
+}
+#container #goods_name{
+  font-size: 40px;
+  font-weight: bold;
+}
+#container #goods_price{
+  font-size: 40px;
+  font-weight: bold;
+}
+#container .input_amount{
+  margin-top: 10px;
+  width: 49%;
+  height: 50px;
+  font-size: 50px;
+}
+#container #goods_totalPrice{
+  display: inline-block;
+  width: 28%;
+  font-size: 40px;
+  font-weight: bold;
+}
+#container #goods_detail {
+  margin-top: 20px;
+  height: 1000px;
+  padding: 20px;
+  border-top: 4px solid #6683ef; 
+  border-bottom: 4px solid #6683ef; 
+  border-radius: 10px;
+}
