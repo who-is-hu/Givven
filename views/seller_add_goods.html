@@ -40,11 +40,11 @@
                     </div>
                     <div id = text>
                         <b class="goods_info">제품 이름</b>
-                        <input type="text" class="text-field" placeholder="제품의 이름을 입력하세요">
+                        <input type="text" id="item_name" class="text-field" placeholder="제품의 이름을 입력하세요">
                         <b class="goods_info">제품 포인트</b>
-                        <input type="text" class="text-field" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 포인트를 입력하세요">
+                        <input type="text" id="item_price" class="text-field" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 포인트를 입력하세요">
                          <b class="goods_info">재고수량</b>
-                        <input type="text" class="text-field" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 재고를 입력하세요">
+                        <input type="text" id="item_stock" class="text-field" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 재고를 입력하세요">
                     </div>
                     <div id = detail>
                         <b class="goods_info">세부 정보</b>
@@ -106,6 +106,25 @@
                 document.querySelector("div#image_container").appendChild(img); }
                 reader.readAsDataURL(event.target.files[0]);
             }
+
+            $(function () {
+               $('#submit').on("click", function () {
+
+                 /* $.post("http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080/item/register", {
+                      name: $("#item_name").val(),
+                      content: $("#goods_detail").val(),
+                      price: $("#item_price").val(),
+                      stock: $("#item_stock").val(),
+                      owner: "seller0"
+                     
+                  }, (data, status) => {
+                     alert(data.msg);
+                     if (data.res == 'fail');
+                     else
+                        window.location.href = '/';
+                  }); /*????*/
+               });
+            });
         </script>
         
 
