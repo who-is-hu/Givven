@@ -47,4 +47,16 @@ router.get('/campaigns/:option', isUserCharity, async (req, res, next) => {
         next(err);
     }
 });
+
+router.post('/donate', isLoggedIn, async( req, res, next) => {
+    const { campaignId, value } = req.body;
+    try {
+        const tradeInstance = Container.get('tradeService');
+        const result = await tradeInstance.donate(req.user, campaignId, value);
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
 module.exports = router;

@@ -11,7 +11,7 @@ const CampaignService =  class {
             title_img = "/uploads/dafault.jpg"
         try{
             let result;
-            const exCampagin = await Campaign.findOne({where : { name }});
+            const exCampagin = await this.campaignModel.findOne({where : { name }});
             if(!exCampagin){
                 await Campaign.create({
                     name,
@@ -89,6 +89,7 @@ const CampaignService =  class {
         } catch (err) {
             console.error(err);
         }
+        
     }
 };
 
