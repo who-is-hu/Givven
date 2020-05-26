@@ -25,7 +25,7 @@ GET {{{baseUrl}}/item/items HTTP/1.1
 content-type : application/json
 
 ### get item detail
-GET {{{baseUrl}}/item/items HTTP/1.1
+GET {{{baseUrl}}/item/detail HTTP/1.1
 content-type : application/json
 
 <!-- response
