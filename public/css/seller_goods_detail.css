@@ -110,7 +110,7 @@
      font-size: 30px;
      text-align: left;
      font-weight: bold;
-     border-bottom: 2px solid #C3D9F0;
+     border-bottom: 2px solid #6683ef;
  }
 
  #image{
@@ -124,10 +124,10 @@
 #image_container {
    text-align: center;
    vertical-align: middle;
-   height: 300px;
-   width: 480px;
+   height: 304px;
+   width: 482px;
    margin-left: auto;
-   border: 1px solid black;
+   border:3px solid #6683ef;
 }
 
 #image_container p{
@@ -154,7 +154,7 @@
     text-align: left;
     font-size: 20px;
     margin-bottom: 70px;
-    border-bottom: 2px solid #C3D9F0;
+    border-bottom: 2px solid #6683ef;
 }
 
 #detail_info{
@@ -165,5 +165,5 @@
     text-align: left;
     font-size: 20px;
     margin-bottom: 70px;
-    border: 2px solid #C3D9F0;
+    border: 2px solid #6683ef;
 }
