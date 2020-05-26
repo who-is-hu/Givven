@@ -75,14 +75,14 @@
             {
                 var img = document.createElement("img");
                 img.setAttribute("src", event.target.result);
-                /*img.width = 800;
-                img.height= 400;*/
-                var MAX_WIDTH = 400;
+                img.width = 480;
+                img.height= 300;
+                /*var MAX_WIDTH = 400;
                 var MAX_HEIGHT = 400;
                 var width = img.width;
                 var height = img.height;
                 var resizeWidth;
-                var resizeHeight;
+                var resizeHeight;*/
 
                /*if(width > maxWidth || height > maxHeight){
                     if(width > height){
@@ -110,19 +110,29 @@
             $(function () {
                $('#submit').on("click", function () {
 
-                 /* $.post("http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080/item/register", {
-                      name: $("#item_name").val(),
-                      content: $("#goods_detail").val(),
-                      price: $("#item_price").val(),
-                      stock: $("#item_stock").val(),
-                      owner: "seller0"
-                     
-                  }, (data, status) => {
-                     alert(data.msg);
-                     if (data.res == 'fail');
-                     else
+                   if($("#item_name").val() == "" || $("#item_price").val() == "" || $("#item_stock").val() == "")
+                   {
+                       alert("입력을 완료해주세요.");
+                   }
+                   /*else
+                   {
+                        $.post("http://ec2-18-221-138-119.us-east-2.compute.amazonaws.com:8080/item/register", {
+                        name: $("#item_name").val(),
+                        content: $("#goods_detail").val(),
+                        price: $("#item_price").val(),
+                        stock: $("#item_stock").val(),
+                        title_img: null
+                        }, (response, status) => {
+                        alert(response.msg);
+                        if (data.res == 'fail');
+                        else
                         window.location.href = '/';
-                  }); /*????*/
+                        });
+                   }
+                   */
+                
+
+                
                });
             });
         </script>
