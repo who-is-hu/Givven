@@ -92,6 +92,25 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
    </script>
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   
+   <script>
+      $.ajax({
+         type: 'POST',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
+         dataType: "json",
+         xhrFields: {
+            withCredentials: true
+         },
+         data: {
+            email: "charity1",
+            password: "charity1"
+         }
+      }).success(function (response) {
+         console.log(response);
+      });
+   </script>
+
 </body>
 
 </html>
