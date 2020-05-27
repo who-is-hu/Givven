@@ -28,23 +28,47 @@
             </div>
 
             <div id = "goods_detail">
-                <p>상품 이름</p>
-                <div id = image>
+                <p id = "name">상품 이름</p>
+                <div id = "image">
                     <div id = "image_container">
                         <p>사진이 없습니다</p>
                     </div>
                 </div>
                 <div id = "simple_info">
                     <b class="goods_info">재고 수량</b>
-                    <p>~~~~~</p>
+                    <p id="stock">~~~~~</p>
                     <b class="goods_info">상품 가격</b>
-                    <p>~~~~~</p>
+                    <p id="price">~~~~~</p>
                 </div>
                 <div id = "detail_info">
                     <b class="goods_info">상세 설명</b>
-                    <p>~~<br>~~</p>
+                    <p id="content">~~~~</p>
                 </div>
             </div>
         </div>
+
+         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+        <script>
+        /*
+         $.get("http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080//item/detail/itemid", {
+                        }, (response, status) => {
+                            $("#name").append(response.data.name);
+                            $("#stock").append(response.data.stock);
+                            $("#price").append(response.data.price);
+                            $("#content").append(response.data.content);
+                            response.data.title_img
+                        });
+        */
+        </script>
+
+
+
     </body>
 </html>

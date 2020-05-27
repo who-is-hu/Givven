@@ -12,6 +12,9 @@ const ContainerConf = () => {
     Container.register('itemModel', [], () => {
         return Model.Item;
     })
+    Container.register('allModels', [], () => {
+        return Model;
+    });
     Container.register('campaignService', [
         'campaignModel','userModel'
     ], (campaignModel, userModel) => {
@@ -21,6 +24,9 @@ const ContainerConf = () => {
         'itemModel','userModel'
     ], (itemModel, userModel) => {
         return new services.Item(itemModel, userModel);
+    });
+    Container.register('tradeService', ['allModels'], (allModels) => {
+        return new services.Trade(allModels);
     });
 }
 module.exports = ContainerConf;
