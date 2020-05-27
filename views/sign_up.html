@@ -4,12 +4,12 @@
       <title>회원가입</title>
       <meta charset = "utf-8">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link rel="stylesheet" href = "/public/css/sign_up_style.css">
+      <link rel="stylesheet" href = "public/css/sign_up_style.css">
    </head>
    <body>
       <div id = 'top_navbar'>
          <div id = 'logo'>
-           <img src='/public/images/logo.png'>
+           <img src='public/images/logo.png'>
          </div>
          <ul id='menu'>
             <li><a href='#'><b>로그인</b></a></li>
@@ -17,7 +17,7 @@
           </ul>
        </div>
        
-      <img class="logo-img" src = "/public/images/logo.PNG">
+      <img class="logo-img" src = "public/images/logo.PNG">
       
       <div class="login-form">
          <div>
@@ -68,19 +68,19 @@
       $('#normal_btn').on("click", function() {
          userType = "normal";
          $('#btn_group').children().css("background-color", "#B2D0EB");
-         $('#normal_btn').css("background-color", "#B2D000");
+         $('#normal_btn').css("background-color", "#6683ef");
 
       });
       $('#charity_btn').on("click", function() {
          userType = "charity";
          $('#btn_group').children().css("background-color", "#B2D0EB");
 
-         $('#charity_btn').css("background-color", "#B2D000");
+         $('#charity_btn').css("background-color", "#6683ef");
       });
       $('#seller_btn').on("click", function() {
          userType = "seller";
          $('#btn_group').children().css("background-color", "#B2D0EB");
-         $('#seller_btn').css("background-color", "#B2D000");
+         $('#seller_btn').css("background-color", "#6683ef");
       });
    });
 

@@ -4,7 +4,7 @@
       <title>GIVVEN(기쁜)</title>
       <meta charset = "utf-8">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link rel="stylesheet" href = "public/css/charity_shop_detail_style.css">
+      <link rel="stylesheet" href = "public/css/normal_donation_detail_donate_style.css">
    </head>
    <body>
       <div id = "navbar">
@@ -13,33 +13,43 @@
                 <img src='public/images/logo.png'>
             </div>
             <ul id='menu'>
-                <li><a href='#'><b>마이페이지</b></a></li>
-                <li><a href='#'><b>로그아웃</b></a></li>
+                <li><a href='#'><b>로그인</b></a></li>
+                <li><a href='#'><b>회원가입</b></a></li>
             </ul>
          </div>
          <div id = "second_navbar">
             <ul id='menu'>
-                <li><a href='#' id = "make_campaign"><b>캠페인 등록</b></a></li>
+                <li><a href='#' id = "go_donate"><b>기부하기</b></a></li>
                 <li><a href='#' id = "go_purchase"><b>상점가기</b></a></li>
             </ul>
-            <a href= '#' id = "change_normal"><b> 일반유저로 전환 </b></a>
          </div>
       </div>
 
       <div id="container">
-         <h2>품목 상세페이지</h2>
-         <img src="public/images/noImg.jpg">
-         <div class = "goods_explain">품목명</div>
-         <div id = "goods_name">제품A</div>
-         <div class = "goods_explain">가격</div>
-         <div id = "goods_price">10000</div>
-         <div class = "goods_explain">품목 개수</div>
-         <input type="text" name="amount" class="input_amount">
-         <div class = "goods_explain">총 가격</div>
-         <div id = "goods_totalPrice">30000</div>
-         <button type="submit" class="submit-btn">구매하기</button>
-         <div class = "goods_explain" style="margin-left: 20px;">품목 상세정보</div>
-         <div id = "goods_detail" style="margin-left: 20px;"></div>
+         <h2>후원 / 결제</h2>
+         <h3>캠페인 정보</h3>
+         <table class="table">
+            <thead>
+               <tr>
+                  <th scope="col" style="width: 20%;">캠페인 이미지</th>
+                  <th scope="col">캠페인명</th>
+                  <th scope="col" style="width: 30%;">후원 포인트</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><img src="public/images/noImg.jpg"></td>
+                  <td>캠페인A</td>
+                  <td>600p</td>
+               </tr>
+            </tbody>
+         </table>
+
+         <h3>결제 정보</h3>
+         <div id = "current_point">현재 포인트 : 1200p</div>
+         <div id = "cost">총 결제 포인트 : 600p</div>
+         <div id = "remain_point">결제 후 잔여 포인트 : 600p</div>
+         <button type="submit" class="submit-btn">후원하기</button>
          <div class = "clearfix" style="clear: left"></div>
       </div>
       
