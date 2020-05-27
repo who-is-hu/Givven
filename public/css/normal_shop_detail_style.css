@@ -76,89 +76,55 @@
    font-size: 20px;
    text-decoration: none;
  }
- #go_purchase b{
-  color: #6683ef;
-}
 
- #change_normal {
-    height: 60px;
-    line-height: 60px;
-    padding-left: 20px;
-    padding-right: 20px;
-    float: right;
-    color: white;
-    text-decoration: none;
-    background-color: #6683ef;
-    font-size: 20px;
-    margin-right: -160px;
-    border-radius: 10px;
+ #go_purchase b{
+    color: #6683ef;
  }
 
  #container {
-  margin: 30px;
+  width: 1300px;
+  margin: 30px auto;
   padding: 30px;
   background-color: white;
   text-align: left;
 }
-
- 
 #container h2{
   font-weight: bold;
   padding-bottom: 10px;
   border-bottom:3px solid #C3D9F0;
 }
 
- 
 #container img{
   width: 50%;
   margin-right: 10px;
   float: left;
 }
-
 #container .goods_explain{
   font-size: 18px;
   font-weight: bold; 
   margin-top: 30px;
   
 }
-
 #container #goods_name{
   font-size: 40px;
   font-weight: bold;
 }
-
 #container #goods_price{
   font-size: 40px;
   font-weight: bold;
 }
-
 #container .input_amount{
   margin-top: 10px;
   width: 49%;
   height: 50px;
   font-size: 50px;
 }
-
 #container #goods_totalPrice{
   display: inline-block;
   width: 28%;
   font-size: 40px;
   font-weight: bold;
 }
-
-#container .submit-btn {
-  width: 20%;
-  height: 60px;
-  padding-left: 20px;
-  padding-right: 20px;
-  float: right;
-  color: white;
-  background-color: #6683ef;
-  font-size: 20px;
-  border-radius: 10px;
-  border: 0px;
-}
-
 #container #goods_detail {
   margin-top: 20px;
   height: 1000px;

@@ -7,7 +7,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('normal_main.html');
+  res.render('normal_donation_main.html');
 });
 router.get('/loginPage', function(req, res, next) {
   res.render('log_in.html');
@@ -38,5 +38,7 @@ router.get('/signupPage', function(req, res, next) {
 router.get('/signupPage', function(req, res, next) {
   res.render('charity_shop_main.html');
 });
-
+router.get('./itemRegister', function(req, res, next) {
+  res.render('seller_add_goods.html');
+})
 module.exports = router;
