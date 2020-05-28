@@ -91,6 +91,21 @@ const CampaignService =  class {
         }
         
     }
+
+    async getCampaignDetail(campaignId){
+        try{
+            let result = {};
+            const campaign = await this.campaignModel.findOne({where : {id : campaignId}});
+            if(campaign == null){
+                result.success = false,
+                result.msg = "wrong id"
+                return result;
+            }
+            return campaign;
+        } catch (err) {
+            console.error(err);
+        }
+    }
 };
 
 module.exports = CampaignService;
