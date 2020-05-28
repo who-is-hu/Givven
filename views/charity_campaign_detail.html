@@ -47,7 +47,7 @@
             'aria-valuemin="0" aria-valuemax="100">'+
             '<b>'+response.data.current_money/response.data.dest_money*100+'% 달성</b></div>');
             $("#detail_switch").append(
-               '<a href="charity_shop_detail.html?id='+id+'" id=goto_detail>캠페인 상세정보</a>'+
+               '<a href="charity_campaign_detail.html?id='+id+'" id=goto_detail>캠페인 상세정보</a>'+
                '<a href="charity_campaign_detail_purchase_list.html?id='+id+'" id=goto_purchase_list>캠페인 거래내역</a>'
             );
             $("#campaign_detail").append(response.data.content);
@@ -64,7 +64,7 @@
          </div>
          <ul id='menu'>
             <li><a href='charity_mypage_main.html?id=10'><b>마이페이지</b></a></li>
-            <li><a href='#'><b>로그아웃</b></a></li>
+            <li><a href='normal_donation_main.html'><b>로그아웃</b></a></li>
          </ul>
       </div>
       <div id="second_navbar">
