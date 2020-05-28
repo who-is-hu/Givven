@@ -47,7 +47,18 @@ router.get('/campaigns/:option', isUserCharity, async (req, res, next) => {
         next(err);
     }
 });
-
+router.get('/detail/:campaignId', async (req, res, next) => {
+    try{
+        const campaignServiceInstance = Container.get('campaignService');
+        const detail = await campaignServiceInstance.getCampaignDetail(req.params.campaignId);
+        return res.json({
+            data : detail,
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
 router.post('/donate', isLoggedIn, async( req, res, next) => {
     const { campaignId, value } = req.body;
     try {
