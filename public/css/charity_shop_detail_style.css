@@ -134,9 +134,21 @@
 
 #container .input_amount{
   margin-top: 10px;
-  width: 49%;
+  width: 40%;
   height: 50px;
-  font-size: 50px;
+  font-size: 30px;
+}
+
+.amount_btn{
+  float: right;
+  margin-top: 10px;
+  width: 9%;
+  height: 50px;
+  background-color: #6683ef;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border: 0px;
 }
 
 #container #goods_totalPrice{
@@ -155,6 +167,7 @@
   color: white;
   background-color: #6683ef;
   font-size: 20px;
+  font-weight: bold;
   border-radius: 10px;
   border: 0px;
 }
