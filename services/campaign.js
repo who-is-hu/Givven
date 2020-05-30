@@ -7,10 +7,11 @@ const CampaignService =  class {
     }
     async register(user, campaign){
         let { name , dest_money, content, due_day, title_img} = campaign;
+        let result;
+
         if(title_img == null)
             title_img = "/uploads/default.jpg"
         try{
-            let result;
             const exCampagin = await this.campaignModel.findOne({where : { name }});
             if(!exCampagin){
                 await Campaign.create({
@@ -23,13 +24,13 @@ const CampaignService =  class {
                     userId : user.id
                 });
                 result = {success : true, msg : '성공'};
-            } else 
-                result = {success : false, msg: '이미 존재하는 Campaing 이름'};
-            
+            }            
             return result;
         }
         catch(err){
             console.error(err);
+            result = {success : false, msg: err};
+            return result;
         }
     }
 
@@ -88,8 +89,7 @@ const CampaignService =  class {
             return end_campaigns;
         } catch (err) {
             console.error(err);
-        }
-        
+        }   
     }
 
     async getCampaignDetail(campaignId){

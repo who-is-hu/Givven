@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>GIVVEN(기쁜)</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/seller_add_goods.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="navbar">
+            <div id="first_navbar">
+                <div id="logo">
+                    <a href="seller_mypage.html"><img src="public/images/logo.PNG"></a>
+                </div>
+                <ul id="f_menu">
+                    <li><a href="log_in.html"><b>로그아웃</b></a></li>
+                </ul>
+            </div>
+            <div id="second_navbor">
+                <ul id="s_menu">
+                    <li><a href="seller_add_goods.html" id="add_goods"><b>상품 등록</b></a></li>
+                    <li><a href="seller_mypage_main.html" id="go_mypage"><b>My Page</b></a></li>
+                </ul>
+                <a href="normal_donation_main.html" id="change_normal"><b>일반 전환</b></a>
+            </div>
+        </div>
+
+        <div id="input_section">
+            <div id="back_ground">
+                <div id="state">
+                    <p>물품 등록</p>
+                </div>
+                <div id="image">
+                    <div id="image_container">
+                        <p>사진이 없습니다</p>
+                    </div>
+                    <input type="file" id="add_img" accept="image/*" onchange="setThumbnail(event);" />
+                </div>
+                <div id=text>
+                    <b class="goods_info">제품 이름</b>
+                    <input type="text" id="item_name" class="text-field" placeholder="제품의 이름을 입력하세요">
+                    <b class="goods_info">제품 포인트</b>
+                    <input type="text" id="item_price" class="text-field"
+                        onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 포인트를 입력하세요">
+                    <b class="goods_info">재고수량</b>
+                    <input type="text" id="item_stock" class="text-field"
+                        onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="제품의 재고를 입력하세요">
+                </div>
+                <div id=detail>
+                    <b class="goods_info">세부 정보</b>
+                    <textarea id="goods_detail" placeholder="제품의 상세설명을 입력하세요"></textarea>
+                </div>
+                <button id="submit" class="submit-btn">등록하기</button>
+            </div>
+        </div>
+        <div id="last">
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+    <script>
+
+        var file = "";
+
+        $.ajax({
+            type: 'POST',
+            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: {
+                email: "seller1",
+                password: "seller1"
+            }
+        }).success(function (response) {
+            console.log(response);
+        });
+
+
+        function setThumbnail(event) {
+            file = "";
+            $('#image_container').empty();
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var img = document.createElement("img");
+                img.id = "thumbnail";
+                img.setAttribute("src", event.target.result);
+
+                document.querySelector("div#image_container").appendChild(img);
+            }
+            reader.readAsDataURL(event.target.files[0]);
+            file = event.target.files[0];
+        }
+
+
+        $(function () {
+            $('#submit').on("click", function () {
+
+                if ($("#item_name").val() == "" || $("#goods_detail").val() == "" || $("#item_price").val() == "" || $("#item_stock").val() == "" || file == "") {
+                    alert("입력을 완료해주세요");
+                }
+                else {
+                    var formData = new FormData();
+                    var img_url;
+                    formData.append('img', file);
+                    $.ajax({
+                        type: 'POST',
+                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/img",
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        enctype: 'multipart/form-data',
+                        data: formData,
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        async : false
+                    }
+                    ).success(function (response) {
+                        //console.log(img_url);
+                        img_url =  response.url;
+                    });
+                    console.log(img_url);
+                    $.ajax({
+                        type: 'POST',
+                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/register",
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        dataType: 'json',
+                        data: {
+                            name: $("#item_name").val(),
+                            content: $("#goods_detail").val(),
+                            price: $("#item_price").val(),
+                            stock: $("#item_stock").val(),
+                            title_img: img_url
+                        },
+                        async : false
+                    }).success(function (response) {
+                         console.log(response);
+                    });
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -7,6 +7,7 @@ const ItemService = class {
     }
     async register(user, item){
         let { name , price, content, stock, title_img } = item;
+        let result ={};
         if(item.title_img == null)
             title_img = "/uploads/default.jpg"
         try{
@@ -19,15 +20,14 @@ const ItemService = class {
                 title_img,
                 userId : user.id,
             });
-            let result ={};
-            if(!exItem){
-               result = { result : false, msg : 'creation failed'};
-            } else {
-                result = { result : true, msg : "success"};
+            if(exItem){
+                result = { success : true, msg : "success"};
             }
-            return result;
+            return result;   
         }catch(err){
             console.error(err);
+            result = { success : false, msg : err};
+            return result;
         }
     }
     async getItemList(){
