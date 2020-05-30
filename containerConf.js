@@ -11,7 +11,13 @@ const ContainerConf = () => {
     });
     Container.register('itemModel', [], () => {
         return Model.Item;
-    })
+    });
+    Container.register('orderModel', [], () => {
+        return Model.Order;
+    });
+    Container.register('donationModel', [], () => {
+        return Model.Donation;
+    });
     Container.register('allModels', [], () => {
         return Model;
     });
@@ -27,6 +33,9 @@ const ContainerConf = () => {
     });
     Container.register('tradeService', ['allModels'], (allModels) => {
         return new services.Trade(allModels);
+    });
+    Container.register('tradeLogs', ['allModels'], (allModels) => {
+        return new services.TradeLog(allModels);
     });
 }
 module.exports = ContainerConf;
