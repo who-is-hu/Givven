@@ -19,10 +19,22 @@ router.post('/register', isUserSeller, async (req, res, next) => {
 });
 
 //Todo: add category filter 
-router.get('/items', isLoggedIn, async (req,res,next) => {
+router.get('/items', async (req,res,next) => {
     try{
         const itemServiceInstance = Container.get('itemService');
         const items = await itemServiceInstance.getItemList();
+        res.json({
+            data : items,
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+router.get('/myItems', isUserSeller, async (req,res,next) => {
+    try{
+        const itemServiceInstance = Container.get('itemService');
+        const items = await itemServiceInstance.getMyItems(req.user);
         res.json({
             data : items,
         });
