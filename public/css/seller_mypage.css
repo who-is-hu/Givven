@@ -164,6 +164,10 @@
     border-radius: 10px;
 }
 
+.card_list .card:hover{
+    background-color: #e6e8ec;
+}
+
 .image_container{
     width: 380px;
     height: 200px;

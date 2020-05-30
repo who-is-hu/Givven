@@ -39,16 +39,7 @@
                 <div id = "my-goods">
                     <a href="#"><p>내 등록 물품</p></a>
                     <div id="goods_card" class="card_list">
-                        <div class="card">
-                            <div class = "image_container">
-                            <img src="public/images/noImg.jpg">
-                            </div>
-                            <div class="menu">
-                                <p id="item_name">제품이름 : </p>
-                                <p id="item_price">제품가격 : </p>
-                                <p id="item_stock">재고수량 : </p>
-                             </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -83,19 +74,60 @@
 
         <script>
 
-        var img1 = document.createElement("img");
-        img1.setAttribute("src", "public/images/noImg.jpg");
+        $.ajax({
+            type: 'POST',
+            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: {
+                email: "seller1",
+                password: "seller1"
+            }
+        }).success(function (response) {
+            console.log(response);
 
-        $("#goods_card").append("<div class='card'>"+
-            "<div class = 'image_container1'>"+
-            "</div>"+
-            "<div class='menu'>"+
-            "<p id='item_name'>제품이름 : </p>"+
-            "<p id='item_price'>제품가격 : </p>"+
-            "<p id='item_stock'>재고수량 : </p>"+
-            "</div></div>");
+            $.ajax({
+                type: 'GET',
+                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/items",
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: {}
+            }).success(function (response) {
+                for (var i in response.data) {
+                    console.log(response.data[i]);
+                    var img1 = document.createElement("img");
+                    img1.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data[i].title_img);
 
-        document.querySelector(".image_container1").appendChild(img1);
+                    $("#goods_card").append("<div id = 'card_"+response.data[i].id+"'class='card' onClick='card_click(this.id)'>"+
+                        "<div id = 'ic_"+response.data[i].id+"' class = 'image_container'>"+
+                        "</div>"+
+                        "<div class='menu'>"+
+                        "<p id='item_name'>제품이름 : "+response.data[i].name+"</p>"+
+                        "<p id='item_price'>제품가격 : "+response.data[i].price+"</p>"+
+                        "<p id='item_stock'>재고수량 : "+response.data[i].stock+"</p>"+
+                        "</div></div>");
+
+                    document.querySelector("#ic_"+response.data[i].id).appendChild(img1);
+                }
+            });
+        });
+
+    function card_click(card_id)
+    {
+        var arr = card_id.split('_');
+        window.location.href = "seller_mypage_goods_detail.html?index=" + arr[1];
+    }
+
+
+
+
+
+
+        
 
         /*
          $.get("http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080//item/items", {
