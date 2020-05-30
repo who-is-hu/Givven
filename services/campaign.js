@@ -20,7 +20,7 @@ const CampaignService =  class {
                     title_img,
                     content,
                     owner : user.name,
-                    due_day, //new Date(), //임시로 현재시간
+                    due_day,
                     userId : user.id
                 });
                 result = {success : true, msg : '성공'};
