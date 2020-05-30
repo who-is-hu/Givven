@@ -8,7 +8,7 @@ const ItemService = class {
     async register(user, item){
         let { name , price, content, stock, title_img } = item;
         if(item.title_img == null)
-            title_img = "/uploads/dafault.jpg"
+            title_img = "/uploads/default.jpg"
         try{
             const exItem = await this.itemModel.create({
                 name,
@@ -20,10 +20,10 @@ const ItemService = class {
                 userId : user.id,
             });
             let result ={};
-            if(exItem){
-               result = { result : true, msg : 'success'};
+            if(!exItem){
+               result = { result : false, msg : 'creation failed'};
             } else {
-                result = { result : false, msg : "error"};
+                result = { result : true, msg : "success"};
             }
             return result;
         }catch(err){
