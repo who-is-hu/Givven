@@ -20,11 +20,15 @@ const ItemService = class {
                 userId : user.id,
             });
             let result ={};
+            console.log(JSON.stringify(exItem));
             if(!exItem){
+                console.log('create');
                result = { result : false, msg : 'creation failed'};
             } else {
+                console.log('no');
                 result = { result : true, msg : "success"};
             }
+            console.log("1 ", result);
             return result;
         }catch(err){
             console.error(err);
