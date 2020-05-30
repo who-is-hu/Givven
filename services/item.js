@@ -20,7 +20,6 @@ const ItemService = class {
                 title_img,
                 userId : user.id,
             });
-            console.log(JSON.stringify(exItem));
             if(!exItem){
                 result = { success : true, msg : "success"};
             }
