@@ -76,6 +76,8 @@
 
     <script>
 
+        var file = "";
+
         $.ajax({
             type: 'POST',
             url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
@@ -93,6 +95,7 @@
 
 
         function setThumbnail(event) {
+            file = "";
             $('#image_container').empty();
             var reader = new FileReader();
             reader.onload = function (event) {
@@ -103,34 +106,58 @@
                 document.querySelector("div#image_container").appendChild(img);
             }
             reader.readAsDataURL(event.target.files[0]);
-
-
+            file = event.target.files[0];
         }
+
 
         $(function () {
             $('#submit').on("click", function () {
 
-                $.ajax({
-                    type: 'POST',
-                    url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/register",
-                    dataType: 'json',
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    data: {
-                        name: $("#item_name").val(),
-                        content: $("#goods_detail").val(),
-                        price: $("#item_price").val(),
-                        stock: $("#item_stock").val(),
-                        title_img: null
+                if ($("#item_name").val() == "" || $("#goods_detail").val() == "" || $("#item_price").val() == "" || $("#item_stock").val() == "" || file == "") {
+                    alert("입력을 완료해주세요");
+                }
+                else {
+                    var formData = new FormData();
+                    var img_url;
+                    formData.append('img', file);
+                    $.ajax({
+                        type: 'POST',
+                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/img",
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        enctype: 'multipart/form-data',
+                        data: formData,
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        async : false
                     }
-                }).success(function (response) {
-                    console.log(response);
-                });
+                    ).success(function (response) {
+                        //console.log(img_url);
+                        img_url =  response.url;
+                    });
+                    console.log($("#goods_detail").val());
+                    $.ajax({
+                        type: 'POST',
+                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/register",
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        dataType: 'json',
+                        data: {
+                            name: $("#item_name").val(),
+                            content: $("#goods_detail").val(),
+                            price: $("#item_price").val(),
+                            stock: $("#item_stock").val(),
+                            title_img: img_url
+                        },
+                        async : false
+                    }).success(function (response) {
+                         console.log(response);
+                    });
+                }
             });
-
-
-
         });
     </script>
 
