@@ -8,7 +8,7 @@ const CampaignService =  class {
     async register(user, campaign){
         let { name , dest_money, content, due_day, title_img} = campaign;
         if(title_img == null)
-            title_img = "/uploads/dafault.jpg"
+            title_img = "/uploads/default.jpg"
         try{
             let result;
             const exCampagin = await this.campaignModel.findOne({where : { name }});
