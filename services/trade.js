@@ -53,6 +53,7 @@ const TradeService = class {
             return result;
         } catch(err){
             console.error(err);
+            return err;
         }
     }
 
