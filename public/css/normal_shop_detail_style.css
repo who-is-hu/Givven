@@ -87,6 +87,8 @@
   padding: 30px;
   background-color: white;
   text-align: left;
+  border-radius: 15px;
+  border: 3px solid #C3D9F0;
 }
 #container h2{
   font-weight: bold;
@@ -94,42 +96,59 @@
   border-bottom:3px solid #C3D9F0;
 }
 
-#container img{
-  width: 50%;
-  margin-right: 10px;
+#simple_info{
+  width: 100%;
+  height: 350px;
+}
+
+#image_container{
+  text-align: center;
   float: left;
+  width: 600px;
+  height: 300px;
 }
-#container .goods_explain{
-  font-size: 18px;
-  font-weight: bold; 
-  margin-top: 30px;
-  
+
+#goods_info{
+  float: right;
+  width: 600px;
+  height: 300px;
+  padding-top: 20px;
 }
-#container #goods_name{
-  font-size: 40px;
+
+#image_container img{
+  max-width: 590px;
+  max-height: 290px;
+  min-width: 500px;
+  min-height: 200px;
+}
+
+.goods_explain{
+  display: block;
+  text-align: left;
+  font-size: 22px;
+  padding: 5px 0px;
+}
+
+#goods_info > p{
+  font-size: 30px;
   font-weight: bold;
 }
-#container #goods_price{
-  font-size: 40px;
-  font-weight: bold;
+
+#container > b{
+  margin-left: 15px;
 }
-#container .input_amount{
-  margin-top: 10px;
-  width: 49%;
-  height: 50px;
-  font-size: 50px;
-}
-#container #goods_totalPrice{
-  display: inline-block;
-  width: 28%;
-  font-size: 40px;
-  font-weight: bold;
-}
-#container #goods_detail {
-  margin-top: 20px;
-  height: 1000px;
-  padding: 20px;
+
+#detail_container{
+  width: 1200px;
+  height: 800px;
+  margin-left: 20px;
+  margin-right:20px;
+  padding: 10px;
   border-top: 4px solid #6683ef; 
   border-bottom: 4px solid #6683ef; 
   border-radius: 10px;
+}
+
+#goods_detail{
+  font-size: 30px;
 }
