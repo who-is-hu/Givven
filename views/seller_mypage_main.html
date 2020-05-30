@@ -35,16 +35,144 @@
             </div>
 
             <div id = "container">
+
                 <div id = "my-goods">
                     <a href="#"><p>내 등록 물품</p></a>
-
+                    <div id="goods_card" class="card_list">
+                        
+                    </div>
                 </div>
+
                 <div id= "order-list">
                     <a href="#"><p>주문 목록</p></a>
-
+                    <div  id="order_card" class="card_list">
+                        <div class="card">
+                            <img src="public/images/noImg.jpg">
+                            <div class="menu">
+                                <div class="campaign_name">
+                                    <h3>캠페인</h3>
+                                    <p>첫번째 캠페인</p>
+                                </div>
+                                <p id ="asd">물품A</p>
+                                <p>개수 : </p>
+                                <p>상세정보 : 물품 A 5개</p>
+                             </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
 
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+        <script>
+
+        $.ajax({
+            type: 'POST',
+            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: {
+                email: "seller1",
+                password: "seller1"
+            }
+        }).success(function (response) {
+            console.log(response);
+
+            $.ajax({
+                type: 'GET',
+                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/items",
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: {}
+            }).success(function (response) {
+                for (var i in response.data) {
+                    console.log(response.data[i]);
+                    var img1 = document.createElement("img");
+                    img1.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data[i].title_img);
+
+                    $("#goods_card").append("<div id = 'card_"+response.data[i].id+"'class='card' onClick='card_click(this.id)'>"+
+                        "<div id = 'ic_"+response.data[i].id+"' class = 'image_container'>"+
+                        "</div>"+
+                        "<div class='menu'>"+
+                        "<p id='item_name'>제품이름 : "+response.data[i].name+"</p>"+
+                        "<p id='item_price'>제품가격 : "+response.data[i].price+"</p>"+
+                        "<p id='item_stock'>재고수량 : "+response.data[i].stock+"</p>"+
+                        "</div></div>");
+
+                    document.querySelector("#ic_"+response.data[i].id).appendChild(img1);
+                }
+            });
+        });
+
+    function card_click(card_id)
+    {
+        var arr = card_id.split('_');
+        window.location.href = "seller_mypage_goods_detail.html?index=" + arr[1];
+    }
+
+
+
+
+
+
+        
+
+        /*
+         $.get("http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080//item/items", {
+                        }, (response, status) => {
+                            
+                            var img = document.createElement("img");
+                            img.setAttribute("src", response.data.title_img);
+
+                            $(goods_card).append("<div class='card'>"+
+                                "<div class = 'image_container"+response.data.id+"'>"+
+                                "</div>"+
+                                "<div class='menu'>"+
+                                "<p id='"+response.data.id+"item_name'>제품이름 : "+response.data.name+"</p>"+
+                                "<p id='"+response.data.id+"item_price'>제품가격 : "+response.data.price+"</p>"+
+                                "<p id='"+response.data.id+"item_stock'>재고수량 : "+response.data.stock+"</p>"+
+                                "</div></div>");
+                            $("#item_name").append(response.data.name);
+                            $("#item_price").append(response.data.price);
+                            $("#item_stock").append(response.data.stock);
+                            
+                            document.querySelector("div#image_container").appendChild(image);
+
+                        });*/
+
+        var img2 = document.createElement("img");
+        img2.setAttribute("src", "public/images/noImg.jpg");
+
+        $("#order_card").append("<div class='card'>"+
+            "<div class = 'image_container2'>"+
+            "</div>"+
+            "<div class='menu'>"+
+            "<div class='campaign_name'>"+
+            "<h3>캠페인</h3>"+
+            "<p>첫번째 캠페인</p>"+
+            "</div>"+
+            "<p id ='asd'>물품A</p>"+
+            "<p>개수 : </p>"+
+            "<p>상세정보 : 물품 A 5개</p>"+
+            "</div>");
+
+        document.querySelector(".image_container2").appendChild(img2);
+                                    
+        /*order list api가 없는거같은데 어디있어요? 좀 주세요*/
+                                
+        </script>
+
     </body>
 </html>
