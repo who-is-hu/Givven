@@ -4,16 +4,18 @@ const { isLoggedIn, isUserSeller, isUserCharity } = require('./middlewares');
 
 const Container = new (require('../utils/Container.js'));
 
-router.post('/register', isUserSeller, async (req, res, next) => {
-    let item = { name , price, content, stock, title_img } = req.body;
+router.get('/myOrders', isLoggedIn, async (req, res, next) => {
     try{
-        const itemServiceInstance = Container.get('itemService');
-        let result = await itemServiceInstance.register(req.user, item);
-        console.log(result);
-        res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
-        return res.json(result);
+        const tradeLogs = Container.get('tradeLogs');
+        let orders = await tradeLogs.getMyOrders(req.user);
+        console.log(orders);
+        return res.json({
+            data : orders
+        });
     } catch (err) {
         console.error(err);
         next(err);
     }
 });
+
+module.exports = router;

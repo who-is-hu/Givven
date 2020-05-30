@@ -14,7 +14,7 @@ const CampaignService =  class {
         try{
             const exCampagin = await this.campaignModel.findOne({where : { name }});
             if(!exCampagin){
-                await Campaign.create({
+                await this.campaignModel.create({
                     name,
                     dest_money,
                     title_img,
@@ -29,7 +29,7 @@ const CampaignService =  class {
         }
         catch(err){
             console.error(err);
-            result = {success : false, msg: err};
+            result = {success : false, msg: String(err)};
             return result;
         }
     }
