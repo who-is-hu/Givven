@@ -38,5 +38,7 @@ router.get('/signupPage', function(req, res, next) {
 router.get('/signupPage', function(req, res, next) {
   res.render('charity_shop_main.html');
 });
-
+router.get('./itemRegister', function(req, res, next) {
+  res.render('seller_add_goods.html');
+})
 module.exports = router;

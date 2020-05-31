@@ -156,6 +156,12 @@
   background-color:white;
 }
 
+#items .no_data{
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 40px;
+}
+
 .card{
   width: 250px;
   float: left;

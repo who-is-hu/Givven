@@ -10,7 +10,7 @@ router.post('/register', isUserSeller, async (req, res, next) => {
         const itemServiceInstance = Container.get('itemService');
         let result = await itemServiceInstance.register(req.user, item);
         console.log(result);
-        res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
+        //res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
         return res.json(result);
     } catch (err) {
         console.error(err);

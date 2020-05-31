@@ -124,14 +124,16 @@
 #image_container {
    text-align: center;
    vertical-align: middle;
-   height: 304px;
+   height: 306px;
    width: 482px;
    margin-left: auto;
+   border-radius: 10px;
    border:3px solid #6683ef;
 }
 
-#image_container p{
-   line-height: 300px;
+#image_container img{
+    max-width: 480px;
+    max-height: 300px;
 }
 
 #simple_info{
@@ -145,15 +147,15 @@
    display: block;
    text-align: left;
    font-size: 25px;
-   margin-top: 30px;
-   margin-bottom: 30px;
+   margin-top: 5px;
+   margin-bottom: 10px;
    padding: 5px 0px;
 }
 
 #simple_info > p{
     text-align: left;
     font-size: 20px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
     border-bottom: 2px solid #6683ef;
 }
 
@@ -165,5 +167,6 @@
     text-align: left;
     font-size: 20px;
     margin-bottom: 70px;
+    border-radius: 5px;
     border: 2px solid #6683ef;
 }

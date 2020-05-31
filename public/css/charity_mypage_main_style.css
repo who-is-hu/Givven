@@ -112,6 +112,11 @@
   font-size: 30px;
 }
 
+#myCampaigns .card_list .no_data {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 40px;
+}
 
 #finishCampaigns {
   margin-top: 20px;
@@ -128,6 +133,11 @@
 }
 #finishCampaigns a b {
   font-size: 30px;
+}
+#finishCampaigns .card_list .no_data {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 40px;
 }
 
 #orderGoods {

@@ -27,22 +27,64 @@
       
       <div id="container">
          <h2>품목 상세페이지</h2>
-         <img src="public/images/noImg.jpg">
-         <div class = "goods_explain">품목명</div>
-         <div id = "goods_name">제품A</div>
-         <div class = "goods_explain">가격</div>
-         <div id = "goods_price">10000</div>
-         <div class = "goods_explain">품목 개수</div>
-         <input type="text" name="amount" class="input_amount">
-         <div class = "goods_explain">총 가격</div>
-         <div id = "goods_totalPrice">30000</div>
-         <div class = "goods_explain" style="margin-left: 20px;">품목 상세정보</div>
-         <div id = "goods_detail" style="margin-left: 20px;"></div>
-         <div class = "clearfix" style="clear: left"></div>
+         <div id = "simple_info">
+            <div id = "image_container">
+            </div>
+            <div id = "goods_info">
+               <b class = "goods_explain">품목명</b>
+               <p id = "goods_name"></p>
+               <b class = "goods_explain">가격</b>
+               <p id = "goods_price"></p>
+               <b class = "goods_explain">재고수량</b>
+               <p id = "goods_stock"></p>
+            </div>
+         </div>
+         <b class = "goods_explain">품목 상세정보</b>
+         <div id = "detail_container">
+            <p id = "goods_detail"></p>  
+         </div>
       </div>
 
-       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+        <script>
+        var index;
+        $(document).ready(function () {
+            
+            index = location.href.substr(
+                location.href.lastIndexOf('=') + 1
+            );
+            console.log('val : ' + index);
+            $.ajax({
+            type: 'GET',
+            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+index,
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: { }
+        }).success(function (response) {
+           console.log(response);
+            $("#goods_name").append(response.data.name);
+            $("#goods_stock").append(response.data.stock);
+            $("#goods_price").append(response.data.price);
+            $("#goods_detail").append(response.data.content.replace(/\r\n|\n|\r/g, '<br/>'));
+
+            var img1 = document.createElement("img");
+            img1.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data.title_img);
+            document.querySelector("#image_container").appendChild(img1);
+        });
+        })
+        </script>
+
+        
+
    </body>
+   
 </html>

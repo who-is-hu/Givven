@@ -20,13 +20,13 @@ const ItemService = class {
                 title_img,
                 userId : user.id,
             });
-            if(!exItem){
+            if(exItem){
                 result = { success : true, msg : "success"};
             }
             return result;   
         }catch(err){
             console.error(err);
-            result = { success : false, msg : "failed"};
+            result = { success : false, msg : err};
             return result;
         }
     }

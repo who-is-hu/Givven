@@ -7,6 +7,8 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link rel="stylesheet" href="public/css/charity_campaign_make_style.css">
+   
+
 </head>
 
 <body>
@@ -22,8 +24,8 @@
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='#' id="make_campaign"><b>캠페인 등록</b></a></li>
-            <li><a href='#' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_campaign_make.html' id="make_campaign"><b>캠페인 등록</b></a></li>
+            <li><a href='charity_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
          </ul>
          <a href='#' id="change_normal"><b> 일반유저로 전환 </b></a>
       </div>
@@ -34,22 +36,23 @@
       <div id="campaign_info">
          <div class="input-group mb-3">
             <div class="input_img">
-               <img src="public/images/noImg.jpg" id = "inputImg">   
-               <div class="search_file">
-                  <input type="file" class="custom-file-input" id="inputImgFile">
-                  <label class="custom-file-label" for="inputImgFile">대표이미지 등록</label>
-               </div>
+               <img src="public/images/noImg.jpg" id="inputImg">
+            </div>
+            <div class="search_file">
+               <input type="file" class="custom-file-input" id="inputImgFile" accept="image/*"
+                  onchange="setThumbnail(event);">
+               <label class="custom-file-label" for="inputImgFile">대표이미지 등록</label>
             </div>
          </div>
-         <div class = "input_explain">캠페인명</div>
-         <input type="text" name="name" class="input_data" id = "campaign_name">
-         <div class = "input_explain">캠페인 목표 모금액</div>
-         <input type="text" name="price" class="input_data" id = "campaign_price">
-         <div class = "input_explain">캠페인 모금 마감 기한</div>
-         <input type="text" name="endtime" class="input_data" id = "campaign_end">
-         <div class = "input_explain">캠페인 모금 상세 소개</div>
-         <input type="text" name="detail" class="input_data" id = "campaign_detail">
-         
+         <div class="input_explain">캠페인명</div>
+         <input type="text" name="name" class="input_data" id="campaign_name">
+         <div class="input_explain">캠페인 목표 모금액</div>
+         <input type="text" name="price" class="input_data" id="campaign_price">
+         <div class="input_explain">캠페인 모금 마감 기한</div>
+         <input type="text" name="endtime" class="input_data" id="campaign_end">
+         <div class="input_explain">캠페인 모금 상세 소개</div>
+         <textarea id="campaign_detail"></textarea>
+
          <button type="submit" class="submit-btn">등록하기</button>
       </div>
    </div>
@@ -64,6 +67,87 @@
    </script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+   </script>
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   <script>
+      $.ajax({
+         type: 'POST',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
+         dataType: "json",
+         xhrFields: {
+            withCredentials: true
+         },
+         data: {
+            email: "charity1",
+            password: "charity1"
+         }
+      }).success(function (response) {
+         console.log(response);
+      });
+
+      var file = "";
+
+      function setThumbnail(event) {
+         file = "";
+         $('.input_img').empty();
+         var reader = new FileReader();
+         reader.onload = function (event) {
+            var img = document.createElement("img");
+            img.id = "inputImg";
+            img.setAttribute("src", event.target.result);
+
+            document.querySelector("div.input_img").appendChild(img);
+         }
+         reader.readAsDataURL(event.target.files[0]);
+         file = event.target.files[0];
+      }
+
+      $(function () {
+         $('.submit-btn').on("click", function () {
+            if ($("#campaign_name").val() == "" || $("#campaign_price").val() == "" || $("#campaign_end")
+               .val() == "" || $("#campaign_detail").val() == "" || file == "") {
+               alert("입력을 완료해주세요");
+            } else {
+               var formData = new FormData();
+               var img_url;
+               formData.append('img', file);
+               $.ajax({
+                  type: 'POST',
+                  url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/img",
+                  xhrFields: {
+                     withCredentials: true
+                  },
+                  enctype: 'multipart/form-data',
+                  data: formData,
+                  dataType: 'json',
+                  processData: false,
+                  contentType: false,
+               }).success(function (response) {
+                  //console.log(img_url);
+                  img_url = response.url;
+               });
+
+               var date = new Date($("#campaign_end").val());
+               $.ajax({
+                  type: 'POST',
+                  url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/register",
+                  xhrFields: {
+                     withCredentials: true
+                  },
+                  dataType: 'json',
+                  data: {
+                     name: $("#campaign_name").val(),
+                     dest_money: $("#campaign_price").val(),
+                     content: $("#campaign_detail").val(),
+                     due_day: date,
+                     title_img: img_url
+                  }
+               }).success(function (response) {
+                  console.log(response);
+               });
+            }
+         });
+      });
    </script>
 </body>
 
