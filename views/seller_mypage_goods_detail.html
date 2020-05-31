@@ -27,25 +27,25 @@
                 </div>
             </div>
 
-            <div id = "goods_detail">
-                <p id = "detail_title">상세 정보</p>
-                <div id = "image">
+            <div id="container">
+                <h2>품목 상세페이지</h2>
+                <div id = "simple_info">
                     <div id = "image_container">
                     </div>
+                    <div id = "goods_info">
+                    <b class = "goods_explain">품목명</b>
+                    <p id = "goods_name"></p>
+                    <b class = "goods_explain">가격</b>
+                    <p id = "goods_price"></p>
+                    <b class = "goods_explain">재고수량</b>
+                    <p id = "goods_stock"></p>
+                    </div>
                 </div>
-                <div id = "simple_info">
-                    <b class="goods_info">물품 이름</b>
-                    <p id="name"></p>
-                    <b class="goods_info">재고 수량</b>
-                    <p id="stock"></p>
-                    <b class="goods_info">물품 가격</b>
-                    <p id="price"></p>
-                </div>
-                <div id = "detail_info">
-                    <b class="goods_info">상세 설명</b>
-                    <p id="content"></p>
-                </div>
+                <b class = "goods_explain">품목 상세정보</b>
+                <div id = "detail_container">
+                    <p id = "goods_detail"></p>  
             </div>
+        </div>
         </div>
 
          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -73,10 +73,10 @@
             },
             data: { }
         }).success(function (response) {
-            $("#name").append(response.data.name);
-            $("#stock").append(response.data.stock);
-            $("#price").append(response.data.price);
-            $("#content").append(response.data.content.replace(/\r\n|\n|\r/g, '<br/>'));
+            $("#goods_name").append(response.data.name);
+            $("#goods_stock").append(response.data.stock);
+            $("#goods_price").append(response.data.price);
+            $("#goods_detail").append(response.data.content.replace(/\r\n|\n|\r/g, '<br/>'));
 
             var img1 = document.createElement("img");
             img1.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data.title_img);
