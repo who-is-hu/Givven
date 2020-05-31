@@ -32,7 +32,7 @@ router.get('/myCampaigns/:option', isUserCharity, async (req, res, next)=> {
     }
 });
 
-router.get('/campaigns/:option', isUserCharity, async (req, res, next) => {
+router.get('/campaigns/:option', async (req, res, next) => {
     const campaignServiceInstance = Container.get('campaignService');
     try{
         const campaigns = await campaignServiceInstance.getAllCampaigns(req.params.option);

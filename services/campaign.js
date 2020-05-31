@@ -72,7 +72,7 @@ const CampaignService =  class {
                 searchOption = { 
                     where : {
                         [Op.or] : [
-                         { due_day : { [Op.gt] : new Date()} },
+                         { due_day : { [Op.lte] : new Date()} },
                          { current_money : { [Op.gte] : sequelize.col('dest_money')} },
                     ]}
                 }
@@ -80,7 +80,7 @@ const CampaignService =  class {
                 searchOption = { 
                     where : {
                         [Op.and] : [
-                         { due_day : { [Op.lte] : new Date()} },
+                         { due_day : { [Op.gt] : new Date()} },
                          { current_money : { [Op.lt] : sequelize.col('dest_money')} },
                     ]}
                 }
