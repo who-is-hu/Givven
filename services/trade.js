@@ -68,16 +68,29 @@ const TradeService = class {
         try{
             let result = {};
             await sequelize.transaction( async (transaction) => { 
-                // 기부 트랜잭션 요청
-                // 트랜잭션 결과 
-                const transactionId = 123213; // 성공 가정
-               
+                // 원장의 user point 잔액 져오기
+                const balance = user.point; // 가져왔다고 가정 
+                if(balance < value)
+                    throw new Error('lack of balance');
                 const campaign = await this.campaignModel.findOne({where : {id : campaignId}}, { transaction});
-                if(campaign == null){
-                   throw new Error('campaign does not exist');
-                }
-                await campaign.update({ current_money : campaign.current_money + value}, {transaction});
-            
+                if(campaign == null)
+                    throw new Error('campaign does not exist');
+                const charityUser = await this.userModel.findOne({where : { id : campaign.userId}}, {transaction});    
+                if(charityUser == null)
+                    throw new Error('wrong campaign');
+                
+                // 기부 트랜잭션 요청
+                // 트랜잭션 키값 저장 
+                const transactionId = 123213; // 성공 가정
+
+                const donatorBalance = user.point - value; // 원장에서 기부자 잔액 가져오기
+                const campaignCurrMoney = campaign.current_money + value ; //원장에서 캠페인 현재 모금액 가져오기
+                const charityBalance = charityUser.point + value;
+               
+                await campaign.update({ current_money : campaignCurrMoney}, {transaction});
+                await user.update({ point : donatorBalance}, {transaction});
+                await charityUser.update({ point : charityBalance}, {transaction});
+
                 const donation = await this.donationModel.create({
                     userId : user.id,
                     campaignId,
@@ -92,12 +105,12 @@ const TradeService = class {
                 result = { success : true, msg : "success"};
               }).catch(err => {
                 // Rolled back
-                result = { success : false, msg : err};
                 throw new Error(err);
             });
             return result;
         } catch(err){
             console.error(err);
+            return { success : false, msg : String(err)};
         }
     }
 };
