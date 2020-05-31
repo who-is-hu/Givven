@@ -36,7 +36,7 @@ const ItemService = class {
             return items;
         } catch (err) {
             console.error(err);
-            next(err);
+            return err;
         }
     }
     async getItem(itemId){
@@ -45,6 +45,16 @@ const ItemService = class {
             return item;
         } catch (err) {
             console.error(err);
+            return err;
+        }
+    }
+    async getMyItems(user){
+        try{
+            const items = await user.getItems();
+            return items;
+        } catch (err) {
+            console.error(err);
+            return err;
         }
     }
 };

@@ -10,7 +10,6 @@ router.post('/register', isUserCharity, async (req, res, next) => {
         const campaignServiceInstance = Container.get('campaignService');
         const result = await campaignServiceInstance.register(req.user, campaign);
         console.log(result);
-        res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
         res.json(result);
     } catch (err) {
         console.error(err);
@@ -33,7 +32,7 @@ router.get('/myCampaigns/:option', isUserCharity, async (req, res, next)=> {
     }
 });
 
-router.get('/campaigns/:option', isUserCharity, async (req, res, next) => {
+router.get('/campaigns/:option', async (req, res, next) => {
     const campaignServiceInstance = Container.get('campaignService');
     try{
         const campaigns = await campaignServiceInstance.getAllCampaigns(req.params.option);

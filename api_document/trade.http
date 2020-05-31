@@ -11,5 +11,6 @@ content-type : application/json
 {
     "itemId" : 1,
     "orderCount" : 3,
-    "campaignId" : 1
+    "campaignId" : 1,
+    "addr" : "살기좋은 안양시"
 }

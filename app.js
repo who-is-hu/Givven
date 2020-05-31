@@ -18,7 +18,9 @@ const authRouter = require('./routes/auth');
 const campaignRouter = require('./routes/campaign');
 const itemRouter = require('./routes/item');
 const imgRouter = require('./routes/img');
+const tradeLogRouter = require('./routes/tradeLog');
 const orderRouter = require('./routes/order');
+
 // middleware setup
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
@@ -50,7 +52,9 @@ app.use('/auth', authRouter);
 app.use('/campaign', campaignRouter);
 app.use('/item', itemRouter);
 app.use('/img', imgRouter);
+app.use('/tradeLog', tradeLogRouter);
 app.use('/order', orderRouter);
+
 //Container
 require('./containerConf')();
 

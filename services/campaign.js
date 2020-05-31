@@ -14,13 +14,13 @@ const CampaignService =  class {
         try{
             const exCampagin = await this.campaignModel.findOne({where : { name }});
             if(!exCampagin){
-                await Campaign.create({
+                await this.campaignModel.create({
                     name,
                     dest_money,
                     title_img,
                     content,
                     owner : user.name,
-                    due_day, //new Date(), //임시로 현재시간
+                    due_day,
                     userId : user.id
                 });
                 result = {success : true, msg : '성공'};
@@ -29,7 +29,7 @@ const CampaignService =  class {
         }
         catch(err){
             console.error(err);
-            result = {success : false, msg: err};
+            result = {success : false, msg: String(err)};
             return result;
         }
     }
@@ -72,7 +72,7 @@ const CampaignService =  class {
                 searchOption = { 
                     where : {
                         [Op.or] : [
-                         { due_day : { [Op.gt] : new Date()} },
+                         { due_day : { [Op.lte] : new Date()} },
                          { current_money : { [Op.gte] : sequelize.col('dest_money')} },
                     ]}
                 }
@@ -80,7 +80,7 @@ const CampaignService =  class {
                 searchOption = { 
                     where : {
                         [Op.and] : [
-                         { due_day : { [Op.lte] : new Date()} },
+                         { due_day : { [Op.gt] : new Date()} },
                          { current_money : { [Op.lt] : sequelize.col('dest_money')} },
                     ]}
                 }
