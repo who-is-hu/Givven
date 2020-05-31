@@ -19,7 +19,6 @@ const campaignRouter = require('./routes/campaign');
 const itemRouter = require('./routes/item');
 const imgRouter = require('./routes/img');
 const tradeLogRouter = require('./routes/tradeLog');
-const orderRouter = require('./routes/order');
 
 // middleware setup
 app.set('views', __dirname + '/views');
@@ -53,7 +52,6 @@ app.use('/campaign', campaignRouter);
 app.use('/item', itemRouter);
 app.use('/img', imgRouter);
 app.use('/tradeLog', tradeLogRouter);
-app.use('/order', orderRouter);
 
 //Container
 require('./containerConf')();
