@@ -32,13 +32,15 @@
                 <div id = "simple_info">
                     <div id = "image_container">
                     </div>
-                    <div id = "order_info">                    
-                    <b class = "order_explain">캠페인</b>
-                    <p id = "campaign_name"></p>
-                    <b class = "order_explain">품목명</b>
-                    <p id = "item_name"></p>
-                    <b class = "order_explain">주문개수</b>
-                    <p id = "item_stock"></p>
+                    <div id = "order_info">
+                        <b class = "order_explain">사회단체</b>
+                        <p id = "charity_name"></p>                    
+                        <b class = "order_explain">캠페인</b>
+                        <p id = "campaign_name"></p>
+                        <b class = "order_explain">품목명</b>
+                        <p id = "item_name"></p>
+                        <b class = "order_explain">주문개수</b>
+                        <p id = "item_stock"></p>
                     </div>
                 </div>
                 <b class = "order_explain">배송지</b>
@@ -77,6 +79,9 @@
             var c_index = response.data.campaignId;
             var i_index = response.data.itemId;
             var img = document.createElement("img");
+
+            
+            $("#charity_name").append(response.data.consumer.name);
 
             $.ajax({
                 type: 'GET',

@@ -126,7 +126,7 @@
     float: right;
     width: 600px;
     height: 300px;
-    padding-top: 20px;
+    padding-top: 10px;
   }
   
   #image_container img{
@@ -140,7 +140,7 @@
     display: block;
     text-align: left;
     font-size: 22px;
-    margin-top: 15px;
+    margin-top: 5px;
     padding: 5px 0px;
   }
   
