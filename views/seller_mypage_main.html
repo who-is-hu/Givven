@@ -46,18 +46,7 @@
                 <div id= "order-list">
                     <a href="#"><p>주문 목록</p></a>
                     <div  id="order_card" class="card_list">
-                        <div class="card">
-                            <img src="public/images/noImg.jpg">
-                            <div class="menu">
-                                <div class="campaign_name">
-                                    <h3>캠페인</h3>
-                                    <p>첫번째 캠페인</p>
-                                </div>
-                                <p id ="asd">물품A</p>
-                                <p>개수 : </p>
-                                <p>상세정보 : 물품 A 5개</p>
-                             </div>
-                        </div>
+                        
                     </div>                    
                 </div>
             </div>
@@ -95,14 +84,15 @@
                 xhrFields: {
                     withCredentials: true
                 },
-                data: {}
+                data: {},
+                async: false
             }).success(function (response) {
                 for (var i in response.data) {
                     console.log(response.data[i]);
                     var img1 = document.createElement("img");
                     img1.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data[i].title_img);
 
-                    $("#goods_card").append("<div id = 'card_"+response.data[i].id+"'class='card' onClick='card_click(this.id)'>"+
+                    $("#goods_card").append("<div id = 'item_"+response.data[i].id+"'class='card' onClick='item_click(this.id)'>"+
                         "<div id = 'ic_"+response.data[i].id+"' class = 'image_container'>"+
                         "</div>"+
                         "<div class='menu'>"+
@@ -114,63 +104,86 @@
                     document.querySelector("#ic_"+response.data[i].id).appendChild(img1);
                 }
             });
+            $.ajax({
+                type: 'GET',
+                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/tradeLog/myOrders",
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: {},
+            }).success(function (response) {
+
+                console.log(response);
+
+                for (var i in response.data) {
+                    console.log(response.data[i]);
+                    var c_index = response.data[i].campaignId;
+                    var i_index = response.data[i].itemId;
+                    var img2 = document.createElement("img");
+
+                    $("#order_card").append("<div id = 'order_"+response.data[i].id+"'class='card' onClick='order_click(this.id)'>"+
+                        "<div id = 'oc_"+response.data[i].id+"'class = 'image_container'>"+
+                        "</div>"+
+                        "<div class='menu'>"+
+                        "<div class='campaign_name'>"+
+                        "<h3>캠페인</h3>"+
+                        "<p id = 'c_name"+response.data[i].id+"'></p>"+
+                        "</div>"+
+                        "<p id = 'i_name"+response.data[i].id+"'>상품명 : </p>"+
+                        "<p id = 'i_stock"+response.data[i].id+"'>개수 : </p>"+
+                        "</div>");
+                    
+                    $.ajax({
+                        type: 'GET',
+                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/"+c_index,
+                        dataType: 'json',
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        data: { },
+                        async : false
+                    }).success(function (response1) {
+                         $("#c_name"+response.data[i].id).append(response1.data.name);
+                    });
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+i_index,
+                        dataType: 'json',
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        data: { },
+                        async : false
+                    }).success(function (response1) {
+                        img2 = document.createElement("img");
+                        img2.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response1.data.title_img);
+                        document.querySelector("#oc_"+response.data[i].id).appendChild(img2);
+
+                         $("#i_name"+response.data[i].id).append(response1.data.name);
+                    });
+
+                    $("#i_stock"+response.data[i].id).append(response.data[i].orderCount);
+                }
+            });
         });
 
-    function card_click(card_id)
+    function item_click(card_id)
     {
         var arr = card_id.split('_');
         window.location.href = "seller_mypage_goods_detail.html?index=" + arr[1];
     }
 
-
-
-
-
-
+    function order_click(card_id)
+    {
+        var arr = card_id.split('_');
+        window.location.href = "seller_mypage_order.html?index="+arr[1];
+    }
         
 
-        /*
-         $.get("http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080//item/items", {
-                        }, (response, status) => {
-                            
-                            var img = document.createElement("img");
-                            img.setAttribute("src", response.data.title_img);
-
-                            $(goods_card).append("<div class='card'>"+
-                                "<div class = 'image_container"+response.data.id+"'>"+
-                                "</div>"+
-                                "<div class='menu'>"+
-                                "<p id='"+response.data.id+"item_name'>제품이름 : "+response.data.name+"</p>"+
-                                "<p id='"+response.data.id+"item_price'>제품가격 : "+response.data.price+"</p>"+
-                                "<p id='"+response.data.id+"item_stock'>재고수량 : "+response.data.stock+"</p>"+
-                                "</div></div>");
-                            $("#item_name").append(response.data.name);
-                            $("#item_price").append(response.data.price);
-                            $("#item_stock").append(response.data.stock);
-                            
-                            document.querySelector("div#image_container").appendChild(image);
-
-                        });*/
-
-        var img2 = document.createElement("img");
-        img2.setAttribute("src", "public/images/noImg.jpg");
-
-        $("#order_card").append("<div class='card'>"+
-            "<div class = 'image_container2'>"+
-            "</div>"+
-            "<div class='menu'>"+
-            "<div class='campaign_name'>"+
-            "<h3>캠페인</h3>"+
-            "<p>첫번째 캠페인</p>"+
-            "</div>"+
-            "<p id ='asd'>물품A</p>"+
-            "<p>개수 : </p>"+
-            "<p>상세정보 : 물품 A 5개</p>"+
-            "</div>");
-
-        document.querySelector(".image_container2").appendChild(img2);
                                     
-        /*order list api가 없는거같은데 어디있어요? 좀 주세요*/
                                 
         </script>
 
