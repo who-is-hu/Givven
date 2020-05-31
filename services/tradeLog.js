@@ -88,16 +88,45 @@ const TradeLog = class {
             return {success: false, msg : String(err)};
         }
     }
-    async getOrdersByItem(){
 
-    }
-
-    async getDonationsByCampaign(){
-
+    async getDonationsByCampaign(campaignId){
+        try{
+            const donations = await this.donationModel.findAll({
+                where : {
+                    campaignId,
+                },
+            });
+            return donations;
+        } catch (err) {
+            console.error(err);
+            return { success : false, msg : String(err)};
+        }
     }
     async getOrderDetail(orderId){
         try{
-            const order = await this.orderModel.findOne({ where : { id : orderId}});
+            const order = await this.orderModel.findOne({ 
+                where : { id : orderId},
+                include : [
+                    {
+                        model : this.campaignModel,
+                        attributes : [ 'id' , 'name' ]
+                    },
+                    {
+                        model : this.itemModel,
+                        attributes : [ 'id' , 'name' ]
+                    },
+                    {
+                        model : this.userModel,
+                        as : 'seller',
+                        attributes : [ 'id' , 'name' ]
+                    },
+                    {
+                        model : this.userModel,
+                        as : 'consumer',
+                        attributes : [ 'id' , 'name' ]
+                    }
+                ]     
+            });
             return  order;
         } catch (err) {
             console.error(err);

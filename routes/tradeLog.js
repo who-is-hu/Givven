@@ -54,6 +54,18 @@ router.get('/myDonations/:option', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
-
+router.get('/donationsByCampaign/:campaignId', isLoggedIn, async (req, res, next) => {
+    try{
+        const tradeLogs = Container.get('tradeLogs');
+        let donations = await tradeLogs.getDonationsByCampaign(req.params.campaignId);
+        //console.log(orders);
+        return res.json({
+            data : donations
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;
