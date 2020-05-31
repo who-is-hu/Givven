@@ -77,8 +77,16 @@ const TradeLog = class {
         }
     }
 
-    async getOrdersByCampaign(){
-
+    async getOrdersByCampaign(campaignId){
+        try{
+            const orders = await this.orderModel.findAll({where : {campaignId,}});
+            if(orders == null || orders.length == 0)
+                throw new Error('wrong campaign id');
+            return orders;
+        } catch (err) {
+            console.error(err);
+            return {success: false, msg : String(err)};
+        }
     }
     async getOrdersByItem(){
 

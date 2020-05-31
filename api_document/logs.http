@@ -89,5 +89,14 @@ content-type : application/json
 // get order detail
 ///////////////////////////////////////////////////////////////////
 ###
-GET {{baseUrl}}/tradeLog/orderDetail/1 HTTP/1.1
+GET {{baseUrl}}/tradeLog/orderDetail/9 HTTP/1.1
+content-type : application/json
+
+//뒤에 orderId
+
+///////////////////////////////////////////////////////////////////
+// get orders by campaign id
+///////////////////////////////////////////////////////////////////
+###
+GET {{baseUrl}}/tradeLog/ordersByCampaign/1 HTTP/1.1
 content-type : application/json

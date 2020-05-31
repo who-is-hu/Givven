@@ -3,7 +3,19 @@ const router = express.Router();
 const { isLoggedIn, isUserSeller, isUserCharity } = require('./middlewares');
 
 const Container = new (require('../utils/Container.js'));
-
+router.get('/orderDetail/:orderId', isLoggedIn, async (req, res, next) => {
+    try{
+        const tradeLogs = Container.get('tradeLogs');
+        let order = await tradeLogs.getOrderDetail(req.params.orderId);
+        //console.log(orders);
+        return res.json({
+            data : order
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
 router.get('/myOrders', isLoggedIn, async (req, res, next) => {
     try{
         const tradeLogs = Container.get('tradeLogs');
@@ -11,6 +23,18 @@ router.get('/myOrders', isLoggedIn, async (req, res, next) => {
         console.log(orders);
         return res.json({
             data : orders
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+router.get('/ordersByCampaign/:campaignId', isLoggedIn, async (req, res, next) => {
+    try{
+        const tradeLogs = Container.get('tradeLogs');
+        let order = await tradeLogs.getOrdersByCampaign(req.params.campaignId);
+        return res.json({
+            data : order
         });
     } catch (err) {
         console.error(err);
@@ -30,18 +54,6 @@ router.get('/myDonations/:option', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
-router.get('/orderDetail/:orderId', isLoggedIn, async (req, res, next) => {
-    try{
-        const tradeLogs = Container.get('tradeLogs');
-        let order = await tradeLogs.getOrderDetail(req.params.orderId);
-        //console.log(orders);
-        return res.json({
-            data : order
-        });
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
-});
+
 
 module.exports = router;
