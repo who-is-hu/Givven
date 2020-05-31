@@ -46,11 +46,41 @@ const TradeLog = class {
         }
     }
 
-    async getMyDonations(){
-
+    async getMyDonations(user, option){ //end, ing
+        try{
+            let searchOption;
+            if(option == 'end'){
+                searchOption = { 
+                        [Op.or] : [
+                            { due_day : { [Op.lte] : new Date()} },
+                            { current_money : { [Op.gte] : sequelize.col('dest_money')} },
+                        ],
+                }
+            } else if( option == 'ing'){
+                searchOption = { 
+                        [Op.and] : [
+                            { due_day : { [Op.gt] : new Date()} },
+                            { current_money : { [Op.lt] : sequelize.col('dest_money')} },
+                        ],
+                }
+            }
+            const donations = await user.getDonations({
+                include : {
+                    model : this.campaignModel,
+                    where : searchOption,                  
+                },
+            });
+            return { data : donations , msg : "success"}
+        } catch (err) {
+            console.error(err);
+            return { success : false, msg : String(err)};
+        }
     }
 
     async getOrdersByCampaign(){
+
+    }
+    async getOrdersByItem(){
 
     }
 
