@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             unique : true,
         },
         title_img : {
-            type : DataTypes.STRING(50),
+            type : DataTypes.STRING(100),
             defaultValue : "/uploads/default.jpg",
             allowNull : true,
         },
