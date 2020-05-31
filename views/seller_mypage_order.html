@@ -27,22 +27,97 @@
                 </div>
             </div>
 
-            <div id = "order">
-                <p>주문 내역</p>
-                <div id = image>
+            <div id="container">
+                <h2>주문목록 상세페이지</h2>
+                <div id = "simple_info">
                     <div id = "image_container">
-                        <p>사진이 없습니다</p>
+                    </div>
+                    <div id = "order_info">
+                        <b class = "order_explain">사회단체</b>
+                        <p id = "charity_name"></p>                    
+                        <b class = "order_explain">캠페인</b>
+                        <p id = "campaign_name"></p>
+                        <b class = "order_explain">품목명</b>
+                        <p id = "item_name"></p>
+                        <b class = "order_explain">주문개수</b>
+                        <p id = "item_stock"></p>
                     </div>
                 </div>
-                <div id = text>
-                    <b class="goods_info">제품 이름</b>
-                    <p>~~~~~</p>
-                    <b class="goods_info">제품 수량</b>
-                    <p>~~~~~</p>
-                    <b class="goods_info">주문지</b>
-                    <p>~~~~~</p>
-                </div>
+                <b class = "order_explain">배송지</b>
+                <div id = "address_info">
+                    <p id = "address"></p>  
             </div>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+        <script>
+        $(document).ready(function () {
+            
+            index = location.href.substr(
+                location.href.lastIndexOf('=') + 1
+            );
+            console.log('val : ' + index);
+            $.ajax({
+            type: 'GET',
+            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/tradeLog/orderDetail/"+index,
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: { }
+        }).success(function (response) {
+
+            console.log(response);
+
+            var c_index = response.data.campaignId;
+            var i_index = response.data.itemId;
+            var img = document.createElement("img");
+
+            
+            $("#charity_name").append(response.data.consumer.name);
+
+            $.ajax({
+                type: 'GET',
+                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/"+c_index,
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: { },
+                async : false
+            }).success(function (response1) {
+                $("#campaign_name").append(response1.data.name);
+            });
+
+
+            $.ajax({
+                type: 'GET',
+                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+i_index,
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: { },
+                async : false
+            }).success(function (response1) {
+                img = document.createElement("img");
+                img.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response1.data.title_img);
+                document.querySelector("#image_container").appendChild(img);
+
+                $("#item_name").append(response1.data.name);
+            });
+
+            $("#item_stock").append(response.data.orderCount);
+            $("#address").append(response.data.addr);
+        });
+        })
+        </script>
     </body>
 </html>

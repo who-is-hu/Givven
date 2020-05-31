@@ -139,6 +139,7 @@
 }
 
 #detail_container{
+  overflow:auto;
   width: 1200px;
   height: 800px;
   margin-left: 20px;
