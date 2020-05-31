@@ -1,5 +1,7 @@
-var simpletest = artifacts.require("Simpletest");
+var givven = artifacts.require("Givven");
 module.exports = function(_deployer) {
   // Use deployer to state migration tasks.
-  _deployer.deploy(simpletest);
+  //let ownerAddress = web3.eth.accounts[1];
+  _deployer.deploy(givven);
 };
+ 
