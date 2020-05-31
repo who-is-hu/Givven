@@ -64,10 +64,10 @@ router.get('/detail/:itemId', isLoggedIn, async (req, res, next) => {
 });
 
 router.post('/buy', isUserCharity, async (req, res, next) => {
-    const { itemId, orderCount, campaignId } = req.body;
+    const { addr, itemId, orderCount, campaignId } = req.body;
     try{
         const tradeInstance = Container.get('tradeService');
-        const result = await tradeInstance.buyItem(req.user, itemId, orderCount, campaignId);
+        const result = await tradeInstance.buyItem(req.user, addr, itemId, orderCount, campaignId);
         res.json(result);
     } catch (err) {
         console.error(err);
