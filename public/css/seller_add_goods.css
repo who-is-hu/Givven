@@ -134,7 +134,7 @@
 #image_container {
     text-align: center;
     vertical-align: middle;
-    height: 304px;
+    height: 306px;
     width: 482px;
     margin-top:50px;
     margin-left: auto;
@@ -145,7 +145,15 @@
     line-height: 300px;
 }
 
- #add_img{
+#thumbnail{
+    max-width: 480px;
+    max-height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#add_img{
      display: block;
      float: right;
      width: 220px;

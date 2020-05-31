@@ -163,6 +163,12 @@ td {
   border-radius: 20px;
 }
 
+#finishCampaigns .card_list .no_data {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 40px;
+}
+
 .card{
   width: 250px;
   float: left;

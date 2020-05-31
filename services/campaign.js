@@ -7,29 +7,30 @@ const CampaignService =  class {
     }
     async register(user, campaign){
         let { name , dest_money, content, due_day, title_img} = campaign;
+        let result;
+
         if(title_img == null)
-            title_img = "/uploads/dafault.jpg"
+            title_img = "/uploads/default.jpg"
         try{
-            let result;
             const exCampagin = await this.campaignModel.findOne({where : { name }});
             if(!exCampagin){
-                await Campaign.create({
+                await this.campaignModel.create({
                     name,
                     dest_money,
                     title_img,
                     content,
                     owner : user.name,
-                    due_day, //new Date(), //임시로 현재시간
+                    due_day,
                     userId : user.id
                 });
                 result = {success : true, msg : '성공'};
-            } else 
-                result = {success : false, msg: '이미 존재하는 Campaing 이름'};
-            
+            }            
             return result;
         }
         catch(err){
             console.error(err);
+            result = {success : false, msg: String(err)};
+            return result;
         }
     }
 
@@ -71,7 +72,7 @@ const CampaignService =  class {
                 searchOption = { 
                     where : {
                         [Op.or] : [
-                         { due_day : { [Op.gt] : new Date()} },
+                         { due_day : { [Op.lte] : new Date()} },
                          { current_money : { [Op.gte] : sequelize.col('dest_money')} },
                     ]}
                 }
@@ -79,7 +80,7 @@ const CampaignService =  class {
                 searchOption = { 
                     where : {
                         [Op.and] : [
-                         { due_day : { [Op.lte] : new Date()} },
+                         { due_day : { [Op.gt] : new Date()} },
                          { current_money : { [Op.lt] : sequelize.col('dest_money')} },
                     ]}
                 }
@@ -88,8 +89,22 @@ const CampaignService =  class {
             return end_campaigns;
         } catch (err) {
             console.error(err);
+        }   
+    }
+
+    async getCampaignDetail(campaignId){
+        try{
+            let result = {};
+            const campaign = await this.campaignModel.findOne({where : {id : campaignId}});
+            if(campaign == null){
+                result.success = false,
+                result.msg = "wrong id"
+                return result;
+            }
+            return campaign;
+        } catch (err) {
+            console.error(err);
         }
-        
     }
 };
 

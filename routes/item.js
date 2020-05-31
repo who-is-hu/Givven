@@ -10,7 +10,8 @@ router.post('/register', isUserSeller, async (req, res, next) => {
         const itemServiceInstance = Container.get('itemService');
         let result = await itemServiceInstance.register(req.user, item);
         console.log(result);
-        res.json(result);
+        //res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
+        return res.json(result);
     } catch (err) {
         console.error(err);
         next(err);
@@ -18,10 +19,22 @@ router.post('/register', isUserSeller, async (req, res, next) => {
 });
 
 //Todo: add category filter 
-router.get('/items', isLoggedIn, async (req,res,next) => {
+router.get('/items', async (req,res,next) => {
     try{
         const itemServiceInstance = Container.get('itemService');
         const items = await itemServiceInstance.getItemList();
+        res.json({
+            data : items,
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+router.get('/myItems', isUserSeller, async (req,res,next) => {
+    try{
+        const itemServiceInstance = Container.get('itemService');
+        const items = await itemServiceInstance.getMyItems(req.user);
         res.json({
             data : items,
         });
@@ -51,10 +64,10 @@ router.get('/detail/:itemId', isLoggedIn, async (req, res, next) => {
 });
 
 router.post('/buy', isUserCharity, async (req, res, next) => {
-    const { itemId, orderCount, campaignId } = req.body;
+    const { addr, itemId, orderCount, campaignId } = req.body;
     try{
         const tradeInstance = Container.get('tradeService');
-        const result = await tradeInstance.buyItem(req.user, itemId, orderCount, campaignId);
+        const result = await tradeInstance.buyItem(req.user, addr, itemId, orderCount, campaignId);
         res.json(result);
     } catch (err) {
         console.error(err);

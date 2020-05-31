@@ -7,6 +7,116 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link rel="stylesheet" href="public/css/charity_mypage_main_style.css">
+
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+   <script>
+      var current_campaign_list;
+      var ended_campaign_list;
+      var i;
+
+   
+      $.ajax({
+         type: 'POST',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
+         dataType: "json",
+         xhrFields: {
+            withCredentials: true
+         },
+         data: {
+            email: "charity1",
+            password: "charity1"
+         }
+      }).success(function (response) {
+         console.log(response);
+      });
+      
+
+      $.ajax({
+         type: 'GET',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/myCampaigns/ing",
+         xhrFields: {
+            withCredentials: true
+         },
+      }).success(function (response) {
+         console.log(response);
+         current_campaign_list = response.data;
+         console.log(current_campaign_list);
+         
+         if(current_campaign_list.campaigns.length == 0){
+            $("#myCampaigns .card_list").append("<p class = "+"no_data"+">모금중인 캠페인이 없어요..</p>");
+         }
+         
+         else{
+            i = 0;
+            while ( i < current_campaign_list.campaigns.length) {
+               if(i > 3){
+                  break;
+               }
+               $("#myCampaigns .card_list").append(
+               "<div class='card'>"+
+                  "<img src='"+"http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+current_campaign_list.campaigns[i].title_img+"'>"+
+                  "<div class='menu'>"+
+                     "<h3>"+current_campaign_list.campaigns[i].name+"</h3>"+
+                     "<p>"+current_campaign_list.campaigns[i].current_money+"p / "+current_campaign_list.campaigns[i].dest_money+"p</p>"+
+                     "<div class='progress'>"+
+                        "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"%'"+
+                           "aria-valuenow='"+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"' aria-valuemin='0' aria-valuemax='100'>"+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"%</div>"+
+                     "</div>"+
+                  "</div>"+
+               "</div>");
+               i = i + 1;
+            }
+            $(".card_list").append('<div class="clearfix" style="clear: left"></div>'); 
+         }
+         
+      });
+      
+      $.ajax({
+         type: 'GET',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/myCampaigns/end",
+         xhrFields: {
+            withCredentials: true
+         },
+      }).success(function (response) {
+         console.log(response);
+         ended_campaign_list = response.data;
+         console.log(ended_campaign_list);
+         
+         if(ended_campaign_list.campaigns.length == 0){
+            $("#finishCampaigns .card_list").append("<p class = "+"no_data"+">모금종료된 캠페인이 없어요..</p>");
+         }
+         else{
+            i = 0;
+            while ( i < ended_campaign_list.campaigns.length) {
+               if(i > 3){
+                  break;
+               }
+               $("#finishCampaigns .card_list").append(
+                  '<div class="card">'+
+                     '<img src="'+ "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+ended_campaign_list.campaigns[i].title_img+'">'+
+                     '<div class="menu">'+
+                        '<h3>'+ ended_campaign_list.campaigns[i].name+'</h3>'+
+                        '<p>'+ ended_campaign_list.campaigns[i].current_money +'p / '+ended_campaign_list.campaigns[i].dest_money+'p</p>'+
+                        '<div class="progress">'+
+                        '<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: '+ (ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100)+'%"'+
+                           'aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100+'%</div>'+
+                           
+                        '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+ (100 - (ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100))+'%"'+
+                           'aria-valuenow="'+ (100 - (ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100))+'" aria-valuemin="0" aria-valuemax="100"></div>'+
+                           
+                     '</div>'+
+                  '</div>'+
+               '</div>'
+               );
+            i= i+1;
+            }
+            $(".card_list").append('<div class="clearfix" style="clear: left"></div>'); 
+         }
+         
+      });
+   </script>
+
 </head>
 
 <body>
@@ -16,51 +126,27 @@
             <img src='public/images/logo.png'>
          </div>
          <ul id='menu'>
-            <li><a href='#'><b>마이페이지</b></a></li>
-            <li><a href='#'><b>로그아웃</b></a></li>
+            <li><a href='charity_mypage_main.html'><b>마이페이지</b></a></li>
+            <li><a href='normal_donation_main.html'><b>로그아웃</b></a></li>
          </ul>
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='#' id="make_campaign"><b>캠페인 등록</b></a></li>
-            <li><a href='#' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_campaign_make.html' id="make_campaign"><b>캠페인 등록</b></a></li>
+            <li><a href='charity_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
          </ul>
-         <a href='#' id="change_normal"><b> 일반유저로 전환 </b></a>
+         <a href='normal_donation_main.html' id="change_normal"><b> 일반유저로 전환 </b></a>
       </div>
    </div>
    <div id=container>
       <div id=myCampaigns>
          <a href='#'><b>내 등록 캠페인</b></a>
          <div class="card_list">
-            <div class="card">
-               <img src="public/images/noImg.jpg">
-               <div class="menu">
-                  <h3>첫번째 캠페인</h3>
-                  <p>3000p / 12000p</p>
-                  <div class="progress">
-                     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                  </div>
-               </div>
-            </div>
          </div>
       </div>
       <div id=finishCampaigns>
          <a href='#'><b>완료된 캠페인</b></a>
          <div class="card_list">
-            <div class="card">
-               <img src="public/images/noImg.jpg">
-               <div class="menu">
-                  <h3>첫번째 캠페인</h3>
-                  <p>3000p / 12000p</p>
-                  <div class="progress">
-                     <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 75%"
-                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-               </div>
-            </div>
          </div>
       </div>
       <div id=orderGoods>
@@ -92,6 +178,7 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
    </script>
+
 </body>
 
 </html>

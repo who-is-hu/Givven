@@ -10,7 +10,7 @@ const TradeService = class {
         this.donationModel = Donation;
     }
     
-    async buyItem(user, itemId, orderCount, campaignId){
+    async buyItem(user, addr, itemId, orderCount, campaignId){
         try{
             let result = {};
             await sequelize.transaction( async (transaction) => { 
@@ -41,6 +41,7 @@ const TradeService = class {
                     orderCount,
                     transactionKey : transactionId,
                     campaignId,
+                    addr,
                 }, {transaction});
               }).then(() => {
                 // Committed
@@ -53,6 +54,7 @@ const TradeService = class {
             return result;
         } catch(err){
             console.error(err);
+            return err;
         }
     }
 

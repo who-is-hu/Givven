@@ -86,8 +86,8 @@
                 withCredentials: true
             },
             data: {
-                email: "seller2",
-                password: "seller2"
+                email: "seller1",
+                password: "seller1"
             }
         }).success(function (response) {
             console.log(response);
@@ -137,7 +137,7 @@
                         //console.log(img_url);
                         img_url =  response.url;
                     });
-                    console.log($("#goods_detail").val());
+                    console.log(img_url);
                     $.ajax({
                         type: 'POST',
                         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/register",

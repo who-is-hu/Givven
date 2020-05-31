@@ -7,8 +7,9 @@ const ItemService = class {
     }
     async register(user, item){
         let { name , price, content, stock, title_img } = item;
+        let result ={};
         if(item.title_img == null)
-            title_img = "/uploads/dafault.jpg"
+            title_img = "/uploads/default.jpg"
         try{
             const exItem = await this.itemModel.create({
                 name,
@@ -19,15 +20,14 @@ const ItemService = class {
                 title_img,
                 userId : user.id,
             });
-            let result ={};
             if(exItem){
-               result = { result : true, msg : 'success'};
-            } else {
-                result = { result : false, msg : "error"};
+                result = { success : true, msg : "success"};
             }
-            return result;
+            return result;   
         }catch(err){
             console.error(err);
+            result = { success : false, msg : err};
+            return result;
         }
     }
     async getItemList(){
@@ -36,7 +36,7 @@ const ItemService = class {
             return items;
         } catch (err) {
             console.error(err);
-            next(err);
+            return err;
         }
     }
     async getItem(itemId){
@@ -45,6 +45,16 @@ const ItemService = class {
             return item;
         } catch (err) {
             console.error(err);
+            return err;
+        }
+    }
+    async getMyItems(user){
+        try{
+            const items = await user.getItems();
+            return items;
+        } catch (err) {
+            console.error(err);
+            return err;
         }
     }
 };

@@ -1,52 +1,123 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>GIVVEN(기쁜)</title>
-      <meta charset = "utf-8">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link rel="stylesheet" href = "public/css/charity_shop_detail_style.css">
-   </head>
-   <body>
-      <div id = "navbar">
-         <div id = 'top_navbar'>
-            <div id = 'logo'>
-                <img src='public/images/logo.png'>
-            </div>
-            <ul id='menu'>
-                <li><a href='#'><b>마이페이지</b></a></li>
-                <li><a href='#'><b>로그아웃</b></a></li>
-            </ul>
-         </div>
-         <div id = "second_navbar">
-            <ul id='menu'>
-                <li><a href='#' id = "make_campaign"><b>캠페인 등록</b></a></li>
-                <li><a href='#' id = "go_purchase"><b>상점가기</b></a></li>
-            </ul>
-            <a href= '#' id = "change_normal"><b> 일반유저로 전환 </b></a>
-         </div>
-      </div>
 
-      <div id="container">
-         <h2>품목 상세페이지</h2>
-         <img src="public/images/noImg.jpg">
-         <div class = "goods_explain">품목명</div>
-         <div id = "goods_name">제품A</div>
-         <div class = "goods_explain">가격</div>
-         <div id = "goods_price">10000</div>
-         <div class = "goods_explain">품목 개수</div>
-         <input type="text" name="amount" class="input_amount">
-         <div class = "goods_explain">총 가격</div>
-         <div id = "goods_totalPrice">30000</div>
-         <button type="submit" class="submit-btn">구매하기</button>
-         <div class = "goods_explain" style="margin-left: 20px;">품목 상세정보</div>
-         <div id = "goods_detail" style="margin-left: 20px;"></div>
-         <div class = "clearfix" style="clear: left"></div>
+<head>
+   <title>GIVVEN(기쁜)</title>
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <link rel="stylesheet" href="public/css/charity_shop_detail_style.css">
+</head>
+
+<body>
+   <div id="navbar">
+      <div id='top_navbar'>
+         <div id='logo'>
+            <img src='public/images/logo.png'>
+         </div>
+         <ul id='menu'>
+            <li><a href='charity_mypage_main.html'><b>마이페이지</b></a></li>
+            <li><a href='normal_donation_main.html'><b>로그아웃</b></a></li>
+         </ul>
       </div>
+      <div id="second_navbar">
+         <ul id='menu'>
+            <li><a href='charity_campaign_make.html' id="make_campaign"><b>캠페인 등록</b></a></li>
+            <li><a href='charity_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
+         </ul>
+         <a href='normal_donation_main.html' id="change_normal"><b> 일반유저로 전환 </b></a>
+      </div>
+   </div>
+
+   <div id="container">
+      <h2>품목 상세페이지</h2>
+      <img src="public/images/noImg.jpg" id = "goods_img">
+      <div class="goods_explain">품목명</div>
+      <div id="goods_name"></div>
+      <div class="goods_explain">가격</div>
+      <div id="goods_price"></div>
+      <div class="goods_explain">품목 개수</div>
+      <input type="text" name="amount" class="input_amount">
+      <button onclick = "input()" class = "amount_btn">개수 결정</button>
+      <div class="goods_explain">총 가격</div>
+      <div id="goods_totalPrice"></div>
+      <button type="submit" class="submit-btn">구매하기</button>
+      <div class="goods_explain" style="margin-left: 20px;">품목 상세정보</div>
+      <div id="goods_detail" style="margin-left: 20px;"></div>
+      <div class="clearfix" style="clear: left"></div>
+   </div>
+
+
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+   </script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+   </script>
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   <script>
+      
+      $.ajax({
+         type: 'POST',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
+         dataType: "json",
+         xhrFields: {
+            withCredentials: true
+         },
+         data: {
+            email: "charity1",
+            password: "charity1"
+         }
+      }).success(function (response) {
+         console.log(response);
+      });
       
 
+      var temp = location.href.split("?");
+      var data = temp[1].split("=");
+      var id = data[1] * 1 ;
+      var price;
 
-       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-   </body>
+      $.ajax({
+         type: 'GET',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+ id,
+         xhrFields: {
+            withCredentials: true
+         },
+      }).success(function (response) {
+         console.log(response);
+         $("#goods_img").attr('src', "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data.title_img);
+         $("#goods_name").append(response.data.name);
+         $("#goods_price").append(response.data.price+"p");
+         $("#goods_totalPrice").append(0);
+         price = response.data.price;
+         $("#goods_detail").append(response.data.content);
+      });
+
+      function input(){
+            var amount = $('.input_amount').val();
+            $("#goods_totalPrice").empty();
+            $("#goods_totalPrice").append(price * amount +"p");
+         }
+
+      $(function () {
+         $('.submit-btn').on("click", function () {
+            if($('.input_amount').val() == ""){
+               alert("입력을 완료해주세요");
+            }
+            else{
+               var amount = $('.input_amount').val();
+               location.href = "charity_shop_detail_purchase.html?id="+id+"&amount="+amount ;
+            }
+         });
+      });  
+
+
+   </script>
+</body>
+
 </html>
