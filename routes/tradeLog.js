@@ -30,5 +30,18 @@ router.get('/myDonations/:option', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
+router.get('/orderDetail/:orderId', isLoggedIn, async (req, res, next) => {
+    try{
+        const tradeLogs = Container.get('tradeLogs');
+        let order = await tradeLogs.getOrderDetail(req.params.orderId);
+        //console.log(orders);
+        return res.json({
+            data : order
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;

@@ -87,6 +87,15 @@ const TradeLog = class {
     async getDonationsByCampaign(){
 
     }
+    async getOrderDetail(orderId){
+        try{
+            const order = await this.orderModel.findOne({ where : { id : orderId}});
+            return  order;
+        } catch (err) {
+            console.error(err);
+            return { success : false, msg : String(err)};
+        }
+    }
 };
 
 module.exports = TradeLog;
