@@ -1,60 +1,110 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>GIVVEN(기쁜)</title>
-      <meta charset = "utf-8">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link rel="stylesheet" href = "public/css/normal_donation_detail_style.css">
-   </head>
-   <body>
-      <div id = "navbar">
-         <div id = 'top_navbar'>
-            <div id = 'logo'>
-                <img src='public/images/logo.png'>
-            </div>
-            <ul id='menu'>
-                <li><a href='#'><b>로그인</b></a></li>
-                <li><a href='#'><b>회원가입</b></a></li>
-            </ul>
+
+<head>
+   <title>GIVVEN(기쁜)</title>
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <link rel="stylesheet" href="public/css/normal_donation_detail_style.css">
+</head>
+
+<body>
+   <div id="navbar">
+      <div id='top_navbar'>
+         <div id='logo'>
+            <img src='public/images/logo.png'>
          </div>
-         <div id = "second_navbar">
-            <ul id='menu'>
-                <li><a href='#' id = "go_donate"><b>기부하기</b></a></li>
-                <li><a href='#' id = "go_purchase"><b>상점가기</b></a></li>
-            </ul>
-         </div>
+         <ul id='menu'>
+            <li><a href='log_in.html'><b>로그인</b></a></li>
+            <li><a href='sign_up.html'><b>회원가입</b></a></li>
+         </ul>
       </div>
-
-      <div id="container">
-         <h2>캠페인 상세페이지</h2>
-         <img src="public/images/noImg.jpg">
-         <div class="campaign_explain">캠페인명</div>
-         <div id="campaign_name">캠페인A</div>
-         <div class="campaign_explain">현재 모금 포인트 / 목표 모금 포인트</div>
-         <div id="collect_amount">10000 / 30000</div>
-         <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 33%" aria-valuenow="33"
-               aria-valuemin="0" aria-valuemax="100"><b>33% 달성</b></div>
-         </div>
-         <div class="campaign_explain">얼마나 후원하시겠어요?</div>
-         <div class = "input_point">
-            <input type="text" name="point" class="point" placeholder="몇 포인트를 후원하시나요?">
-            <button type="submit" class="submit-btn">후원하기</button>
-         </div>
-         <div id="detail_switch">
-            <a href="#" id=goto_detail>캠페인 상세정보</a>
-            <a href="#" id=goto_purchase_list>캠페인 거래내역</a>
-         </div>
-         <div id="campaign_detail" style="margin-left: 20px;"></div>
-         <div class="clearfix" style="clear: left"></div>
+      <div id="second_navbar">
+         <ul id='menu'>
+            <li><a href='normal_donation_main.html' id="go_donate"><b>기부하기</b></a></li>
+            <li><a href='normal_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
+         </ul>
       </div>
-      
-      
-      
+   </div>
+
+   <div id="container">
+      <h2>캠페인 상세페이지</h2>
+      <img src="public/images/noImg.jpg" id="campaign_img">
+      <div class="campaign_explain">캠페인명</div>
+      <div id="campaign_name"></div>
+      <div class="campaign_explain">현재 모금 포인트 / 목표 모금 포인트</div>
+      <div id="collect_amount"></div>
+      <div class="progress">
+      </div>
+      <div class="campaign_explain">얼마나 후원하시겠어요?</div>
+      <div class="input_point">
+         <input type="text" name="point" class="point" placeholder="몇 포인트를 후원하시나요?">
+         <button type="submit" class="submit-btn">후원하기</button>
+      </div>
+      <div id="detail_switch">
+      </div>
+      <div id="campaign_detail" style="margin-left: 20px;"></div>
+      <div class="clearfix" style="clear: left"></div>
+   </div>
 
 
-       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-   </body>
+
+
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+   </script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+   </script>
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   <script>
+      var temp = location.href.split("?");
+      var data = temp[1].split("=");
+      var id = data[1] * 1;
+
+      $.ajax({
+         type: 'GET',
+         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/" + id,
+         xhrFields: {
+            withCredentials: true
+         },
+      }).success(function (response) {
+         console.log(response);
+         $("#campaign_name").append(response.data.name);
+         $("#campaign_img").attr('src', "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080" +
+            response.data.title_img);
+         $("#collect_amount").append(response.data.current_money + " / " + response.data.dest_money);
+         $(".progress").append('<div class="progress-bar progress-bar-striped" ' +
+            'role="progressbar"' +
+            'style="width: ' + response.data.current_money / response.data.dest_money * 100 + '%"' +
+            'aria-valuenow="' + response.data.current_money / response.data.dest_money * 100 + '"' +
+            'aria-valuemin="0" aria-valuemax="100">' +
+            '<b>' + response.data.current_money / response.data.dest_money * 100 + '% 달성</b></div>');
+         $("#detail_switch").append(
+            '<a href="normal_donation_detail.html?id=' + id + '" id=goto_detail>캠페인 상세정보</a>' +
+            '<a href="normal_donation_detail_purchase_list.html?id=' + id +
+            '" id=goto_purchase_list>캠페인 거래내역</a>'
+         );
+         $("#campaign_detail").append(response.data.content);
+      });
+
+      $(function () {
+         $('.submit-btn').on("click", function () {
+            if ($('.point').val() == "") {
+               alert("입력을 완료해주세요");
+            } else {
+               var point = $('.point').val();
+               location.href = "normal_donation_detail_donate.html?id=" + id + "&point=" + point;
+            }
+         });
+      })
+   </script>
+
+</body>
+
 </html>
