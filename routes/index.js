@@ -32,13 +32,57 @@ router.get('/charity_mypage_main', function(req, res, next) {
 router.get('/charity_shop_detail_purchase', function(req, res, next) {
   res.render('charity_shop_detail_purchase.html');
 });
-router.get('/signupPage', function(req, res, next) {
+router.get('/charity_shop_detail', function(req, res, next) {
   res.render('charity_shop_detail.html');
 });
-router.get('/signupPage', function(req, res, next) {
+router.get('/charity_shop_main', function(req, res, next) {
   res.render('charity_shop_main.html');
 });
-router.get('./itemRegister', function(req, res, next) {
+/* normal */
+router.get('/normal_donation_detail_donate', function(req, res, next) {
+  res.render('normal_donation_detail_donate.html');
+});
+router.get('/normal_donation_detail_purchase', function(req, res, next) {
+  res.render('normal_donation_detail_purchase.html');
+});
+router.get('/normal_donation_detail', function(req, res, next) {
+  res.render('normal_donation_detail.html');
+});
+router.get('/normal_donation_main', function(req, res, next) {
+  res.render('normal_donation_main.html');
+});
+router.get('/normal_donation_search_result', function(req, res, next) {
+  res.render('normal_donation_search_result.html');
+});
+router.get('/normal_mypage_main', function(req, res, next) {
+  res.render('normal_mypage_main.html');
+});
+router.get('/normal_mypage_charge', function(req, res, next) {
+  res.render('normal_mypage_charge.html');
+});
+router.get('/normal_shop_detail', function(req, res, next) {
+  res.render('normal_shop_detail.html');
+});
+router.get('/normal_shop_main', function(req, res, next) {
+  res.render('normal_shop_main.html');
+});
+router.get('/normal_shop_search_result', function(req, res, next) {
+  res.render('normal_shop_search_result.html');
+});
+/* seller */
+router.get('/seller_mypage_exchange', function(req, res, next) {
+  res.render('seller_mypage_exchange.html');
+});
+router.get('/seller_add_goods', function(req, res, next) {
   res.render('seller_add_goods.html');
-})
+});
+router.get('./seller_mypage_goods_detail', function(req, res, next) {
+  res.render('seller_mypage_goods_detail.html');
+});
+router.get('./seller_mypage_main', function(req, res, next) {
+  res.render('seller_mypage_main.html');
+});
+router.get('./seller_mypage_order', function(req, res, next) {
+  res.render('seller_mypage_order.html');
+});
 module.exports = router;
