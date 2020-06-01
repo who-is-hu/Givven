@@ -85,4 +85,5 @@ router.get('./seller_mypage_main', function(req, res, next) {
 router.get('./seller_mypage_order', function(req, res, next) {
   res.render('seller_mypage_order.html');
 });
+
 module.exports = router;
