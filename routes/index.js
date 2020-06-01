@@ -9,10 +9,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('normal_donation_main.html');
 });
-router.get('/loginPage', function(req, res, next) {
+router.get('/log_in', function(req, res, next) {
   res.render('log_in.html');
 });
-router.get('/signupPage', function(req, res, next) {
+router.get('/sign_up', function(req, res, next) {
   res.render('sign_up.html');
 });
 
