@@ -16,14 +16,14 @@
             <img src='public/images/logo.png'>
          </div>
          <ul id='menu'>
-            <li><a href='log_in.html'><b>로그인</b></a></li>
-            <li><a href='sign_up.html'><b>회원가입</b></a></li>
+            <li><a href='log_in'><b>로그인</b></a></li>
+            <li><a href='sign_up'><b>회원가입</b></a></li>
          </ul>
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='normal_donation_main.html' id="go_donate"><b>기부하기</b></a></li>
-            <li><a href='normal_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='normal_donation_main' id="go_donate"><b>기부하기</b></a></li>
+            <li><a href='normal_shop_main' id="go_purchase"><b>상점가기</b></a></li>
          </ul>
       </div>
    </div>
@@ -70,7 +70,7 @@
 
       $.ajax({
          type: 'GET',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/campaigns/ing",
+         url: "/campaign/campaigns/ing",
          xhrFields: {
             withCredentials: true
          },
@@ -84,7 +84,7 @@
          } else {
             i = 0;
             var imgurl;
-            while (i < current_campaign_list.campaigns.length) {imgurl = "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+current_campaign_list.campaigns[i].title_img;
+            while (i < current_campaign_list.campaigns.length) {imgurl = current_campaign_list.campaigns[i].title_img;
                if (i === 0) {
                   $(".carousel-indicators").append(
                      '<li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>'
@@ -106,7 +106,7 @@
                      '</button>'+
                      '</div>'
                   );
-                  imgurl = "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+current_campaign_list.campaigns[i].title_img;
+                  imgurl = current_campaign_list.campaigns[i].title_img;
                   $("#first").css("background-image", imgurl);
                } else if (i === 1) {
                   $(".carousel-indicators").append(
@@ -129,7 +129,7 @@
                      '</button>'+
                      '</div>'
                   );
-                  imgurl = "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+current_campaign_list.campaigns[i].title_img;
+                  imgurl = current_campaign_list.campaigns[i].title_img;
                   $("#second").css("background-image", imgurl);
                } else if (i === 2) {
                   $(".carousel-indicators").append(
