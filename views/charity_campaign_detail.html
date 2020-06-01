@@ -9,30 +9,13 @@
    <link rel="stylesheet" href="public/css/charity_campaign_detail_style.css">
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <script>
-      /*
-      $.ajax({
-         type: 'POST',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
-         dataType: "json",
-         xhrFields: {
-            withCredentials: true
-         },
-         data: {
-            email: "charity1",
-            password: "charity1"
-         }
-      }).success(function (response) {
-         console.log(response);
-      });
-      */
-
       var temp = location.href.split("?");
       var data = temp[1].split("=");
       var id = data[1] * 1 ;
 
       $.ajax({
          type: 'GET',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/"+ id,
+         url: id,
          xhrFields: {
             withCredentials: true
          },
