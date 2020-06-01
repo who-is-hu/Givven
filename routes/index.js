@@ -76,13 +76,13 @@ router.get('/seller_mypage_exchange', function(req, res, next) {
 router.get('/seller_add_goods', function(req, res, next) {
   res.render('seller_add_goods.html');
 });
-router.get('./seller_mypage_goods_detail', function(req, res, next) {
+router.get('/seller_mypage_goods_detail', function(req, res, next) {
   res.render('seller_mypage_goods_detail.html');
 });
-router.get('./seller_mypage_main', function(req, res, next) {
+router.get('/seller_mypage_main', function(req, res, next) {
   res.render('seller_mypage_main.html');
 });
-router.get('./seller_mypage_order', function(req, res, next) {
+router.get('/seller_mypage_order', function(req, res, next) {
   res.render('seller_mypage_order.html');
 });
 
