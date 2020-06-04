@@ -94,13 +94,13 @@
 
       $.ajax({
          type: 'GET',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+ id,
+         url: "/item/detail/"+ id,
          xhrFields: {
             withCredentials: true
          },
       }).success(function (response) {
          console.log(response);
-         $("#goods_img").attr('src', "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data.title_img);
+         $("#goods_img").attr('src', response.data.title_img);
          $("#goods_name").append(response.data.name);
          $("#goods_price").append(response.data.price+"p");
          $("#goods_amount").append(amount+"개");
@@ -110,7 +110,7 @@
 
       $.ajax({
          type: 'GET',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/myCampaigns/end",
+         url: "/campaign/myCampaigns/end",
          xhrFields: {
             withCredentials: true
          },
