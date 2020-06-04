@@ -36,7 +36,17 @@
                '<a href="charity_campaign_detail_purchase_list?id='+id+'" id=goto_purchase_list>캠페인 거래내역</a>'
             );
 
-      });      
+      });
+      
+      $.ajax({
+         type: 'GET',
+         url: "/tradeLog/ordersByCampaign/" + id,
+         xhrFields: {
+            withCredentials: true
+         },
+      }).success(function (response) {
+            console.log(response);
+      });
    </script>
 </head>
 
