@@ -16,16 +16,16 @@
             <img src='public/images/logo.png'>
          </div>
          <ul id='menu'>
-            <li><a href='charity_mypage_main.html'><b>마이페이지</b></a></li>
-            <li><a href='normal_donation_main.html'><b>로그아웃</b></a></li>
+            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
+            <li><a href='/auth/logout'><b>로그아웃</b></a></li>
          </ul>
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='charity_campaign_make.html' id="make_campaign"><b>캠페인 등록</b></a></li>
-            <li><a href='charity_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
+            <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
          </ul>
-         <a href='#' id="change_normal"><b> 일반유저로 전환 </b></a>
+         <a href='normal_donation_main.html' id="change_normal"><b> 일반유저로 전환 </b></a>
       </div>
    </div>
    <div id="container">
@@ -62,22 +62,6 @@
       <div id = "campaign_choice"> 포인트를 차감할 캠페인을 골라주세요</div>
       <div id=finishCampaigns>
          <div class="card_list">
-            <!--
-            <button class="card">
-               <img src="public/images/noImg.jpg">
-               <div class="menu">
-                  <h4>첫번째 캠페인</h4>
-                  <p>현재 사용금액 / 전체 모금금액</p>
-                  <p>3000p / 12000p</p>
-                  <div class="progress">
-                     <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 75%"
-                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-               </div>
-            </button>
-            -->
          </div>
          <div class = "clearfix" style="clear: left"></div>
       </div>
@@ -101,22 +85,6 @@
       var ended_campaign_list;
       var i;
       
-      $.ajax({
-         type: 'POST',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
-         dataType: "json",
-         xhrFields: {
-            withCredentials: true
-         },
-         data: {
-            email: "charity1",
-            password: "charity1"
-         }
-      }).success(function (response) {
-         console.log(response);
-      });
-      
-
       var temp = location.href.split("?");
       var data = temp[1].split("&");
       var data_id = data[0].split("=");

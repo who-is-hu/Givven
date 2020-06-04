@@ -16,16 +16,16 @@
             <img src='public/images/logo.png'>
          </div>
          <ul id='menu'>
-            <li><a href='charity_mypage_main.html'><b>마이페이지</b></a></li>
-            <li><a href='normal_donation_main.html'><b>로그아웃</b></a></li>
+            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
+            <li><a href='/auth/logout'><b>로그아웃</b></a></li>
          </ul>
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='charity_campaign_make.html' id="make_campaign"><b>캠페인 등록</b></a></li>
-            <li><a href='charity_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
+            <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
          </ul>
-         <a href='normal_donation_main.html' id="change_normal"><b> 일반유저로 전환 </b></a>
+         <a href='normal_donation_main' id="change_normal"><b> 일반유저로 전환 </b></a>
       </div>
    </div>
 
@@ -60,23 +60,6 @@
    </script>
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <script>
-      
-      $.ajax({
-         type: 'POST',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
-         dataType: "json",
-         xhrFields: {
-            withCredentials: true
-         },
-         data: {
-            email: "charity1",
-            password: "charity1"
-         }
-      }).success(function (response) {
-         console.log(response);
-      });
-      
-
       var temp = location.href.split("?");
       var data = temp[1].split("=");
       var id = data[1] * 1 ;
@@ -84,13 +67,13 @@
 
       $.ajax({
          type: 'GET',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+ id,
+         url: "/item/detail/"+ id,
          xhrFields: {
             withCredentials: true
          },
       }).success(function (response) {
          console.log(response);
-         $("#goods_img").attr('src', "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data.title_img);
+         $("#goods_img").attr('src', response.data.title_img);
          $("#goods_name").append(response.data.name);
          $("#goods_price").append(response.data.price+"p");
          $("#goods_totalPrice").append(0);
@@ -111,7 +94,7 @@
             }
             else{
                var amount = $('.input_amount').val();
-               location.href = "charity_shop_detail_purchase.html?id="+id+"&amount="+amount ;
+               location.href = "charity_shop_detail_purchase?id="+id+"&amount="+amount ;
             }
          });
       });  
