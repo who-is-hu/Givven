@@ -79,9 +79,7 @@ const TradeLog = class {
 
     async getOrdersByCampaign(campaignId){
         try{
-            const orders = await this.orderModel.findAll({where : {campaignId,}});
-            if(orders == null || orders.length == 0)
-                throw new Error('wrong campaign id');
+            const orders = await this.orderModel.findAll({where : {campaignId}});
             return orders;
         } catch (err) {
             console.error(err);
@@ -91,11 +89,7 @@ const TradeLog = class {
 
     async getDonationsByCampaign(campaignId){
         try{
-            const donations = await this.donationModel.findAll({
-                where : {
-                    campaignId,
-                },
-            });
+            const donations = await this.donationModel.findAll({where : { campaignId}});
             return donations;
         } catch (err) {
             console.error(err);
