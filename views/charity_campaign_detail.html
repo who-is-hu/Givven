@@ -21,6 +21,7 @@
          },
       }).success(function (response) {
             console.log(response);
+            $("#campaign_img").attr('src', response.data.title_img);
             $("#campaign_name").append(response.data.name);
             $("#collect_amount").append(response.data.current_money+" / "+ response.data.dest_money);
             $(".progress").append('<div class="progress-bar progress-bar-striped" '+
@@ -60,7 +61,7 @@
    </div>
    <div id="container">
       <h2>캠페인 상세페이지</h2>
-      <img src="public/images/noImg.jpg">
+      <img id = "campaign_img" src="public/images/noImg.jpg">
       <div class="campaign_explain">캠페인명</div>
       <div id="campaign_name"></div>
       <div class="campaign_explain">현재 모금 포인트 / 목표 모금 포인트</div>
