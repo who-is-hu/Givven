@@ -78,18 +78,44 @@ const TradeLog = class {
     }
 
     async getOrdersByCampaign(campaignId){
-        try{
-            const orders = await this.orderModel.findAll({where : {campaignId}});
+        try {
+            const orders = await this.orderModel.findAll({
+                where: { campaignId, },
+                include: [
+                    {
+                        model: this.userModel,
+                        as: 'seller',
+                        attributes: ['id', 'name']
+                    },
+                    {
+                        model: this.userModel,
+                        as: 'consumer',
+                        attributes: ['id', 'name']
+                    },
+                    {
+                        model: this.itemModel,
+                        attributes: ['id', 'name']
+                    },
+                ],
+            });
             return orders;
         } catch (err) {
             console.error(err);
-            return {success: false, msg : String(err)};
+            return { success: false, msg: String(err) };
         }
     }
 
     async getDonationsByCampaign(campaignId){
         try{
-            const donations = await this.donationModel.findAll({where : { campaignId}});
+            const donations = await this.donationModel.findAll({
+                where : {
+                    campaignId,
+                },
+                include : { 
+                    model : this.userModel,
+                    attributes : ['id', 'name']
+                }
+            });
             return donations;
         } catch (err) {
             console.error(err);
