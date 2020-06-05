@@ -12,18 +12,18 @@
             <div id = "navbar">
                 <div id = "first_navbar">
                     <div id = "logo">
-                        <a href = "seller_mypage.html"><img src="public/images/logo.PNG"></a>
+                        <a href = "seller_mypage_main"><img src="public/images/logo.PNG"></a>
                     </div>
                     <ul id = "f_menu">
-                        <li><a href="log_in.html"><b>로그아웃</b></a></li>
+                        <li><a href="/auth/logout"><b>로그아웃</b></a></li>
                     </ul>
                 </div>
                 <div id = "second_navbor">
                     <ul id = "s_menu">
-                        <li><a href="seller_add_goods.html" id = "add_goods"><b>상품 등록</b></a></li>
-                        <li><a href="seller_mypage_main.html" id = "go_mypage"><b>My Page</b></a></li>
+                        <li><a href="seller_add_goods" id = "add_goods"><b>상품 등록</b></a></li>
+                        <li><a href="seller_mypage_main" id = "go_mypage"><b>My Page</b></a></li>
                     </ul>
-                     <a href="normal_donation_main.html" id = "change_normal"><b>일반 전환</b></a>
+                     <a href="normal_donation_main" id = "change_normal"><b>일반 전환</b></a>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
             console.log('val : ' + index);
             $.ajax({
             type: 'GET',
-            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/tradeLog/orderDetail/"+index,
+            url: "/tradeLog/orderDetail/"+index,
             dataType: 'json',
             xhrFields: {
                 withCredentials: true
@@ -85,7 +85,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/"+c_index,
+                url: "/campaign/detail/"+c_index,
                 dataType: 'json',
                 xhrFields: {
                     withCredentials: true
@@ -99,7 +99,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+i_index,
+                url: "/item/detail/"+i_index,
                 dataType: 'json',
                 xhrFields: {
                     withCredentials: true
@@ -108,7 +108,7 @@
                 async : false
             }).success(function (response1) {
                 img = document.createElement("img");
-                img.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response1.data.title_img);
+                img.setAttribute("src", response1.data.title_img);
                 document.querySelector("#image_container").appendChild(img);
 
                 $("#item_name").append(response1.data.name);

@@ -13,14 +13,14 @@
                 <img src='public/images/logo.png'>
             </div>
             <ul id='menu'>
-                <li><a href='#'><b>마이페이지</b></a></li>
-                <li><a href='#'><b>로그아웃</b></a></li>
+                <li><a href='normal_mypage_main'><b>마이페이지</b></a></li>
+                <li><a href='/auth/logout'><b>로그아웃</b></a></li>
             </ul>
          </div>
          <div id = "second_navbar">
             <ul id='menu'>
-                <li><a href='#' id = "go_donate"><b>기부하기</b></a></li>
-                <li><a href='#' id = "go_purchase"><b>상점가기</b></a></li>
+                <li><a href='normal_donation_main' id = "go_donate"><b>기부하기</b></a></li>
+                <li><a href='normal_shop_main' id = "go_purchase"><b>상점가기</b></a></li>
             </ul>
          </div>
       </div>
@@ -28,39 +28,13 @@
       <div id="container">
          <div id="myCampaigns">
             <a href='#'><b>내 등록 캠페인</b></a>
-            <div class="card_list">
-               <div class="card">
-                  <img src="public/images/noImg.jpg">
-                  <div class="menu">
-                     <h3>첫번째 캠페인</h3>
-                     <p>3000p / 12000p</p>
-                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%"
-                           aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
-                        </div>
-                     </div>
-                  </div>
-               </div>
+            <div id ="ing_campaign" class="card_list">
+               
             </div>
          </div>
          <div id="finishCampaigns">
             <a href='#'><b>완료된 캠페인</b></a>
-            <div class="card_list">
-               <div class="card">
-                  <img src="public/images/noImg.jpg">
-                  <div class="menu">
-                     <h3>첫번째 캠페인</h3>
-                     <p>3000p / 12000p</p>
-                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%"
-                           aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> 25%
-                        </div>
-                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 75%"
-                           aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                     </div>
-                  </div>
-               </div>
+            <div id ="end_campaign" class="card_list">
             </div>
          </div>
       </div>
@@ -69,8 +43,87 @@
 
 
 
-       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+      <script>
+
+         $.ajax({
+               type: 'GET',
+               url: "/tradeLog/myDonations/ing",
+               dataType: 'json',
+               xhrFields: {
+                  withCredentials: true
+               },
+               data: {
+               }
+         }).success(function (response1) {
+               for (var i in response1.data) {
+                  console.log(response1.data[i]);
+                  var img1 = document.createElement("img");
+                  img1.setAttribute("src", response1.data[i].campaign.title_img);
+
+                  var cur_var = response1.data[i].campaign.current_money / response1.data[i].campaign.dest_money * 100;
+                  $("#ing_campaign").append("<div id = 'ingcard_"+response1.data[i].id+"'class='card' onClick='click(this.id)'>>"+
+                  "<div id = 'ic_"+response1.data[i].id+"'class = 'image_container'>"+
+                  "</div>"+
+                  "<div class='menu'>"+
+                  "<h3 id = 'camname_"+response1.data[i].id+"'></h3>"+
+                  "<p>"+response1.data[i].campaign.current_money+" / "+response1.data[i].campaign.dest_money+"</p>"+
+                  "<div class='progress'>"+
+                  "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+cur_var+"%'"+
+                  "aria-valuenow='"+cur_var+"' aria-valuemin='0' aria-valuemax='100'>"+cur_var+"%"+
+                  "</div></div></div></div>");
+                  $("#camname_"+response1.data[i].id).append( response1.data[i].campaign.name);
+                  document.querySelector("#ic_"+response1.data[i].id).appendChild(img1);
+               }
+         });
+      
+         $.ajax({
+               type: 'GET',
+               url: "/tradeLog/myDonations/end",
+               dataType: 'json',
+               xhrFields: {
+                  withCredentials: true
+               },
+               data: {
+               }
+         }).success(function (response2) {
+               console.log(response2);
+               for (var i in response2.data) {
+                  console.log(response2.data[i]);
+                  var img2 = document.createElement("img");
+                  img2.setAttribute("src", response2.data[i].campaign.title_img);
+
+                  var cur_var = response2.data[i].campaign.current_money / response2.data[i].campaign.dest_money * 100;
+                  $("#end_campaign").append("<div id = 'endcard_"+response2.data[i].id+"'class='card' onClick='click(this.id)'>>"+
+                  "<div id = 'ec_"+response2.data[i].id+"'class = 'image_container'>"+
+                  "</div>"+
+                  "<div class='menu'>"+
+                  "<h3 id = 'camname_"+response2.data[i].id+"'></h3>"+
+                  "<p>"+response2.data[i].campaign.current_money+" / "+response2.data[i].campaign.dest_money+"</p>"+
+                  "<div class='progress'>"+
+                  "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+cur_var+"%'"+
+                  "aria-valuenow='"+cur_var+"' aria-valuemin='0' aria-valuemax='100'>"+cur_var+"%"+
+                  "</div></div></div></div>");
+                  $("#camname_"+response2.data[i].id).append( response2.data[i].campaign.name);
+                  document.querySelector("#ec_"+response2.data[i].id).appendChild(img2);
+               }
+         });
+
+         function click(card_id)
+         {
+            var arr = card_id.split('_');
+            window.location.href = "normal_donation_detail?index=" + arr[1];
+         }
+      
+      </script>
+        
+        
    </body>
 </html>

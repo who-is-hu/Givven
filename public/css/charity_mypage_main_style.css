@@ -163,6 +163,7 @@
 }
 
 .card{
+  float: left;
   width: 400px;
   display: block;
   margin-left: 20px;

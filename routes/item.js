@@ -44,7 +44,7 @@ router.get('/myItems', isUserSeller, async (req,res,next) => {
     }
 });
 
-router.get('/detail/:itemId', isLoggedIn, async (req, res, next) => {
+router.get('/detail/:itemId', async (req, res, next) => {
     try{
         const itemServiceInstance = Container.get('itemService');
         const item = await itemServiceInstance.getItem(req.params.itemId);

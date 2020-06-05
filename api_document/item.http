@@ -55,9 +55,9 @@ content-type : application/json
 -->
 
 ///////////////////////////////////////////////////////////////////
-// get item 
+// buy item 
 ///////////////////////////////////////////////////////////////////
-### buy item
+###
 POST {{baseUrl}}/item/buy HTTP/1.1
 content-type : application/json
 
@@ -67,4 +67,3 @@ content-type : application/json
     "orderCount" : 5,
     "campaignId" : 3
 }
-
