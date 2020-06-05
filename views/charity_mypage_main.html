@@ -37,6 +37,7 @@
                   break;
                }
                $("#myCampaigns .card_list").append(
+               "<a href = 'charity_campaign_detail/"+current_campaign_list.campaigns[i].id+"'>"+
                "<div class='card'>"+
                   "<img src='"+current_campaign_list.campaigns[i].title_img+"'>"+
                   "<div class='menu'>"+
@@ -47,7 +48,9 @@
                            "aria-valuenow='"+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"' aria-valuemin='0' aria-valuemax='100'>"+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"%</div>"+
                      "</div>"+
                   "</div>"+
-               "</div>");
+               "</div>"+
+               "<a>");
+               
                i = i + 1;
             }
             $(".card_list").append('<div class="clearfix" style="clear: left"></div>'); 
@@ -76,6 +79,7 @@
                   break;
                }
                $("#finishCampaigns .card_list").append(
+                  '<a href = "charity_campaign_detail/'+ended_campaign_list.campaigns[i].id+' ">'+
                   '<div class="card">'+
                      '<img src="'+ +ended_campaign_list.campaigns[i].title_img+'">'+
                      '<div class="menu">'+
@@ -90,7 +94,8 @@
                            
                      '</div>'+
                   '</div>'+
-               '</div>'
+               '</div>'+
+               '</a>'
                );
             i= i+1;
             }
