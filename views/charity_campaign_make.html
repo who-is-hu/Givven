@@ -27,7 +27,7 @@
             <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
             <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
          </ul>
-         <a href='#' id="change_normal"><b> 일반유저로 전환 </b></a>
+         <a href='normal_donation_main' id="change_normal"><b> 일반유저로 전환 </b></a>
       </div>
    </div>
 
@@ -109,7 +109,7 @@
                   processData: false,
                   contentType: false,
                }).success(function (response) {
-                  //console.log(img_url);
+                  console.log(img_url);
                   img_url = response.url;
                });
 
@@ -129,6 +129,7 @@
                      title_img: img_url
                   }
                }).success(function (response) {
+                  console.log(img_url);
                   console.log(response);
                });
             }
