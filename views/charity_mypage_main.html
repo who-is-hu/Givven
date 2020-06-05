@@ -37,7 +37,7 @@
                   break;
                }
                $("#myCampaigns .card_list").append(
-               "<a href = 'charity_campaign_detail/"+current_campaign_list.campaigns[i].id+"'>"+
+               "<a href = 'charity_campaign_detail?id="+current_campaign_list.campaigns[i].id+"'>"+
                "<div class='card'>"+
                   "<img src='"+current_campaign_list.campaigns[i].title_img+"'>"+
                   "<div class='menu'>"+
@@ -79,7 +79,7 @@
                   break;
                }
                $("#finishCampaigns .card_list").append(
-                  '<a href = "charity_campaign_detail/'+ended_campaign_list.campaigns[i].id+' ">'+
+                  '<a href = "charity_campaign_detail?id='+ended_campaign_list.campaigns[i].id+' ">'+
                   '<div class="card">'+
                      '<img src="'+ +ended_campaign_list.campaigns[i].title_img+'">'+
                      '<div class="menu">'+
