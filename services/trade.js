@@ -113,6 +113,43 @@ const TradeService = class {
             return { success : false, msg : String(err)};
         }
     }
+
+    async buyPoint(user, value){
+        try{
+            let result = {};
+            await sequelize.transaction( async (transaction) => { 
+                //web3 js 충전 트랜잭션 요청
+                //get balance
+                const userBalance = user.point + value //임시
+                await user.update({ point : userBalance}, { transaction });   
+            })
+            .then(()=>{
+                result = { success : true, msg : "success"};
+            }).catch(err => {
+                throw new Error(err);
+            });
+            return result;
+        } catch (err) {
+            console.error(err);
+            return { success :false, msg : String(err)}
+        }
+    }
+
+    async changePoint(user, value){
+        let result = {};
+        await sequelize.transaction( async (transaction) => { 
+            //get balance
+            const userBalance = user.point;
+            point
+            await user.update({ point : userBalance}, { transaction });   
+        })
+        .then(()=>{
+            result = { success : true, msg : "success"};
+        }).catch(err => {
+            throw new Error(err);
+        });
+        return result;
+    }
 };
 
 module.exports = TradeService;
