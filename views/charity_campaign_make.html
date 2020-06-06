@@ -72,7 +72,6 @@
    <script>
 
       var file = "";
-      var img_url;
 
       function setThumbnail(event) {
          file = "";
@@ -90,6 +89,7 @@
       }
 
       $(function () {
+         var img_url;
          $('.submit-btn').on("click", function () {
             if ($("#campaign_name").val() == "" || $("#campaign_price").val() == "" || $("#campaign_end")
                .val() == "" || $("#campaign_detail").val() == "" || file == "") {
