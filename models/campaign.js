@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         title_img : {
             type : DataTypes.STRING(100),
-            //defaultValue : "/uploads/default.jpg",
+            defaultValue : "/uploads/default.jpg",
             allowNull : true,
         },
         dest_money : {
