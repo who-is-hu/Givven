@@ -115,6 +115,7 @@
                });
 
                var date = new Date($("#campaign_end").val());
+               console.log(img_url);
                $.ajax({
                   type: 'POST',
                   url: "/campaign/register",
