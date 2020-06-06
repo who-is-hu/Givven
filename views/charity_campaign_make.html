@@ -89,13 +89,13 @@
       }
 
       $(function () {
-         var img_url;
          $('.submit-btn').on("click", function () {
             if ($("#campaign_name").val() == "" || $("#campaign_price").val() == "" || $("#campaign_end")
                .val() == "" || $("#campaign_detail").val() == "" || file == "") {
                alert("입력을 완료해주세요");
             } else {
                var formData = new FormData();
+               var img_url;
                formData.append('img', file);
                $.ajax({
                   type: 'POST',
