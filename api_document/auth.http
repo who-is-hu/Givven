@@ -6,8 +6,8 @@ POST {{baseUrl}}/auth/login  HTTP/1.1
 content-type: application/json
 
 {
-    "email": "normal1",
-    "password": "normal1"
+    "email": "seller1",
+    "password": "seller1"
 }
 
 ### regiseer
