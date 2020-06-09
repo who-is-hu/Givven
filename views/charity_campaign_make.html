@@ -72,7 +72,6 @@
    <script>
 
       var file = "";
-      var img_url;
 
       function setThumbnail(event) {
          file = "";
@@ -96,6 +95,7 @@
                alert("입력을 완료해주세요");
             } else {
                var formData = new FormData();
+               var img_url;
                formData.append('img', file);
                $.ajax({
                   type: 'POST',
@@ -115,6 +115,7 @@
                });
 
                var date = new Date($("#campaign_end").val());
+               console.log(img_url);
                $.ajax({
                   type: 'POST',
                   url: "/campaign/register",
