@@ -33,6 +33,7 @@ contract Givven{
         accounts[_user] = 0;
     }
     function getBalance(string memory _user) public view returns (uint){
+
         return accounts[_user];
     }
     function chargeUser(string memory _user, uint _point) public onlyGivven {
