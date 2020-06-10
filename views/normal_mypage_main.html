@@ -13,14 +13,14 @@
                 <img src='public/images/logo.png'>
             </div>
             <ul id='menu'>
-                <li><a href='#'><b>마이페이지</b></a></li>
-                <li><a href='#'><b>로그아웃</b></a></li>
+                <li><a href='normal_mypage_main'><b>마이페이지</b></a></li>
+                <li><a href='/auth/logout'><b>로그아웃</b></a></li>
             </ul>
          </div>
          <div id = "second_navbar">
             <ul id='menu'>
-                <li><a href='#' id = "go_donate"><b>기부하기</b></a></li>
-                <li><a href='#' id = "go_purchase"><b>상점가기</b></a></li>
+                <li><a href='normal_donation_main' id = "go_donate"><b>기부하기</b></a></li>
+                <li><a href='normal_shop_main' id = "go_purchase"><b>상점가기</b></a></li>
             </ul>
          </div>
       </div>
@@ -52,24 +52,10 @@
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
       <script>
-         $.ajax({
-               type: 'POST',
-               url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
-               dataType: 'json',
-               xhrFields: {
-                  withCredentials: true
-               },
-               data: {
-                  email: "normal1",
-                  password: "normal1"
-               }
-         }).success(function (response) {
-               console.log(response);
-         });
 
          $.ajax({
                type: 'GET',
-               url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/tradeLog/myDonations/ing",
+               url: "/tradeLog/myDonations/ing",
                dataType: 'json',
                xhrFields: {
                   withCredentials: true
@@ -77,14 +63,13 @@
                data: {
                }
          }).success(function (response1) {
-               /*console.log(response1);*/
                for (var i in response1.data) {
                   console.log(response1.data[i]);
                   var img1 = document.createElement("img");
-                  img1.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response1.data[i].campaign.title_img);
+                  img1.setAttribute("src", response1.data[i].campaign.title_img);
 
                   var cur_var = response1.data[i].campaign.current_money / response1.data[i].campaign.dest_money * 100;
-                  $("#ing_campaign").append("<div id = 'ingcard_"+response1.data[i].id+"'class='card'>"+
+                  $("#ing_campaign").append("<div id = 'ingcard_"+response1.data[i].id+"'class='card' onClick='click(this.id)'>>"+
                   "<div id = 'ic_"+response1.data[i].id+"'class = 'image_container'>"+
                   "</div>"+
                   "<div class='menu'>"+
@@ -101,7 +86,7 @@
       
          $.ajax({
                type: 'GET',
-               url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/tradeLog/myDonations/end",
+               url: "/tradeLog/myDonations/end",
                dataType: 'json',
                xhrFields: {
                   withCredentials: true
@@ -113,10 +98,10 @@
                for (var i in response2.data) {
                   console.log(response2.data[i]);
                   var img2 = document.createElement("img");
-                  img2.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response2.data[i].campaign.title_img);
+                  img2.setAttribute("src", response2.data[i].campaign.title_img);
 
                   var cur_var = response2.data[i].campaign.current_money / response2.data[i].campaign.dest_money * 100;
-                  $("#end_campaign").append("<div id = 'endcard_"+response2.data[i].id+"'class='card'>"+
+                  $("#end_campaign").append("<div id = 'endcard_"+response2.data[i].id+"'class='card' onClick='click(this.id)'>>"+
                   "<div id = 'ec_"+response2.data[i].id+"'class = 'image_container'>"+
                   "</div>"+
                   "<div class='menu'>"+
@@ -130,35 +115,13 @@
                   document.querySelector("#ec_"+response2.data[i].id).appendChild(img2);
                }
          });
-      
 
-        /*<div class="card">
-                  <img src="public/images/noImg.jpg">
-                  <div class="menu">
-                     <h3>첫번째 캠페인</h3>
-                     <p>3000p / 12000p</p>
-                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%"
-                           aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
-                        </div>
-                     </div>
-                  </div>
-               </div>*/
-         /*<div class="card">
-                  <img src="public/images/noImg.jpg">
-                  <div class="menu">
-                     <h3>첫번째 캠페인</h3>
-                     <p>3000p / 12000p</p>
-                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%"
-                           aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> 25%
-                        </div>
-                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 75%"
-                           aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                     </div>
-                  </div>
-               </div>*/
+         function click(card_id)
+         {
+            var arr = card_id.split('_');
+            window.location.href = "normal_donation_detail?index=" + arr[1];
+         }
+      
       </script>
         
         

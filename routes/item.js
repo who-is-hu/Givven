@@ -44,7 +44,7 @@ router.get('/myItems', isUserSeller, async (req,res,next) => {
     }
 });
 
-router.get('/detail/:itemId', isLoggedIn, async (req, res, next) => {
+router.get('/detail/:itemId', async (req, res, next) => {
     try{
         const itemServiceInstance = Container.get('itemService');
         const item = await itemServiceInstance.getItem(req.params.itemId);
@@ -66,6 +66,7 @@ router.get('/detail/:itemId', isLoggedIn, async (req, res, next) => {
 router.post('/buy', isUserCharity, async (req, res, next) => {
     const { addr, itemId, orderCount, campaignId } = req.body;
     try{
+        console.log(addr, itemId, orderCount, campaignId);
         const tradeInstance = Container.get('tradeService');
         const result = await tradeInstance.buyItem(req.user, addr, itemId, orderCount, campaignId);
         res.json(result);

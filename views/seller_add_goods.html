@@ -15,18 +15,18 @@
         <div id="navbar">
             <div id="first_navbar">
                 <div id="logo">
-                    <a href="seller_mypage.html"><img src="public/images/logo.PNG"></a>
+                    <a href="seller_mypage_main"><img src="public/images/logo.PNG"></a>
                 </div>
                 <ul id="f_menu">
-                    <li><a href="log_in.html"><b>로그아웃</b></a></li>
+                    <li><a href="/auth/logout"><b>로그아웃</b></a></li>
                 </ul>
             </div>
             <div id="second_navbor">
                 <ul id="s_menu">
-                    <li><a href="seller_add_goods.html" id="add_goods"><b>상품 등록</b></a></li>
-                    <li><a href="seller_mypage_main.html" id="go_mypage"><b>My Page</b></a></li>
+                    <li><a href="seller_add_goods" id="add_goods"><b>상품 등록</b></a></li>
+                    <li><a href="seller_mypage_main" id="go_mypage"><b>My Page</b></a></li>
                 </ul>
-                <a href="normal_donation_main.html" id="change_normal"><b>일반 전환</b></a>
+                <a href="normal_donation_main" id="change_normal"><b>일반 전환</b></a>
             </div>
         </div>
 
@@ -78,22 +78,6 @@
 
         var file = "";
 
-        $.ajax({
-            type: 'POST',
-            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
-            dataType: 'json',
-            xhrFields: {
-                withCredentials: true
-            },
-            data: {
-                email: "seller2",
-                password: "seller2"
-            }
-        }).success(function (response) {
-            console.log(response);
-        });
-
-
         function setThumbnail(event) {
             file = "";
             $('#image_container').empty();
@@ -122,7 +106,7 @@
                     formData.append('img', file);
                     $.ajax({
                         type: 'POST',
-                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/img",
+                        url: "/img",
                         xhrFields: {
                             withCredentials: true
                         },
@@ -140,7 +124,7 @@
                     console.log($("#goods_detail").val());
                     $.ajax({
                         type: 'POST',
-                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/register",
+                        url: "/item/register",
                         xhrFields: {
                             withCredentials: true
                         },

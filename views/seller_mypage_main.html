@@ -12,25 +12,25 @@
             <div id = "navbar">
                 <div id = "first_navbar">
                     <div id = "logo">
-                        <a href = "seller_mypage.html"><img src="public/images/logo.PNG"></a>
+                        <a href = "seller_mypage"><img src="public/images/logo.PNG"></a>
                     </div>
                     <ul id = "f_menu">
-                        <li><a href="log_in.html"><b>로그아웃</b></a></li>
+                        <li><a href="/auth/logout"><b>로그아웃</b></a></li>
                     </ul>
                 </div>
                 <div id = "second_navbor">
                     <ul id = "s_menu">
-                        <li><a href="seller_add_goods.html" id = "add_goods"><b>상품 등록</b></a></li>
-                        <li><a href="seller_mypage.html" id = "go_mypage"><b>My Page</b></a></li>
+                        <li><a href="seller_add_goods" id = "add_goods"><b>상품 등록</b></a></li>
+                        <li><a href="seller_mypage_main" id = "go_mypage"><b>My Page</b></a></li>
                     </ul>
-                    <a href="normal_donation_main.html" id = "change_normal"><b>일반 전환</b></a>
+                    <a href="normal_donation_main" id = "change_normal"><b>일반 전환</b></a>
                 </div>
             </div>
 
             <div id = "state">
                 <ul id = "pocket">
                     <li>내 지갑 : ~~포인트</li>
-                    <li><a href="seller_exchange.html"><b>환전</b></a></li>
+                    <li><a href="seller_mypage_exchange"><b>환전</b></a></li>
                 </ul>
             </div>
 
@@ -63,23 +63,9 @@
 
         <script>
 
-        $.ajax({
-            type: 'POST',
-            url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/auth/login",
-            dataType: 'json',
-            xhrFields: {
-                withCredentials: true
-            },
-            data: {
-                email: "seller1",
-                password: "seller1"
-            }
-        }).success(function (response) {
-            console.log(response);
-
             $.ajax({
                 type: 'GET',
-                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/myitems",
+                url: "/item/myitems",
                 dataType: 'json',
                 xhrFields: {
                     withCredentials: true
@@ -90,7 +76,7 @@
                 for (var i in response.data) {
                     console.log(response.data[i]);
                     var img1 = document.createElement("img");
-                    img1.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response.data[i].title_img);
+                    img1.setAttribute("src", response.data[i].title_img);
 
                     $("#goods_card").append("<div id = 'item_"+response.data[i].id+"'class='card' onClick='item_click(this.id)'>"+
                         "<div id = 'ic_"+response.data[i].id+"' class = 'image_container'>"+
@@ -106,7 +92,7 @@
             });
             $.ajax({
                 type: 'GET',
-                url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/tradeLog/myOrders",
+                url: "/tradeLog/myOrders",
                 dataType: 'json',
                 xhrFields: {
                     withCredentials: true
@@ -136,7 +122,7 @@
                     
                     $.ajax({
                         type: 'GET',
-                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/"+c_index,
+                        url: "/campaign/detail/"+c_index,
                         dataType: 'json',
                         xhrFields: {
                             withCredentials: true
@@ -150,7 +136,7 @@
 
                     $.ajax({
                         type: 'GET',
-                        url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/item/detail/"+i_index,
+                        url: "/item/detail/"+i_index,
                         dataType: 'json',
                         xhrFields: {
                             withCredentials: true
@@ -159,7 +145,7 @@
                         async : false
                     }).success(function (response1) {
                         img2 = document.createElement("img");
-                        img2.setAttribute("src", "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080"+response1.data.title_img);
+                        img2.setAttribute("src", response1.data.title_img);
                         document.querySelector("#oc_"+response.data[i].id).appendChild(img2);
 
                          $("#i_name"+response.data[i].id).append(response1.data.name);
@@ -168,18 +154,18 @@
                     $("#i_stock"+response.data[i].id).append(response.data[i].orderCount);
                 }
             });
-        });
+        
 
     function item_click(card_id)
     {
         var arr = card_id.split('_');
-        window.location.href = "seller_mypage_goods_detail.html?index=" + arr[1];
+        window.location.href = "seller_mypage_goods_detail?index=" + arr[1];
     }
 
     function order_click(card_id)
     {
         var arr = card_id.split('_');
-        window.location.href = "seller_mypage_order.html?index="+arr[1];
+        window.location.href = "seller_mypage_order?index="+arr[1];
     }
         
 

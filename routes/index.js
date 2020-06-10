@@ -9,10 +9,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('normal_donation_main.html');
 });
-router.get('/loginPage', function(req, res, next) {
+router.get('/log_in', function(req, res, next) {
   res.render('log_in.html');
 });
-router.get('/signupPage', function(req, res, next) {
+router.get('/sign_up', function(req, res, next) {
   res.render('sign_up.html');
 });
 
@@ -76,13 +76,13 @@ router.get('/seller_mypage_exchange', function(req, res, next) {
 router.get('/seller_add_goods', function(req, res, next) {
   res.render('seller_add_goods.html');
 });
-router.get('./seller_mypage_goods_detail', function(req, res, next) {
+router.get('/seller_mypage_goods_detail', function(req, res, next) {
   res.render('seller_mypage_goods_detail.html');
 });
-router.get('./seller_mypage_main', function(req, res, next) {
+router.get('/seller_mypage_main', function(req, res, next) {
   res.render('seller_mypage_main.html');
 });
-router.get('./seller_mypage_order', function(req, res, next) {
+router.get('/seller_mypage_order', function(req, res, next) {
   res.render('seller_mypage_order.html');
 });
 
