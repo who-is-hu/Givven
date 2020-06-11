@@ -13,6 +13,7 @@
    <script>
       var current_campaign_list;
       var ended_campaign_list;
+      var order_goods_list;
       var i;
 
       $.ajax({
@@ -33,9 +34,6 @@
          else{
             i = 0;
             while ( i < current_campaign_list.campaigns.length) {
-               if(i > 3){
-                  break;
-               }
                $("#myCampaigns .card_list").append(
                "<a href = 'charity_campaign_detail?id="+current_campaign_list.campaigns[i].id+"'>"+
                "<div class='card'>"+
@@ -74,10 +72,7 @@
          }
          else{
             i = 0;
-            while ( i < ended_campaign_list.campaigns.length) {
-               if(i > 3){
-                  break;
-               }
+            while ( i < ended_campaign_list.campaigns.length) {  
                $("#finishCampaigns .card_list").append(
                   '<a href = "charity_campaign_detail?id='+ended_campaign_list.campaigns[i].id+' ">'+
                   '<div class="card">'+
@@ -101,7 +96,18 @@
             }
             $(".card_list").append('<div class="clearfix" style="clear: left"></div>'); 
          }
-         
+      });
+
+      $.ajax({
+         type: 'GET',
+         url: "/tradeLog/myOrders",
+         xhrFields: {
+            withCredentials: true
+         },
+      }).success(function (response) {
+         console.log(response);
+         order_goods_list = response.data;
+
       });
    </script>
 
@@ -111,7 +117,7 @@
    <div id="navbar">
       <div id='top_navbar'>
          <div id='logo'>
-            <img src='public/images/logo.png'>
+            <img src='public/images/logo.PNG'>
          </div>
          <ul id='menu'>
             <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
@@ -128,17 +134,17 @@
    </div>
    <div id=container>
       <div id=myCampaigns>
-         <a href='#'><b>내 등록 캠페인</b></a>
+         <b>내 등록 캠페인</b>
          <div class="card_list">
          </div>
       </div>
       <div id=finishCampaigns>
-         <a href='#'><b>완료된 캠페인</b></a>
+         <b>완료된 캠페인</b>
          <div class="card_list">
          </div>
       </div>
       <div id=orderGoods>
-         <a href='#'><b>주문내역</b></a>
+         <b>주문내역</b>
          <div class="card_list">
             <div class="card">
                <img src="public/images/noImg.jpg">
