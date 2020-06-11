@@ -156,15 +156,14 @@
 
       $.ajax({
          type: 'GET',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/" + id,
+         url: "/campaign/detail/" + id,
          xhrFields: {
             withCredentials: true
          },
       }).success(function (response) {
          console.log(response);
          $("#campaign_name").append(response.data.name);
-         $("#campaign_img").attr('src', "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080" +
-            response.data.title_img);
+         $("#campaign_img").attr('src', response.data.title_img);
          $("#collect_amount").append(response.data.current_money + " / " + response.data.dest_money);
          $(".progress").append('<div class="progress-bar progress-bar-striped" ' +
             'role="progressbar"' +
@@ -181,11 +180,18 @@
 
       $(function () {
          $('.submit-btn').on("click", function () {
-            if ($('.point').val() == "") {
-               alert("입력을 완료해주세요");
-            } else {
-               var point = $('.point').val();
-               location.href = "normal_donation_detail_donate.html?id=" + id + "&point=" + point;
+             if(mytype == "normal")
+            {
+               if ($('.point').val() == "") {
+                  alert("입력을 완료해주세요");
+               } else {
+                  var point = $('.point').val();
+                  location.href = "normal_donation_detail_donate?id=" + id + "&point=" + point;
+               }
+            }
+            else
+            {
+               alert("기부자가 아닙니다.");
             }
          });
       })
