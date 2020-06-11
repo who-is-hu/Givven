@@ -13,17 +13,17 @@
    <div id="navbar">
       <div id='top_navbar'>
          <div id='logo'>
-            <img src='public/images/logo.png'>
+            <img src='public/images/logo.PNG'>
          </div>
          <ul id='menu'>
-            <li><a href='log_in.html'><b>로그인</b></a></li>
-            <li><a href='sign_up.html'><b>회원가입</b></a></li>
+            <li><a href='log_in'><b>로그인</b></a></li>
+            <li><a href='sign_up'><b>회원가입</b></a></li>
          </ul>
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='normal_donation_main.html' id="go_donate"><b>기부하기</b></a></li>
-            <li><a href='normal_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='normal_donation_main' id="go_donate"><b>기부하기</b></a></li>
+            <li><a href='normal_shop_main' id="go_purchase"><b>상점가기</b></a></li>
          </ul>
       </div>
    </div>
@@ -69,15 +69,14 @@
 
       $.ajax({
          type: 'GET',
-         url: "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080/campaign/detail/" + id,
+         url: "/campaign/detail/" + id,
          xhrFields: {
             withCredentials: true
          },
       }).success(function (response) {
          console.log(response);
          $("#campaign_name").append(response.data.name);
-         $("#campaign_img").attr('src', "http://ec2-18-191-173-110.us-east-2.compute.amazonaws.com:8080" +
-            response.data.title_img);
+         $("#campaign_img").attr('src',response.data.title_img);
          $("#collect_amount").append(response.data.current_money + " / " + response.data.dest_money);
          $(".progress").append('<div class="progress-bar progress-bar-striped" ' +
             'role="progressbar"' +
@@ -99,7 +98,7 @@
                alert("입력을 완료해주세요");
             } else {
                var point = $('.point').val();
-               location.href = "normal_donation_detail_donate.html?id=" + id + "&point=" + point;
+               location.href = "normal_donation_detail_donate?id=" + id + "&point=" + point;
             }
          });
       })
