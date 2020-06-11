@@ -29,14 +29,16 @@
          } else {
             while (i < item_list.length) {
                $("#items").append(
+                  '<a href = "charity_shop_detail?id='+ item_list[i].id+'">' +
                   '<div class="card">' +
-                     '<img src="'+item_list[i].title_img+'">' +
-                     '<div class="menu">' +
-                        '<h3>'+item_list[i].name+'</h3>' +
-                        '<p>'+item_list[i].price+'p</p>' +
-                     '</div>' +
-                  '</div>');
-               
+                  '<img src="' + item_list[i].title_img + '">' +
+                  '<div class="menu">' +
+                  '<h3>' + item_list[i].name + '</h3>' +
+                  '<p>' + item_list[i].price + 'p</p>' +
+                  '</div>' +
+                  '</div>' +
+                  '<a>');
+
                i = i + 1;
             }
          }
