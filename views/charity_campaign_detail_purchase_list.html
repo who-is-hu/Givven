@@ -61,7 +61,7 @@
                '<th scope="col" style="width: 10%;">거래 순서</th>' +
                '<th scope="col">거래 품목</th>' +
                '<th scope="col" style="width: 13%;">거래처</th>' +
-               '<th scope="col" style="width: 5%;">물품 개수</th>' +
+               '<th scope="col" style="width: 9%;">물품 개수</th>' +
                '<th scope="col" style="width: 9%;">물품 가격</th>' +
                '<th scope="col" style="width: 9%;">물품 총 가격</th>' +
                '<th scope="col" style="width: 13%;">거래 날짜</th>' +
@@ -73,8 +73,8 @@
          }
          i = 0;
          while (i < tradeLogList.length) {
-            var date_tmp = location.href.split("T");
-            var date = temp[0];
+            var date_tmp = tradeLogList[i].createdAt.split("T");
+            var date = date_temp[0];
             $(".table_body").append(
                '<tr>' +
                '<th scope="row">'+ i +'</th>' +
@@ -83,7 +83,7 @@
                '<td>'+ tradeLogList[i].orderCount +'</td>' +
                '<td>'+ tradeLogList[i].item.price +'p</td>' +
                '<td>'+ (tradeLogList[i].orderCount * tradeLogList[i].item.price) +'p</td>' +
-               '<td>'+ tradeLogList[i].date +'</td>' +
+               '<td>'+ date +'</td>' +
                '</tr>'
             );
             i = i + 1;
