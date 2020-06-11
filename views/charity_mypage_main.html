@@ -107,7 +107,46 @@
       }).success(function (response) {
          console.log(response);
          order_goods_list = response.data;
-
+         if (order_goods_list.length === 0) {
+            $("#orderGoods").append(
+               '<p>구매 내역이 없습니다.</p>' +
+               '<div class="clearfix" style="clear: left"></div>'
+            );
+         } else {
+            $("#orderGoods").append(
+               '<table class="table">' +
+               '<thead>' +
+               '<tr>' +
+               '<th scope="col" style="width: 15%;">구매 캠페인</th>' +
+               '<th scope="col">거래 품목</th>' +
+               '<th scope="col" style="width: 13%;">거래처</th>' +
+               '<th scope="col" style="width: 9%;">물품 개수</th>' +
+               '<th scope="col" style="width: 9%;">물품 가격</th>' +
+               '<th scope="col" style="width: 9%;">물품 총 가격</th>' +
+               '<th scope="col" style="width: 13%;">구매 날짜</th>' +
+               '</tr>' +
+               '</thead>' +
+               '<tbody class="table_body">' +
+               '</tbody>' +
+               '</table>');
+         }
+         i = 0;
+         while (i < order_goods_list.length) {
+            var date_tmp = order_goods_list[i].createdAt.split("T");
+            var date = date_temp[0];
+            $(".table_body").append(
+               '<tr>' +
+               '<td>'+ order_goods_list[i].consumer.name +'</td>' +
+               '<td>'+ order_goods_list[i].item.name +'</td>' +
+               '<td>'+ order_goods_list[i].seller.name +'</td>' +
+               '<td>'+ order_goods_list[i].orderCount +'</td>' +
+               '<td>'+ order_goods_list[i].item.price +'p</td>' +
+               '<td>'+ (order_goods_list[i].orderCount * order_goods_list[i].item.price) +'p</td>' +
+               '<td>'+ date +'</td>' +
+               '</tr>'
+            );
+            i = i + 1;
+         }
       });
    </script>
 
@@ -145,20 +184,6 @@
       </div>
       <div id=orderGoods>
          <b>주문내역</b>
-         <div class="card_list">
-            <div class="card">
-               <img src="public/images/noImg.jpg">
-               <div class="menu">
-                  <h3>물품A</h3>
-                  <div class="campaign_name">
-                     <h4>캠페인</h4>
-                     <p>첫번째 캠페인</p>
-                  </div>
-                  <p>가격 : 200p</p>
-                  <p>상세정보 : 물품 A 5개</p>
-               </div>
-            </div>
-         </div>
       </div>
    </div>
 
