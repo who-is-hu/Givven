@@ -102,13 +102,9 @@
     border-radius: 20px;
 }
 
-#myCampaigns a {
-  margin-left: 20px;
-  color: black;
-  text-decoration: none;
-  text-align: left;
-}
-#myCampaigns a b {
+#myCampaigns b {
+  display: block;
+  padding-left: 20px;
   font-size: 30px;
 }
 
@@ -125,15 +121,12 @@
   text-align: left;
   border-radius: 20px;
 }
-#finishCampaigns a {
-  margin-left: 20px;
-  color: black;
-  text-decoration: none;
-  text-align: left;
-}
-#finishCampaigns a b {
+#finishCampaigns b{
+  display: block;
+  padding-left: 20px;
   font-size: 30px;
 }
+
 #finishCampaigns .card_list .no_data {
   font-size: 30px;
   font-weight: bold;
@@ -147,16 +140,11 @@
   text-align: left;
   border-radius: 20px;
 }
-#orderGoods a {
-  margin-left: 20px;
-  color: black;
-  text-decoration: none;
-  text-align: left;
-}
-#orderGoods a b {
+#orderGoods b {
+  display: block;
+  padding-left: 20px;
   font-size: 30px;
 }
-
 
 .card_list{
   margin-top: 20px;
@@ -167,6 +155,7 @@
   width: 400px;
   display: block;
   margin-left: 20px;
+  margin-top: 20px;
   background-color: white;
   border: 4px solid#6683ef;
   border-radius: 10px;
