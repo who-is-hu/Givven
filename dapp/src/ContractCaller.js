@@ -1,18 +1,15 @@
-const Web3 = require('web3');
 const fs = require('fs');
-
-var jsonFile = fs.readFileSync('../build/contracts/Givven.json', 'utf8');
-var jsonData = JSON.parse(jsonFile);
-var abi = jsonData.abi;
 
 const blockchain = class {
 
-    constructor() {
+    constructor(path) {
+        var jsonFile = fs.readFileSync(path, 'utf8');
+        var jsonData = JSON.parse(jsonFile);
         this.web3 = null;
         this.account = '';
         this.contract = null;
         this.provider = null;
-        this.abi = null;
+        this.abi = jsonData.abi;;
     }
     setProvider(provider) {
         this.provider = provider;
@@ -26,7 +23,7 @@ const blockchain = class {
     getweb3() {
         return this.web3;
     }
-    setAbi() {
+    setAbi(abi) {
         this.abi = abi;
     }
     getAbi() {
@@ -63,7 +60,7 @@ const blockchain = class {
         return balance;
     }
 
-    async chargerUser(uid, value) {
+    async chargeUser(uid, value) {
         let hash;
         await this.contract.methods.chargeUser(uid, value).send({ from: this.account }, function (err, result) {
             hash = result;
