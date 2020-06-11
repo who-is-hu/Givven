@@ -13,7 +13,7 @@
    <div id="navbar">
       <div id='top_navbar'>
          <div id='logo'>
-            <img src='public/images/logo.png'>
+            <img src='public/images/logo.PNG'>
          </div>
          <ul id='menu'>
          
@@ -23,7 +23,7 @@
          <ul id='menu'>
             <li><a href='normal_donation_main' id="go_donate"><b>기부하기</b></a></li>
             <li><a href='normal_shop_main' id="go_purchase"><b>상점가기</b></a></li>
-            <li><a href ="#none" onclick="mypage()" id="go_myapage"><b>My Page</b></li>
+            <li><a href ="#none" onclick="mypage()" id="go_myapage"><b>My Page</b></a></li>
          </ul>
       </div>
    </div>
@@ -75,6 +75,7 @@
             withCredentials: true
          },
          error : function(error){
+            mytype = "guest";
             $('#menu').append("<li><a href='log_in'><b>로그인</b></a></li><li><a href='sign_up'><b>회원가입</b></a></li>");
          },
          success : function(response){
@@ -98,6 +99,10 @@
       })
 
    function mypage(){
+      if(mytype == "gueset")
+      {
+         alert("로그인이 필요합니다");
+      }
       if(mytype == "seller")
       {
          window.location.href = "seller_mypage_main"
