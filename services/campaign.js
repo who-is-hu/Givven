@@ -1,9 +1,12 @@
 const { Op } = require('sequelize');
+const Container = new (require('../utils/Container.js'));
 
 const CampaignService =  class {
     constructor(campaignModel, userModel){
         this.userModel = userModel;
         this.campaignModel = campaignModel;
+        this.contracts = Container.get('contractCaller');s
+
     }
     async register(user, campaign){
         let { name , dest_money, content, due_day, title_img} = campaign;
@@ -24,7 +27,9 @@ const CampaignService =  class {
                     userId : user.id
                 });
                 result = {success : true, msg : '성공'};
-            }            
+            }
+            const hash = await this.contracts.createCampaign(name, user.name );   
+            console.log(hash);    
             return result;
         }
         catch(err){

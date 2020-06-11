@@ -2,7 +2,7 @@ var Web3 = require('web3');
 var decoder = require('abi-decoder');
 var blockchain = require('./GivvenRepository.js');
 
-const contractaddress = '0x347c1c3D35B7ca85208F2A57864f3861CF40529d';
+const contractaddress = '0xcCEd1CfA48c2a1d848756A9FA4A3Dd91Ae7F3FE1';
 const hash = '0x4d3d8b08f67251638a6e05db2642ed2aef596be0ed156cbaa359ede7e731886d';
 
 var provider = new Web3.providers.WebsocketProvider('ws://127.0.0.1:8545')

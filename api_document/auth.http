@@ -15,9 +15,9 @@ POST {{baseUrl}}/auth/join  HTTP/1.1
 content-type: application/json
 
 { 
-    "name" : "normal1",
+    "name" : "normal6",
     "email" : "normal1",
-    "password" : "normal1",
+    "password" : "normal6",
     "type" : "normal"
 }
 

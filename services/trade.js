@@ -1,4 +1,5 @@
 const { sequelize } = require('../models');
+const Container = new (require('../utils/Container.js'));
 
 const TradeService = class {
     constructor(allModels){
@@ -8,6 +9,7 @@ const TradeService = class {
         this.campaignModel = Campaign;
         this.orderModel = Order;
         this.donationModel = Donation;
+        this.contracts = Container.get('contractCaller');s
     }
     
     async buyItem(user, addr, itemId, orderCount, campaignId){
@@ -23,7 +25,7 @@ const TradeService = class {
                     throw new Error('seller does not exist');
                 
                 const finalPrice = item.price * orderCount;
-                // 원장에 저장된 유저 point 잔액 가져오기
+                // 원장에 저장된 유저 campaign 잔액 가져오기
                 const balance = user.point ; //우선 웹서버 db에 있는값으로 성공했다 가정
                 if(balance < finalPrice){
                     throw new Error("lack of balance");
@@ -69,7 +71,9 @@ const TradeService = class {
             let result = {};
             await sequelize.transaction( async (transaction) => { 
                 // 원장의 user point 잔액 져오기
-                const balance = user.point; // 가져왔다고 가정 
+                //const balance = user.point; // 가져왔다고 가정 
+                const balance = await this.contracts.getUserBalance(user.email);
+               
                 if(balance < value)
                     throw new Error('lack of balance');
                 const campaign = await this.campaignModel.findOne({where : {id : campaignId}}, { transaction});
@@ -80,11 +84,11 @@ const TradeService = class {
                     throw new Error('wrong campaign');
                 
                 // 기부 트랜잭션 요청
-                // 트랜잭션 키값 저장 
-                const transactionId = 123213; // 성공 가정
+                // 트랜잭션 키값 저장
+                const transactionId = await this.contracts.donate(user.name, campaign.name, value);//123213; // 성공 가정
 
-                const donatorBalance = user.point - value; // 원장에서 기부자 잔액 가져오기
-                const campaignCurrMoney = campaign.current_money + value ; //원장에서 캠페인 현재 모금액 가져오기
+                const donatorBalance = await this.contracts.getUserBalance(user.name);//user.point - value; // 원장에서 기부자 잔액 가져오기
+                const campaignCurrMoney = await this.contracts.getCampaignBalance(campaign);//campaign.current_money + value ; //원장에서 캠페인 현재 모금액 가져오기
                 const charityBalance = charityUser.point + value;
                
                 await campaign.update({ current_money : campaignCurrMoney}, {transaction});
@@ -119,8 +123,8 @@ const TradeService = class {
             let result = {};
             await sequelize.transaction( async (transaction) => { 
                 //web3 js 충전 트랜잭션 요청
-                //get balance
-                const userBalance = user.point + value //임시
+                const txid = await this.contracts.chargeUser(user.name, value);
+                const userBalance = await this.contracts.getUserBalance(user.name);//user.point + value //임시
                 await user.update({ point : userBalance}, { transaction });   
             })
             .then(()=>{
@@ -139,8 +143,9 @@ const TradeService = class {
         let result = {};
         await sequelize.transaction( async (transaction) => { 
             //get balance
-            const userBalance = user.point;
-            point
+            const txid = await this.contracts.dischargeUser(user.name, value);
+            const userBalance =  await this.contracts.getUserBalance(user.name);//user.point;
+            
             await user.update({ point : userBalance}, { transaction });   
         })
         .then(()=>{
