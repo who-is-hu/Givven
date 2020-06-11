@@ -146,6 +146,12 @@
   font-size: 30px;
 }
 
+#orderGoods p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
 .card_list{
   margin-top: 20px;
 }
