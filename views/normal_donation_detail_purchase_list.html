@@ -20,8 +20,8 @@
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='normal_donation_main.html' id="go_donate"><b>기부하기</b></a></li>
-            <li><a href='normal_shop_main.html' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='normal_donation_main' id="go_donate"><b>기부하기</b></a></li>
+            <li><a href='normal_shop_main' id="go_purchase"><b>상점가기</b></a></li>
             <li><a href ="#none" onclick="mypage()" id="go_myapage"><b>My Page</b></a></li>
          </ul>
       </div>
@@ -173,7 +173,7 @@
             '<b>' + response.data.current_money / response.data.dest_money * 100 + '% 달성</b></div>');
          $("#detail_switch").append(
             '<a href="normal_donation_detail.html?id=' + id + '" id=goto_detail>캠페인 상세정보</a>' +
-            '<a href="normal_donation_detail_purchase_list.html?id=' + id +
+            '<a href="normal_donation_detail_purchase_list?id=' + id +
             '" id=goto_purchase_list>캠페인 거래내역</a>'
          );
       });
