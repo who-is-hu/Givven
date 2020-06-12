@@ -3,17 +3,15 @@ pragma solidity > 0.4.17;
 contract Givven{
 
     address admin;
-
-    
     mapping(string => uint) accounts;
     mapping(string => Campaign) campaigns;
-    mapping(string => Store) stores;
 
     struct Campaign{
         string socialOrg;
         uint currentDonate;
-        string[] donator;
+
         mapping(string => uint) donatevalue;
+        mapping(string => uint) products;
     }
 
     //contructor
@@ -24,6 +22,11 @@ contract Givven{
     modifier onlyGivven{
         require(msg.sender == admin);
         _;
+    }
+    //Service End
+    function serviceEnd() public onlyGivven{
+        require(admin == msg.sender);
+        selfdestruct(msg.sender);
     }
 
     //-----------User Method-------------
@@ -41,22 +44,20 @@ contract Givven{
 
     function dischargeUser(string memory _userEmail, uint _point) public onlyGivven{
         require(accounts[_userEmail] > _point);
-        accounts[_user] -= _point;
+        accounts[_userEmail] -= _point;
     }
 
     //----------Campaign Method--------------
     function createCampaign(string memory _campaignId, string memory _socialOrg) public {
-        Campaign  memory newcampaign = Campaign(_socialorg,0,new string[](0));
+        Campaign  memory newcampaign = Campaign(_socialOrg,0);
         campaigns[_campaignId] = newcampaign;
     }
-
+   
     function donate(string memory _userEmail, string memory _campaignId, uint _value) public {
-        require(accounts[_userEmail] > _value);
+        require(accounts[_userEmail] >= _value);
         accounts[_userEmail] -= _value;
-        Campaign storage target = campaigns[_campaignId];
-        target.currentDonate += _value;
-        target.donatevalue[_user] = _value;
-        target.donator.push(_user);
+        campaigns[_campaignId].currentDonate += _value;
+        campaigns[_campaignId].donatevalue[_userEmail] += _value;
     }
 
     function getCampaignBalance(string memory _campaignId) public view returns (uint){
@@ -71,11 +72,19 @@ contract Givven{
         return campaigns[_campaignId].donatevalue[_userEmail];
     }
 
-    function purchase(string memory _socialOrg, string memory _seller, string memory _product, uint value) public {
-        require 
+    function purchase(string memory _campaignId, string memory _seller, string memory _product,uint _productNum, uint _value) public {
+        require(campaigns[_campaignId].currentDonate >= _value);
+        campaigns[_campaignId].currentDonate -= _value;
+        accounts[_seller] += _value;
+        campaigns[_campaignId].products[_product] += _productNum;
     }
-    function getRestPoint(string memory _socialOrg, string memory _campaignId){
-        account[_socialOrg] += campaigns[_campaignId].currentDonate;
+
+    function productNumByCmapaign(string memory _campaignId,string memory _product) public view returns (uint){
+        return campaigns[_campaignId].products[_product];
+    }
+
+    function returnRestPoint(string memory _socialOrg, string memory _campaignId) public {
+        accounts[_socialOrg] += campaigns[_campaignId].currentDonate;
         campaigns[_campaignId].currentDonate = 0;
     }
 }
