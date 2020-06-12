@@ -89,6 +89,7 @@
       var ended_campaign_list;
       var i;
       var campaign_id;
+      var cost;
       
       var temp = location.href.split("?");
       var data = temp[1].split("&");
@@ -109,8 +110,9 @@
          $("#goods_name").append(response.data.name);
          $("#goods_price").append(response.data.price+"p");
          $("#goods_amount").append(amount+"개");
-         $("#goods_totalPrice").append(amount*response.data.price + "p");
-         $("#cost").append(amount*response.data.price + "p");
+         cost = amount*response.data.price
+         $("#goods_totalPrice").append( cost + "p");
+         $("#cost").append( cost + "p");
       });  
 
       $.ajax({
@@ -155,7 +157,7 @@
          alert(param.id);
          campaign_id = param.id;
          $("#leftPoint").empty();
-         $("#leftPoint").append("캠페인 결제 후 남은 포인트 : "+ (param.dest_money-param.current_money-(amount*response.data.price)) +"p");
+         $("#leftPoint").append("캠페인 결제 후 남은 포인트 : "+ (param.dest_money - param.current_money - cost) +"p");
       }
    </script>
    </script>
