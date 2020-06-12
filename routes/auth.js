@@ -26,17 +26,19 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
         });
         const contractCaller = await Container.get('contractCaller');
         const addUserResultHash = await contractCaller.addUser(email);
-        if(!addUserResultHash){
+        console.log('join hash' , addUserResultHash);
+        if(addUserResultHash !== undefined ){
             console.log(addUserResultHash);
             return res.json({
                 res: 'success',
                 msg: '회원가입 성공'
             });
-        }else
-        return res.json({
-            res: 'fail',
-            msg: '회원가입 실패'
-        });
+        }else{
+            return res.json({
+                res: 'fail',
+                msg: '회원가입 실패'
+            });
+        }
     } catch (err) {
         console.error(err);
         next(err);

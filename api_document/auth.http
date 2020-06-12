@@ -15,10 +15,10 @@ POST {{baseUrl}}/auth/join  HTTP/1.1
 content-type: application/json
 
 { 
-    "name" : "normal6",
-    "email" : "normal1",
-    "password" : "normal6",
-    "type" : "normal"
+    "name" : "seller1",
+    "email" : "seller1",
+    "password" : "1234",
+    "type" : "seller"
 }
 
 ### logout

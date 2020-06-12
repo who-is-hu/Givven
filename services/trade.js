@@ -9,13 +9,14 @@ const TradeService = class {
         this.campaignModel = Campaign;
         this.orderModel = Order;
         this.donationModel = Donation;
-        this.contracts = Container.get('contractCaller');s
+        this.contracts = Container.get('contractCaller');
     }
     
     async buyItem(user, addr, itemId, orderCount, campaignId){
         try{
             let result = {};
             await sequelize.transaction( async (transaction) => { 
+                const campaign = await this.campaignModel.findOne({where : { id : campaignId}});
                 const item = await this.itemModel.findOne({where : {id : itemId}}, { transaction });
                 if(item == null){
                     throw new Error('item does not exist');
@@ -26,7 +27,7 @@ const TradeService = class {
                 
                 const finalPrice = item.price * orderCount;
                 // 원장에 저장된 유저 campaign 잔액 가져오기
-                const balance = user.point ; //우선 웹서버 db에 있는값으로 성공했다 가정
+                const balance = await this.contracts.getUserBalance(user.email);//user.point ; //우선 웹서버 db에 있는값으로 성공했다 가정
                 if(balance < finalPrice){
                     throw new Error("lack of balance");
                 }
@@ -36,9 +37,9 @@ const TradeService = class {
                 
                 // blockchain 거래 트랜잭션 요청
                 // 트랜잭션 키값 받기
-                const transactionId = 1234; //성공 가정
-                const consumerBalance = user.point - finalPrice; //원장의 구매자 point 가져오기 성공했다 가정
-                const sellerBalance = seller.point + finalPrice; //원장의 판매자 point 가져오기 성공했다 가정
+                const txid = await this.contracts.purchase(campaign.name, seller.email, item.name, orderCount, finalPrice);
+                const consumerBalance = await this.contracts.getUserBalance(user.email);//user.point - finalPrice; //원장의 구매자 point 가져오기 성공했다 가정
+                const sellerBalance = await this.contracts.getUserBalance(seller.email);//seller.point + finalPrice; //원장의 판매자 point 가져오기 성공했다 가정
                 
                 await item.update({ stock : item.stock - orderCount}, {transaction});
                 await user.update({ point : consumerBalance }, {transaction});
@@ -48,7 +49,7 @@ const TradeService = class {
                     to : item.userId,
                     itemId : item.id,
                     orderCount,
-                    transactionKey : transactionId,
+                    transactionKey : txid,
                     campaignId,
                     addr,
                 }, {transaction});
