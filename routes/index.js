@@ -42,8 +42,8 @@ router.get('/charity_shop_main', function(req, res, next) {
 router.get('/normal_donation_detail_donate', function(req, res, next) {
   res.render('normal_donation_detail_donate.html');
 });
-router.get('/normal_donation_detail_purchase', function(req, res, next) {
-  res.render('normal_donation_detail_purchase.html');
+router.get('/normal_donation_detail_purchase_list', function(req, res, next) {
+  res.render('normal_donation_detail_purchase_list.html');
 });
 router.get('/normal_donation_detail', function(req, res, next) {
   res.render('normal_donation_detail.html');
@@ -68,9 +68,6 @@ router.get('/normal_shop_main', function(req, res, next) {
 });
 router.get('/normal_shop_search_result', function(req, res, next) {
   res.render('normal_shop_search_result.html');
-});
-router.get('/normal_donatiuon_detail_purchase_list', function(req, res, next) {
-  res.render('normal_donatiuon_detail_purchase_list.html.html');
 });
 /* seller */
 router.get('/seller_mypage_exchange', function(req, res, next) {
