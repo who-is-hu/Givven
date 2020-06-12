@@ -127,7 +127,7 @@
             i = 0;
             while ( i < ended_campaign_list.campaigns.length) {
                $("#finishCampaigns .card_list").append(
-                  '<button class="card" onclick = "getCampaignId('+i+')">'+
+                  '<button class="card" onclick = "getCampaignId('+ended_campaign_list.campaigns[i].id+')">'+
                      '<img src="'+ ended_campaign_list.campaigns[i].title_img+'">'+
                      '<div class="menu">'+
                         '<h3>'+ ended_campaign_list.campaigns[i].name+'</h3>'+
@@ -140,9 +140,6 @@
                            'aria-valuenow="'+ (100 - (ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100))+'" aria-valuemin="0" aria-valuemax="100"></div>'+
                      '</div>'+
                   '</div>'+
-                  '<div id = "CampaignNum'+ i +'">'+
-                     ended_campaign_list.campaigns[i].id +
-                  '</div>'+
                '</button>'
                );
             i= i+1;
@@ -151,9 +148,8 @@
       });
 
       function getCampaignId(n){
-         var campaign = '#CampaignNum'+n
-         campaign_id = $(campaign).val();
-         alert(campaign_id);
+         alert(n);
+         campaign_id = n;
       }
 
    </script>
