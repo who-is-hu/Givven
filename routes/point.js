@@ -30,4 +30,13 @@ router.post('/change', isUserSeller, async (req, res, next) => {
     }
 });
 
+router.get('/', isUserLoggedIn, async ( req, res, next) => {
+   try{
+        //const tradeService = Container.get('tradeService');
+        res.json({point : req.user.point});  
+    } catch (err) {
+       console.error(err);
+       next(err);
+   }
+});
 module.exports = router;

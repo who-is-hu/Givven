@@ -150,6 +150,10 @@ const TradeService = class {
         });
         return result;
     }
+
+    async getBalance(user){
+        return user.point;
+    }
 };
 
 module.exports = TradeService;
