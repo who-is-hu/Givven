@@ -82,7 +82,7 @@
          async: false
          }).success(function (response) {
             console.log(response);
-            $('#donation_value').append(point+"p");
+            $('#donation_value').append(point+"p")*1;
             $('#campaign_name').append(response.data.name);
             $('#campaign_img').append("<img src = '"+response.data.title_img+"'>");
             $('#cost').append(point+"p");
