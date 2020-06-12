@@ -69,7 +69,7 @@
          var temp = location.href.split("?");
          var data = temp[1].split("&");
          var id = data[0].split("=")[1];
-         var point = data[1].split("=")[1];
+         var point = data[1].split("=")[1]*1;
          var campid;
 
 
@@ -82,7 +82,7 @@
          async: false
          }).success(function (response) {
             console.log(response);
-            $('#donation_value').append(point+"p")*1;
+            $('#donation_value').append(point+"p");
             $('#campaign_name').append(response.data.name);
             $('#campaign_img').append("<img src = '"+response.data.title_img+"'>");
             $('#cost').append(point+"p");

@@ -33,7 +33,7 @@
                 </div>
                 <p>환전을 원하는 포인트를 입력하세요</p>
                 <input type="text" id="point" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="포인트 입력">
-                <p>내 지갑 : ~~포인트</p>
+                <p id = "my_point">내 지갑 : </p>
                 <button id="exchange"><b>환전하기</b></button>
             </div>
         </div>
@@ -47,12 +47,54 @@
      <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
         <script>
+
+        var point;
+
+         $.ajax({
+         type: 'GET',
+         url: "/point",
+         xhrFields: {
+            withCredentials: true
+         },
+         async: false
+         }).success(function (response) {
+             point = response.point;
+            $('#my_point').append(point+"포인트");
+         });
+
+
+
             $(function () {
                $('#exchange').on("click", function () {
-                var price = $('#point').val();
+                var price = $('#point').val()*1;
                   if(price == 0){
                      alert('환전을 원하는 포인트를 입력하세요');
                      return ;
+                  }
+                  else 
+                  {
+                      if(price > point)
+                      {
+                        alert("잔액이 부족합니다");
+                      }
+                      else
+                      {
+                          $.ajax({
+                            type: 'POST',
+                            url: "/point/change",
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            dataType: 'json',
+                            data:{
+                                value: price
+                            },
+                            async: false
+                            }).success(function (response) {
+                                alert("환전이 완료되었습니다");
+                                window.location.href = "seller_mypage_main";
+                            });
+                      }
                   }
                   alert(price+'포인트를 환전합니다');
                });

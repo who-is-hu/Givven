@@ -29,7 +29,7 @@
 
             <div id = "state">
                 <ul id = "pocket">
-                    <li>내 지갑 : ~~포인트</li>
+                    <li id = "my_point">내 지갑 : </li>
                     <li><a href="seller_mypage_exchange"><b>환전</b></a></li>
                 </ul>
             </div>
@@ -154,6 +154,17 @@
                     $("#i_stock"+response.data[i].id).append(response.data[i].orderCount);
                 }
             });
+    
+    $.ajax({
+         type: 'GET',
+         url: "/point",
+         xhrFields: {
+            withCredentials: true
+         },
+         async: false
+         }).success(function (response) {
+            $('#my_point').append(response.point+"포인트");
+         });
         
 
     function item_click(card_id)
