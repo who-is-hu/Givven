@@ -77,18 +77,18 @@
                   img1.setAttribute("src", response1.data.data[i].campaign.title_img);
 
                   var cur_var = response1.data.data[i].campaign.current_money / response1.data.data[i].campaign.dest_money * 100;
-                  $("#ing_campaign").append("<div id = 'ingcard_"+response1.data.data[i].campaign.id+"'class='card' onClick='campaign_click(this.id)'>"+
-                  "<div id = 'ic_"+response1.data.data[i].campaign.id+"'class = 'image_container'>"+
+                  $("#ing_campaign").append("<div id = 'ingcard_"+response1.data.data[i].id+"'class='card' onClick='campaign_click(this.id)'>"+
+                  "<div id = 'ic_"+response1.data.data[i].id+"'class = 'image_container'>"+
                   "</div>"+
                   "<div class='menu'>"+
-                  "<h3 id = 'camname_"+response1.data.data[i].campaign.id+"'></h3>"+
+                  "<h3 id = 'camname_"+response1.data.data[i].id+"'></h3>"+
                   "<p>"+response1.data.data[i].campaign.current_money+" / "+response1.data.data[i].campaign.dest_money+"</p>"+
                   "<div class='progress'>"+
                   "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+cur_var+"%'"+
                   "aria-valuenow='"+cur_var+"' aria-valuemin='0' aria-valuemax='100'>"+cur_var+"%"+
                   "</div></div></div></div>");
-                  $("#camname_"+response1.data.data[i].campaign.id).append( response1.data.data[i].campaign.name);
-                  document.querySelector("#ic_"+response1.data.data[i].campaign.id).appendChild(img1);
+                  $("#camname_"+response1.data.data[i].id).append( response1.data.data[i].campaign.name);
+                  document.querySelector("#ic_"+response1.data.data[i].id).appendChild(img1);
                }
          });
       
@@ -108,18 +108,18 @@
                   img2.setAttribute("src", response2.data.data[i].campaign.title_img);
 
                   var cur_var = response2.data.data[i].campaign.current_money / response2.data.data[i].campaign.dest_money * 100;
-                  $("#end_campaign").append("<div id = 'endcard_"+response2.data.data[i].campaign.id+"'class='card' onClick='campaign_click(this.id)'>"+
-                  "<div id = 'ec_"+response2.data.data[i].campaign.id+"'class = 'image_container'>"+
+                  $("#end_campaign").append("<div id = 'endcard_"+response2.data.data[i].id+"'class='card' onClick='campaign_click(this.id)'>"+
+                  "<div id = 'ec_"+response2.data.data[i].id+"'class = 'image_container'>"+
                   "</div>"+
                   "<div class='menu'>"+
-                  "<h3 id = 'camname_"+response2.data.data[i].campaign.id+"'></h3>"+
+                  "<h3 id = 'camname_"+response2.data.data[i].id+"'></h3>"+
                   "<p>"+response2.data.data[i].campaign.current_money+" / "+response2.data.data[i].campaign.dest_money+"</p>"+
                   "<div class='progress'>"+
                   "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+cur_var+"%'"+
                   "aria-valuenow='"+cur_var+"' aria-valuemin='0' aria-valuemax='100'>"+cur_var+"%"+
                   "</div></div></div></div>");
-                  $("#camname_"+response2.data.data[i].campaign.id).append( response2.data.data[i].campaign.name);
-                  document.querySelector("#ec_"+response2.data.data[i].campaign.id).appendChild(img2);
+                  $("#camname_"+response2.data.data[i].id).append( response2.data.data[i].campaign.name);
+                  document.querySelector("#ec_"+response2.data.data[i].id).appendChild(img2);
                }
          });
 
