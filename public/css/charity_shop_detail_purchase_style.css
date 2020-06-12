@@ -150,6 +150,11 @@ td {
   font-weight: bold;
 }
 
+#leftPoint{
+  font-size: 20px;
+  font-weight: bold;
+}
+
 #campaign_choice{
   margin-top: 25px;
   font-size: 21px;

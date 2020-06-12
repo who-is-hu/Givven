@@ -58,12 +58,16 @@
       </div>
       <h3>결제 정보</h3>
       <div id = "cost">총 결제 포인트 : </div>
-
+      <div id = "leftPoint"></div>
+   
       <div id = "campaign_choice"> 포인트를 차감할 캠페인을 골라주세요</div>
       <div id=finishCampaigns>
          <div class="card_list">
          </div>
          <div class = "clearfix" style="clear: left"></div>
+      </div>
+      <div id = "purchase_info">
+
       </div>
       <button type="submit" class="submit-btn">결제하기</button>
       <div class = "clearfix" style="clear: left"></div>
@@ -127,7 +131,7 @@
             i = 0;
             while ( i < ended_campaign_list.campaigns.length) {
                $("#finishCampaigns .card_list").append(
-                  '<button class="card" onclick = "getCampaignId('+ended_campaign_list.campaigns[i].id+')">'+
+                  '<button class="card" onclick = "getCampaignId('+ended_campaign_list.campaigns[i]+')">'+
                      '<img src="'+ ended_campaign_list.campaigns[i].title_img+'">'+
                      '<div class="menu">'+
                         '<h3>'+ ended_campaign_list.campaigns[i].name+'</h3>'+
@@ -147,11 +151,12 @@
          }  
       });
 
-      function getCampaignId(n){
-         alert(n);
-         campaign_id = n;
+      function getCampaignId(param){
+         alert(param.id);
+         campaign_id = param.id;
+         $("#leftPoint").empty();
+         $("#leftPoint").append("캠페인 결제 후 남은 포인트 : "+ (param.dest_money-param.current_money-(amount*response.data.price)) +"p");
       }
-
    </script>
    </script>
 </body>
