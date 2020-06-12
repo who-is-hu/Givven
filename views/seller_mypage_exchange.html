@@ -58,7 +58,7 @@
          },
          async: false
          }).success(function (response) {
-             point = response.point;
+             point = response.point*1;
             $('#my_point').append(point+"포인트");
          });
 
@@ -96,7 +96,6 @@
                             });
                       }
                   }
-                  alert(price+'포인트를 환전합니다');
                });
             });
          
