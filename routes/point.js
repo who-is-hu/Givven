@@ -30,7 +30,7 @@ router.post('/change', isUserSeller, async (req, res, next) => {
     }
 });
 
-router.get('/', isUserLoggedIn, async ( req, res, next) => {
+router.get('/', isLoggedIn, async ( req, res, next) => {
    try{
         //const tradeService = Container.get('tradeService');
         res.json({point : req.user.point});  
