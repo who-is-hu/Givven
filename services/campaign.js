@@ -28,8 +28,8 @@ const CampaignService =  class {
                 });
                 result = {success : true, msg : '성공'};
             }
-            const hash = await this.contracts.createCampaign(name, user.name );   
-            console.log(hash);    
+            const hash = await this.contracts.createCampaign(name, user.email );   
+            console.log('camapgin creation', hash);    
             return result;
         }
         catch(err){

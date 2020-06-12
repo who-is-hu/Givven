@@ -85,10 +85,10 @@ const TradeService = class {
                 
                 // 기부 트랜잭션 요청
                 // 트랜잭션 키값 저장
-                const transactionId = await this.contracts.donate(user.name, campaign.name, value);//123213; // 성공 가정
+                const transactionId = await this.contracts.donate(user.email, campaign.name, value);//123213; // 성공 가정
 
                 const donatorBalance = await this.contracts.getUserBalance(user.name);//user.point - value; // 원장에서 기부자 잔액 가져오기
-                const campaignCurrMoney = await this.contracts.getCampaignBalance(campaign);//campaign.current_money + value ; //원장에서 캠페인 현재 모금액 가져오기
+                const campaignCurrMoney = await this.contracts.getCampaignBalance(campaign.name);//campaign.current_money + value ; //원장에서 캠페인 현재 모금액 가져오기
                 const charityBalance = charityUser.point + value;
                
                 await campaign.update({ current_money : campaignCurrMoney}, {transaction});
@@ -123,8 +123,8 @@ const TradeService = class {
             let result = {};
             await sequelize.transaction( async (transaction) => { 
                 //web3 js 충전 트랜잭션 요청
-                const txid = await this.contracts.chargeUser(user.name, value);
-                const userBalance = await this.contracts.getUserBalance(user.name);//user.point + value //임시
+                const txid = await this.contracts.chargeUser(user.email, value);
+                const userBalance = await this.contracts.getUserBalance(user.email);//user.point + value //임시
                 await user.update({ point : userBalance}, { transaction });   
             })
             .then(()=>{
@@ -143,8 +143,8 @@ const TradeService = class {
         let result = {};
         await sequelize.transaction( async (transaction) => { 
             //get balance
-            const txid = await this.contracts.dischargeUser(user.name, value);
-            const userBalance =  await this.contracts.getUserBalance(user.name);//user.point;
+            const txid = await this.contracts.dischargeUser(user.email, value);
+            const userBalance =  await this.contracts.getUserBalance(user.email);//user.point;
             
             await user.update({ point : userBalance}, { transaction });   
         })
