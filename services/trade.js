@@ -139,8 +139,7 @@ const TradeService = class {
         let result = {};
         await sequelize.transaction( async (transaction) => { 
             //get balance
-            const userBalance = user.point;
-            point
+            const userBalance = user.point - value;
             await user.update({ point : userBalance}, { transaction });   
         })
         .then(()=>{
