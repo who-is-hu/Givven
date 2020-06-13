@@ -139,6 +139,15 @@
                         async : false
                     }).success(function (response) {
                          console.log(response);
+                         if(response.success == "true")
+                         {
+                             alert("상품등록이 완료되었습니다.");
+                         }
+                         else if (response.success == "false")
+                         {
+                             alert("이미 존재하는 상품입니다");
+                         }
+                         window.location.href = "seller_mypage_main";
                     });
                 }
             });
