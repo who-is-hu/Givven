@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
         },
         transactionKey : {
-            type : DataTypes.INTEGER,
+            type : DataTypes.STRING(66),
             allowNull : false,
         } 
         //auto create

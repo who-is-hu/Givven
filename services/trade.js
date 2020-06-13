@@ -27,8 +27,7 @@ const TradeService = class {
                 throw new Error('seller does not exist');
 
             const finalPrice = item.price * orderCount;
-            // 원장에 저장된 유저 campaign 잔액 가져오기
-            const balance = await this.contracts.getUserBalance(user.email);//user.point ; //우선 웹서버 db에 있는값으로 성공했다 가정
+            const balance = await this.contracts.getCampaignBalance(campaign.name);
             if (balance < finalPrice) {
                 throw new Error("lack of balance");
             }
@@ -37,13 +36,13 @@ const TradeService = class {
             }
 
             // blockchain 거래 트랜잭션 요청
-            // 트랜잭션 키값 받기
             const txid = await this.contracts.purchase(campaign.name, seller.email, item.name, orderCount, finalPrice);
-            const consumerBalance = await this.contracts.getUserBalance(user.email);//user.point - finalPrice; //원장의 구매자 point 가져오기 성공했다 가정
-            const sellerBalance = await this.contracts.getUserBalance(seller.email);//seller.point + finalPrice; //원장의 판매자 point 가져오기 성공했다 가정
+            const campaignBalance = await this.contracts.getCampaignBalance(user.email);
+            const sellerBalance = await this.contracts.getUserBalance(seller.email);
 
             await item.update({ stock: item.stock - orderCount }, { transaction });
-            await user.update({ point: consumerBalance }, { transaction });
+            await user.update({point : user.point - value});
+            await campaign.update({ used_money : campaign.current_money - campaignBalance}, { transaction });
             await seller.update({ point: sellerBalance }, { transaction })
             await this.orderModel.create({
                 from: user.id,
@@ -85,10 +84,10 @@ const TradeService = class {
 
             // 기부 트랜잭션 요청
             // 트랜잭션 키값 저장
-            const transactionId = await this.contracts.donate(user.email, campaign.name, value);//123213; // 성공 가정
+            const transactionId = await this.contracts.donate(user.email, campaign.name, value);
 
-            const donatorBalance = await this.contracts.getUserBalance(user.name);//user.point - value; // 원장에서 기부자 잔액 가져오기
-            const campaignCurrMoney = await this.contracts.getCampaignBalance(campaign.name);//campaign.current_money + value ; //원장에서 캠페인 현재 모금액 가져오기
+            const donatorBalance = await this.contracts.getUserBalance(user.name);
+            const campaignCurrMoney = await this.contracts.getCampaignBalance(campaign.name);
             const charityBalance = charityUser.point + value;
 
             await campaign.update({ current_money: campaignCurrMoney }, { transaction });
