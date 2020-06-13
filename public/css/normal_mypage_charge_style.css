@@ -81,3 +81,46 @@
  #normal_mypage b{
   color: #6683ef;
 }
+
+#charge_money{
+  width: 800px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  border :  3px solid #6683ef;
+}
+
+#state{
+  width: 100%;
+  margin-bottom: 50px;
+  font-size: 50px;
+  border-bottom: 3px solid #C3D9F0;
+  float: left;
+}
+
+#charge_money p{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#charge_money #point{
+  width: 400px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+#charge{
+  display: block;
+  width: 250px;
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #6683ef;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
