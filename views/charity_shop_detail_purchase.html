@@ -139,7 +139,7 @@
                   i = i + 1;
                   continue;
                }
-               if(ended_campaign_list.campaigns[i].name.length){
+               if(ended_campaign_list.campaigns[i].name.length > 11){
                   var name = ended_campaign_list.campaigns[i].name.substr(0, 11) + "...";
                }
                $("#finishCampaigns .card_list").append(
