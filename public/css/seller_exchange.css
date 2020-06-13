@@ -22,7 +22,6 @@
 }
 
 #logo{
-    float: left;
     line-height: 60px;
     padding-left: 30px;
 }
@@ -33,7 +32,6 @@
 }
 
 #f_menu{
-    float: right;
     padding: 0;
     padding-right: 30px;
     margin: 0;
@@ -42,7 +40,6 @@
 }
 
 #f_menu a{
-    float: right;
     color: black;
     font-size: 13px;
     text-decoration: none;
@@ -55,7 +52,6 @@
 }
 
 #s_menu{
-    float: left;
     padding: 0;
     padding-left: 50px;
     margin: 0;
@@ -64,7 +60,6 @@
 }
 
 #s_menu li{
-    float: left;
     padding-left: 20px;
     padding-right: 20px;
 }
