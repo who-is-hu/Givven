@@ -118,12 +118,10 @@ const TradeService = class {
 
     async buyPoint(user, value) {
         let result = {};
-        console.log('in ==================');
         await sequelize.transaction(async (transaction) => {
-            //web3 js 충전 트랜잭션 요청
             await this.setContranctCaller();
             const txid = await this.contracts.chargeUser(user.email, value);
-            const userBalance = await this.contracts.getUserBalance(user.email);//user.point + value //임시
+            const userBalance = await this.contracts.getUserBalance(user.email);
             await user.update({ point: userBalance }, { transaction });
             console.log('buy point', txid);
         }).then(() => {
@@ -137,17 +135,22 @@ const TradeService = class {
 
     async changePoint(user, value) {
         let result = {};
+        
         await sequelize.transaction(async (transaction) => {
+            if(user.point < value){
+                throw new Error('lack of balance');
+            }
             await this.setContranctCaller();
-            //get balance
             const txid = await this.contracts.dischargeUser(user.email, value);
-            const userBalance = await this.contracts.getUserBalance(user.email);//user.point;
-
+            const userBalance = await this.contracts.getUserBalance(user.email);
             await user.update({ point: userBalance }, { transaction });
+            console.log('change point', txid);
+
         }).then(() => {
             result = { success: true, msg: "success" };
         }).catch(err => {
-            throw new Error(err);
+            console.error(err);
+            result = { success: false, msg: String(err) };
         });
         return result;
     }

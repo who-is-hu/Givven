@@ -6,7 +6,7 @@ POST {{baseUrl}}/auth/login  HTTP/1.1
 content-type: application/json
 
 {
-    "email": "charity2",
+    "email": "seller2",
     "password": "1234"
 }
 
@@ -15,10 +15,10 @@ POST {{baseUrl}}/auth/join  HTTP/1.1
 content-type: application/json
 
 { 
-    "name" : "normal2",
-    "email" : "normal2",
+    "name" : "seller2",
+    "email" : "seller2",
     "password" : "1234",
-    "type" : "normal"
+    "type" : "seller"
 }
 
 ### logout
