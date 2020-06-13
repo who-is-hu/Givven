@@ -82,6 +82,8 @@
          async: false
          }).success(function (response) {
             console.log(response);
+            console.log(typeof response.data.current_money);
+            console.log(typeof response.data.dest_money);
             $('#donation_value').append(point+"p");
             $('#campaign_name').append(response.data.name);
             $('#campaign_img').append("<img src = '"+response.data.title_img+"'>");
