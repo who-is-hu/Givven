@@ -70,6 +70,7 @@
                 var price = $('#point').val();
                 console.log(typeof price);
                 console.log(typeof parseInt(price));
+                price = parseInt(price);
                   if(price == 0){
                      alert('환전을 원하는 포인트를 입력하세요');
                      return ;
