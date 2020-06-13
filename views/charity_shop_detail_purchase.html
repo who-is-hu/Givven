@@ -131,28 +131,39 @@
          } else {
             i = 0;
             while (i < ended_campaign_list.campaigns.length) {
+               if(ended_campaign_list.campaigns[i].current_money == 0){
+                  i = i + 1;
+                  continue;
+               }
+               if(ended_campaign_list.campaigns[i].used_money >= ended_campaign_list.campaigns[i].current_money){
+                  i = i + 1;
+                  continue;
+               }
+               if(ended_campaign_list.campaigns[i].name.length){
+                  var name = ended_campaign_list.campaigns[i].name.substr(0, 11) + "...";
+               }
                $("#finishCampaigns .card_list").append(
                   '<button class="card" onclick = "getCampaignId(' + ended_campaign_list.campaigns[i].id +
                   ',' +
-                  ended_campaign_list.campaigns[i].current_money + ',' +
-                  ended_campaign_list.campaigns[i].dest_money + ')">' +
+                  ended_campaign_list.campaigns[i].used_money + ',' +
+                  ended_campaign_list.campaigns[i].current_money + ')">' +
                   '<img src="' + ended_campaign_list.campaigns[i].title_img + '">' +
                   '<div class="menu">' +
                   '<h3>' + ended_campaign_list.campaigns[i].name + '</h3>' +
-                  '<p>' + ended_campaign_list.campaigns[i].current_money + 'p / ' + ended_campaign_list
-                  .campaigns[i].dest_money + 'p</p>' +
+                  '<p>' + ended_campaign_list.campaigns[i].used_money + 'p / ' + ended_campaign_list
+                  .campaigns[i].current_money + 'p</p>' +
                   '<div class="progress">' +
                   '<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: ' +
-                  (ended_campaign_list.campaigns[i].current_money / ended_campaign_list.campaigns[i]
-                     .dest_money * 100) + '%"' +
+                  (ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i]
+                     .current_money * 100) + '%"' +
                   'aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">' + ended_campaign_list.campaigns[
-                     i].current_money / ended_campaign_list.campaigns[i].dest_money * 100 + '%</div>' +
+                     i].used_money / ended_campaign_list.campaigns[i].current_money * 100 + '%</div>' +
 
                   '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: ' + (100 - (
-                     ended_campaign_list.campaigns[i].current_money / ended_campaign_list.campaigns[i]
-                     .dest_money * 100)) + '%"' +
-                  'aria-valuenow="' + (100 - (ended_campaign_list.campaigns[i].current_money /
-                     ended_campaign_list.campaigns[i].dest_money * 100)) +
+                     ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i]
+                     .current_money * 100)) + '%"' +
+                  'aria-valuenow="' + (100 - (ended_campaign_list.campaigns[i].used_money /
+                     ended_campaign_list.campaigns[i].current_money * 100)) +
                   '" aria-valuemin="0" aria-valuemax="100"></div>' +
                   '</div>' +
                   '</div>' +
@@ -163,10 +174,10 @@
          }
       });
 
-      function getCampaignId(id, current_money, dest_money) {
+      function getCampaignId(id, used_money, current_money) {
          campaign_id = id;
          $("#leftPoint").empty();
-         $("#leftPoint").append("캠페인 결제 후 남은 포인트 : " + (dest_money - current_money - cost) + "p");
+         $("#leftPoint").append("캠페인 결제 후 남은 포인트 : " + (current_money - used_money - cost) + "p");
       }
 
       $(function () {
