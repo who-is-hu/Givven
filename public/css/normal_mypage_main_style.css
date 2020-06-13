@@ -77,6 +77,10 @@
    text-decoration: none;
  }
 
+ #normal_mypage b{
+  color: #6683ef;
+}
+
  #state{
   width: 100%;
   height: 60px;
