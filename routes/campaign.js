@@ -63,7 +63,10 @@ router.post('/donate', isLoggedIn, async( req, res, next) => {
     const { campaignId, value } = req.body;
     try {
         const tradeInstance = Container.get('tradeService');
-        const result = await tradeInstance.donate(req.user, campaignId, value);
+        console.log('typeof value in router ', typeof value);
+        console.log('value value in router ',  value);
+
+        const result = await tradeInstance.donate(req.user, campaignId, parseInt(value));
         res.json(result);
     } catch (err) {
         console.error(err);

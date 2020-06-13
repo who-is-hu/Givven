@@ -26,7 +26,7 @@
                     <li><a href="seller_add_goods" id="add_goods"><b>상품 등록</b></a></li>
                     <li><a href="seller_mypage_main" id="go_mypage"><b>My Page</b></a></li>
                 </ul>
-                <a href="normal_donation_main" id="change_normal"><b>일반 전환</b></a>
+                <a href="normal_donation_main" id="change_normal"><b>홈으로</b></a>
             </div>
         </div>
 
@@ -132,13 +132,22 @@
                         data: {
                             name: $("#item_name").val(),
                             content: $("#goods_detail").val(),
-                            price: $("#item_price").val(),
-                            stock: $("#item_stock").val(),
+                            price: $("#item_price").val()*1,
+                            stock: $("#item_stock").val()*1,
                             title_img: img_url
                         },
                         async : false
                     }).success(function (response) {
                          console.log(response);
+                         if(response.success == true)
+                         {
+                             alert("상품등록이 완료되었습니다.");
+                         }
+                         else if (response.success == false)
+                         {
+                             alert("이미 존재하는 상품입니다");
+                         }
+                         window.location.href = "seller_mypage_main";
                     });
                 }
             });
