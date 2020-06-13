@@ -69,7 +69,7 @@
          var temp = location.href.split("?");
          var data = temp[1].split("&");
          var id = data[0].split("=")[1];
-         var point = data[1].split("=")[1]*1;
+         var point = data[1].split("=")[1];
          var campid;
 
 
@@ -113,7 +113,7 @@
                dataType: 'json',
                data:{
                   campaignId: id,
-                  value: point*1
+                  value: parseInt(point)
                },
                async: false
                }).success(function (response) {
