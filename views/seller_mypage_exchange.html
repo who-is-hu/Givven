@@ -59,7 +59,6 @@
          async: false
          }).success(function (response) {
              point = response.point*1;
-             console.log(typeof response.point);
             $('#my_point').append(point+"포인트");
          });
 
@@ -68,9 +67,8 @@
             $(function () {
                $('#exchange').on("click", function () {
                 var price = $('#point').val();
-                console.log(typeof price);
-                console.log(typeof parseInt(price));
                 price = parseInt(price);
+                console.log(typeof price);
                   if(price == 0){
                      alert('환전을 원하는 포인트를 입력하세요');
                      return ;
