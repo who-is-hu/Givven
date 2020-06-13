@@ -117,6 +117,8 @@
                },
                async: false
                }).success(function (response) {
+                  console.log(response);
+                  console.log(typeof parseInt(point));
                   alert("기부되었습니다");
                   window.location.href = "normal_donation_main";
                });
