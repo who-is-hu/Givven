@@ -27,6 +27,12 @@
       </div>
    </div>
 
+   <div id = "state">
+      <ul id = "pocket">
+         <li id = "my_point">내 지갑 : </li>
+      </ul>
+   </div>
+
    <div id="container">
       <h2>캠페인 상세페이지</h2>
       <img src="public/images/noImg.jpg">
@@ -98,9 +104,12 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
    </script>
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   
+   
    <script>
 
    var mytype;
+   var mypoint;
          $.ajax({
                type: 'GET',
                url: "/auth/isLoggedIn",
@@ -125,6 +134,17 @@
                   {
                      $('#menu').append("<li><b>사회단체입니다.</b></li><li><a href='/auth/logout'><b>로그아웃</b></a></li>");
                   }
+                  $.ajax({
+                     type: 'GET',
+                     url: "/point",
+                     xhrFields: {
+                        withCredentials: true
+                     },
+                     async: false
+                     }).success(function (response) {
+                        mypoint = response.point
+                        $('#my_point').append(mypoint+"포인트");
+                     });  
                   
                },
                complete : function(){
@@ -180,13 +200,21 @@
 
       $(function () {
          $('.submit-btn').on("click", function () {
-             if(mytype == "normal")
+            if(mytype == "normal")
             {
                if ($('.point').val() == "") {
                   alert("입력을 완료해주세요");
                } else {
                   var point = $('.point').val();
-                  location.href = "normal_donation_detail_donate?id=" + id + "&point=" + point;
+                  point = parseInt(point);
+                  if(point > mypoint)
+                  {
+                     alert("잔액이 부족합니다");
+                  }
+                  else
+                  {
+                     location.href = "normal_donation_detail_donate?id=" + id + "&point=" + point;
+                  }
                }
             }
             else
