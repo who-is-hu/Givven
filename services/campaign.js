@@ -29,7 +29,7 @@ const CampaignService =  class {
                     userId : user.id
                 });
                 const hash = await this.contracts.createCampaign(name, user.email );   
-                console.log('camapgin creation', hash);    
+                console.log('campaign creation', hash);    
                 result = {success : true, msg : '성공'};
             }
             else

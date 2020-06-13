@@ -9,12 +9,14 @@ const TradeService = class {
         this.campaignModel = Campaign;
         this.orderModel = Order;
         this.donationModel = Donation;
-        this.contracts = Container.get('contractCaller');
     }
-    
+    async setContranctCaller(){
+        this.contracts = await Container.get('contractCaller');
+    }
     async buyItem(user, addr, itemId, orderCount, campaignId){
         try{
             let result = {};
+            await setContranctCaller();
             await sequelize.transaction( async (transaction) => { 
                 const campaign = await this.campaignModel.findOne({where : { id : campaignId}});
                 const item = await this.itemModel.findOne({where : {id : itemId}}, { transaction });
@@ -70,6 +72,7 @@ const TradeService = class {
     async donate(user, campaignId, value){
         try{
             let result = {};
+            await setContranctCaller();
             await sequelize.transaction( async (transaction) => { 
                 // 원장의 user point 잔액 져오기
                 //const balance = user.point; // 가져왔다고 가정 
