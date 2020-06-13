@@ -88,7 +88,7 @@
                   img1.setAttribute("src", response1.data.data[i].campaign.title_img);
 
                   var cur_var = response1.data.data[i].campaign.current_money / response1.data.data[i].campaign.dest_money * 100;
-                  $("#ing_campaign").append("<a href = 'normal_donation_detail?index="+response1.data.data[i].id+"'>"+
+                  $("#ing_campaign").append("<a href = 'normal_donation_detail?index="+response1.data.data[i].campaign.id+"'>"+
                   "<div id = 'ingcard_"+response1.data.data[i].id+"'class='card'>"+
                   "<div id = 'ic_"+response1.data.data[i].id+"'class = 'image_container'>"+
                   "</div>"+
@@ -120,7 +120,7 @@
                   img2.setAttribute("src", response2.data.data[i].campaign.title_img);
 
                   var cur_var = response2.data.data[i].campaign.current_money / response2.data.data[i].campaign.dest_money * 100;
-                  $("#end_campaign").append("<a href = 'normal_donation_detail?index="+response2.data.data[i].id+"'>"+
+                  $("#end_campaign").append("<a href = 'normal_donation_detail?index="+response2.data.data[i].campaign.id+"'>"+
                   "<div id = 'endcard_"+response2.data.data[i].id+"'class='card'>"+
                   "<div id = 'ec_"+response2.data.data[i].id+"'class = 'image_container'>"+
                   "</div>"+
