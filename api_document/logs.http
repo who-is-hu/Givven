@@ -61,7 +61,7 @@ content-type : application/json
 // get donations by campaign Id
 ///////////////////////////////////////////////////////////////////
 ###
-GET {{baseUrl}}/tradeLog/donationsByCampaign/1 HTTP/1.1
+GET {{baseUrl}}/tradeLog/donationsByCampaign/3 HTTP/1.1
 content-type : application/json
 
 ///////////////////////////////////////////////////////////////////

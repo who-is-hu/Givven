@@ -21,8 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         current_money : {
             type : DataTypes.INTEGER,
-            defaultValue : 0,
-            allowNull : true,
+            allowNull : false,
         },
         content : {
             type: DataTypes.STRING(100),
