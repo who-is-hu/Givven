@@ -22,6 +22,7 @@ const CampaignService =  class {
                     owner : user.name,
                     due_day,
                     userId : user.id,
+                    used_money : 0,
                     current_money : 0
                 });
                 result = {success : true, msg : '성공'};

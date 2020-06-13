@@ -11,61 +11,58 @@ const TradeService = class {
     }
 
     async buyItem(user, addr, itemId, orderCount, campaignId) {
-        try {
-            let result = {};
-            await sequelize.transaction(async (transaction) => {
-                const item = await this.itemModel.findOne({ where: { id: itemId } }, { transaction });
-                if (item == null) {
-                    throw new Error('item does not exist');
-                }
-                const seller = await this.userModel.findOne({ where: { id: item.userId } });
-                if (seller == null)
-                    throw new Error('seller does not exist');
+        let result = {};
+        await sequelize.transaction(async (transaction) => {
+            const item = await this.itemModel.findOne({ where: { id: itemId } }, { transaction });
+            if (item == null) {
+                throw new Error('item does not exist');
+            }
+            const seller = await this.userModel.findOne({ where: { id: item.userId } });
+            if (seller == null)
+                throw new Error('seller does not exist');
+            const campaign = await this.campaignModel.findOne({ where: { id: campaignId } });
+            const finalPrice = item.price * orderCount;
+            // 원장에 저장된 유저 point 잔액 가져오기
+            const balance = user.point; //우선 웹서버 db에 있는값으로 성공했다 가정
+            if (balance < finalPrice) {
+                throw new Error("lack of balance");
+            }
+            if (item.stock < orderCount) {
+                throw new Error("lack of item stock");
+            }
 
-                const finalPrice = item.price * orderCount;
-                // 원장에 저장된 유저 point 잔액 가져오기
-                const balance = user.point; //우선 웹서버 db에 있는값으로 성공했다 가정
-                if (balance < finalPrice) {
-                    throw new Error("lack of balance");
-                }
-                if (item.stock < orderCount) {
-                    throw new Error("lack of item stock");
-                }
+            // blockchain 거래 트랜잭션 요청
+            // 트랜잭션 키값 받기
+            const transactionId = 1234; //성공 가정
+            const consumerBalance = user.point - finalPrice; //원장의 구매자 point 가져오기 성공했다 가정
+            const camp_used_money = campaign.used_money + finalPrice;
+            const sellerBalance = seller.point + finalPrice; //원장의 판매자 point 가져오기 성공했다 가정
 
-                // blockchain 거래 트랜잭션 요청
-                // 트랜잭션 키값 받기
-                const transactionId = 1234; //성공 가정
-                const consumerBalance = user.point - finalPrice; //원장의 구매자 point 가져오기 성공했다 가정
-                const sellerBalance = seller.point + finalPrice; //원장의 판매자 point 가져오기 성공했다 가정
-
-                await item.update({ stock: item.stock - orderCount }, { transaction });
-                await user.update({ point: consumerBalance }, { transaction });
-                await seller.update({ point: sellerBalance }, { transaction })
-                await this.orderModel.create({
-                    from: user.id,
-                    to: item.userId,
-                    itemId: item.id,
-                    orderCount,
-                    transactionKey: transactionId,
-                    campaignId,
-                    addr,
-                }, { transaction });
-            }).then(() => {
-                // Committed
-                result = { success: true, msg: "success" };
-            }).catch(err => {
-                // Rolled back
-                throw new Error(err);
-            });
-            return result;
-        } catch (err) {
+            await item.update({ stock: item.stock - orderCount }, { transaction });
+            await user.update({ point: consumerBalance }, { transaction });
+            await seller.update({ point: sellerBalance }, { transaction });
+            await campaign.update({ used_money: camp_used_money }, { transaction });
+            await this.orderModel.create({
+                from: user.id,
+                to: item.userId,
+                itemId: item.id,
+                orderCount,
+                transactionKey: transactionId,
+                campaignId,
+                addr,
+            }, { transaction });
+        }).then(() => {
+            // Committed
+            result = { success: true, msg: "success" };
+        }).catch(err => {
+            // Rolled back
+            result = { success: false, msg: String(err) };
             console.error(err);
-            return { success: false, msg: String(err) };
-        }
+        });
+        return result;
     }
 
     async donate(user, campaignId, value) {
-
         let result = {};
         await sequelize.transaction(async (transaction) => {
             // 원장의 user point 잔액 져오기
@@ -90,7 +87,6 @@ const TradeService = class {
             await campaign.update({ current_money: campaignCurrMoney }, { transaction });
             await user.update({ point: donatorBalance }, { transaction });
             await charityUser.update({ point: charityBalance }, { transaction });
-
             const donation = await this.donationModel.create({
                 userId: user.id,
                 campaignId,
@@ -137,7 +133,10 @@ const TradeService = class {
         let result = {};
         await sequelize.transaction(async (transaction) => {
             //get balance
+            console.log('user point', typeof user.point);
+            console.log('value', typeof value);
             const userBalance = user.point - value;
+            console.log('balacne', typeof userBalance);
             await user.update({ point: userBalance }, { transaction });
         })
             .then(() => {
