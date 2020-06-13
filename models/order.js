@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.INTEGER,
             allowNull : false,
         },
-        transactionKey : {
+        transactionId : {
             type : DataTypes.INTEGER,
             allowNull : false,
         } 

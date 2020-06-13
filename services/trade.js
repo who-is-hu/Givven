@@ -47,7 +47,7 @@ const TradeService = class {
                 to: item.userId,
                 itemId: item.id,
                 orderCount,
-                transactionKey: transactionId,
+                transactionId,
                 campaignId,
                 addr,
             }, { transaction });
