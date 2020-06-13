@@ -82,6 +82,7 @@
  }
  
  #container {
+  min-width: 1450px;
   margin: 30px;
   padding: 30px;
   background-color: white;
