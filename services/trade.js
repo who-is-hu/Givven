@@ -49,7 +49,7 @@ const TradeService = class {
                 to: item.userId,
                 itemId: item.id,
                 orderCount,
-                transactionKey: txid,
+                transactionId: txid,
                 campaignId,
                 addr,
             }, { transaction });
@@ -69,8 +69,6 @@ const TradeService = class {
         let result = {};
         await sequelize.transaction(async (transaction) => {
             await this.setContranctCaller();
-            // 원장의 user point 잔액 져오기
-            //const balance = user.point; // 가져왔다고 가정 
             const balance = await this.contracts.getUserBalance(user.email);
 
             if (balance < value)
