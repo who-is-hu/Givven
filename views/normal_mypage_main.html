@@ -60,13 +60,17 @@
 
       <script>
 
-      function campaign_click(card_id)
-      {
-         console.log("asd");
-         alert("asd");
-         var arr = card_id.split('_');
-         window.location.href = "normal_donation_detail?index=" + arr[1];
-      }
+         $.ajax({
+         type: 'GET',
+         url: "/point",
+         xhrFields: {
+            withCredentials: true
+         },
+         async: false
+         }).success(function (response) {
+            $('#my_point').append(response.point+"포인트");
+         });
+      
 
          $.ajax({
                type: 'GET',
