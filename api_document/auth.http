@@ -6,7 +6,7 @@ POST {{baseUrl}}/auth/login  HTTP/1.1
 content-type: application/json
 
 {
-    "email": "seller2",
+    "email": "charity2",
     "password": "1234"
 }
 

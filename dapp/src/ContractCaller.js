@@ -143,7 +143,7 @@ const blockchain = class {
     //캠페인으로 물건 구매(캠페인 고유 id, 판매자 이메일, 상품명 or id, 상품갯수, 총 금액) => 리턴 : 트랜잭션 해쉬 값
     async purchase(campaignid, sellerEmail, product, productNum, value){
         let hash;
-        await this.contract.methods.purchase(campaignid, sellerEmail, product, productNum, value).send({fromt : this.account},function(err,result){
+        await this.contract.methods.purchase(campaignid, sellerEmail, product, productNum, value).send({from : this.account},function(err,result){
             hash = result;
         });
         return hash;
@@ -151,7 +151,7 @@ const blockchain = class {
     //캠페인에서 해당 제품을 몇개샀는가(캠페인 고유 id, 제품명) => 리턴 : 구매한 제품 숫자
     async productNumByCampaign(campaignid, productName){
         let num;
-        await this.contract.methods.productNumByCampaign(campaignid, productName).send({fromt : this.account},function(err,result){
+        await this.contract.methods.productNumByCampaign(campaignid, productName).send({from : this.account},function(err,result){
             num = result;
         });
         return num;
@@ -161,7 +161,7 @@ const blockchain = class {
     //만든 이유 : 돈이 애매하게 남았을 때 필요할듯, 나중에 필요가 있을수도 있다.
     async returnRestPoint(socialorg_Email, campaignid){
         let hash;
-        await this.contract.methods.returnRestPoint(socialorg_Email, campaignid).send({fromt : this.account},function(err,result){
+        await this.contract.methods.returnRestPoint(socialorg_Email, campaignid).send({from : this.account},function(err,result){
             hash = result;
         });
         return hash;

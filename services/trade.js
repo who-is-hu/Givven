@@ -18,7 +18,7 @@ const TradeService = class {
         await sequelize.transaction(async (transaction) => {
             await this.setContranctCaller();
             const campaign = await this.campaignModel.findOne({ where: { id: campaignId } });
-            const item = await this.itemModel.findOne({ where: { id: itemId } }, { transaction });
+            const item = await this.itemModel.findOne({ where: { id: itemId } });
             if (item == null) {
                 throw new Error('item does not exist');
             }
@@ -41,7 +41,7 @@ const TradeService = class {
             const sellerBalance = await this.contracts.getUserBalance(seller.email);
 
             await item.update({ stock: item.stock - orderCount }, { transaction });
-            await user.update({point : user.point - value});
+            await user.update({point : user.point - finalPrice}, { transaction });
             await campaign.update({ used_money : campaign.current_money - campaignBalance}, { transaction });
             await seller.update({ point: sellerBalance }, { transaction })
             await this.orderModel.create({
