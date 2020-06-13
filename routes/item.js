@@ -68,7 +68,7 @@ router.post('/buy', isUserCharity, async (req, res, next) => {
     try{
         console.log(addr, itemId, orderCount, campaignId);
         const tradeInstance = Container.get('tradeService');
-        const result = await tradeInstance.buyItem(req.user, addr, itemId, orderCount, campaignId);
+        const result = await tradeInstance.buyItem(req.user, addr, itemId, parseInt(orderCount), campaignId);
         res.json(result);
     } catch (err) {
         console.error(err);

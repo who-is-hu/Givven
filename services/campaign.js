@@ -25,6 +25,8 @@ const CampaignService =  class {
                     title_img,
                     content,
                     owner : user.name,
+                    current_money : 0,
+                    used_money : 0,
                     due_day,
                     userId : user.id
                 });

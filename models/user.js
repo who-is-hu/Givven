@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
         },
         point : {
-            type : DataTypes.INTEGER(),
+            type : DataTypes.INTEGER,
             allowNull : true, 
         }
     },{

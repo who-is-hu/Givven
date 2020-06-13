@@ -4,7 +4,7 @@ const services = require('./services');
 var Web3 = require('web3');
 const ContractCaller = require('./dapp/src/ContractCaller');
 
-const contractaddress = '0x5d5c0af9851ae058e77a6402f1328725581a4423';
+const contractaddress = '0x5F97f7e1862eF0Ce667B469409Ba842Fd1b70C35';
 var provider = new Web3.providers.WebsocketProvider('ws://127.0.0.1:8545')
 var web3 = new Web3(provider);
 
