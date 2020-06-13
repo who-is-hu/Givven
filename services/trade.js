@@ -23,7 +23,7 @@ const TradeService = class {
             const campaign = await this.campaignModel.findOne({ where: { id: campaignId } });
             const finalPrice = item.price * orderCount;
             // 원장에 저장된 유저 point 잔액 가져오기
-            const balance = user.point; //우선 웹서버 db에 있는값으로 성공했다 가정
+            const balance = campaign.current_money - campaign.used_money; //우선 웹서버 db에 있는값으로 성공했다 가정
             if (balance < finalPrice) {
                 throw new Error("lack of balance");
             }
