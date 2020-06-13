@@ -106,7 +106,15 @@
 
         $(function () {
          $('.submit-btn').on("click", function () {
-             $.ajax({
+            console.log('before convert typeof point', typeof point);
+            console.log('before convert val point',  point);
+
+            point = parseInt(point);
+           
+            console.log('after convert typeof point',typeof point); 
+            console.log('after convert val point',  point);
+
+            $.ajax({
                type: 'POST',
                url: "/campaign/donate",
                xhrFields: {
@@ -115,8 +123,8 @@
                dataType: 'json',
                data:{
                   campaignId: id,
-                  value: parseInt(point)
-               },
+                  value: point
+               }, 
                async: false
                }).success(function (response) {
                   console.log(response);
@@ -125,7 +133,7 @@
                   window.location.href = "normal_donation_main";
                });
          });
-         })
+         });
         </script>
 
    </body>
