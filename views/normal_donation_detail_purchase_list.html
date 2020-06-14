@@ -50,40 +50,6 @@
       <div id="detail_switch">
       </div>
       <div id="campaign_detail" style="margin-left: 20px;">
-         <table class="table">
-            <thead>
-               <tr>
-                  <th scope="col" style="width: 10%;">거래 순서</th>
-                  <th scope="col">거래 품목</th>
-                  <th scope="col" style="width: 13%;">거래처</th>
-                  <th scope="col" style="width: 13%;">물품 가격</th>
-                  <th scope="col" style="width: 13%;">거래 날짜</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <th scope="row">1</th>
-                  <td>제품 A</td>
-                  <td>거래처A</td>
-                  <td>200p</td>
-                  <td>2020-05-24</td>
-               </tr>
-               <tr>
-                  <th scope="row">2</th>
-                  <td>제품 B</td>
-                  <td>거래처A</td>
-                  <td>200p</td>
-                  <td>2020-05-24</td>
-               </tr>
-               <tr>
-                  <th scope="row">3</th>
-                  <td>제품 B</td>
-                  <td>거래처A</td>
-                  <td>200p</td>
-                  <td>2020-05-25</td>
-               </tr>
-            </tbody>
-         </table>
       </div>
       <div class="clearfix" style="clear: left"></div>
    </div>
@@ -107,15 +73,14 @@
    
    
    <script>
+   var tradeLogList;
+   var i;
 
-   var mytype;
+   var mytype = "guest";
    var mypoint;
          $.ajax({
                type: 'GET',
                url: "/auth/isLoggedIn",
-               xhrFields: {
-                  withCredentials: true
-               },
                error : function(error){
                   mytype = "guest";
                   $('#menu').append("<li><a href='log_in'><b>로그인</b></a></li><li><a href='sign_up'><b>회원가입</b></a></li>");
@@ -223,6 +188,61 @@
             }
          });
       })
+
+      $.ajax({
+         type: 'GET',
+         url: "/tradeLog/ordersByCampaign/" + id,
+         xhrFields: {
+            withCredentials: true
+         },
+      }).success(function (response) {
+         console.log(response);
+         tradeLogList = response.data;
+         if (tradeLogList.length === 0) {
+            $("#campaign_detail").append(
+               '<p>거래 내역이 없습니다.</p>' +
+               '<div class="clearfix" style="clear: left"></div>'
+            );
+         } else {
+            $("#campaign_detail").append(
+               '<table class="table">' +
+               '<thead>' +
+               '<tr>' +
+               '<th scope="col" style="width: 10%;">거래 순서</th>' +
+               '<th scope="col">거래 품목</th>' +
+               '<th scope="col" style="width: 13%;">거래처</th>' +
+               '<th scope="col" style="width: 9%;">물품 개수</th>' +
+               '<th scope="col" style="width: 9%;">물품 가격</th>' +
+               '<th scope="col" style="width: 9%;">물품 총 가격</th>' +
+               '<th scope="col" style="width: 13%;">거래 날짜</th>' +
+               '<th scope="col" style="width: 13%;" class = "tid">트랜잭션 ID</th>' +
+               '</tr>' +
+               '</thead>' +
+               '<tbody class="table_body">' +
+               '</tbody>' +
+               '</table>');
+         }
+         i = 0;
+         while (i < tradeLogList.length) {
+            var date_tmp = tradeLogList[i].createdAt.split("T");
+            var date = date_tmp[0];
+            var tidstr = tradeLogList[i].transactionId+" ";
+            var tid = tidstr.substr(0,10) + "..."
+            $(".table_body").append(
+               '<tr>' +
+               '<th scope="row">'+ i +'</th>' +
+               '<td>'+ tradeLogList[i].item.name +'</td>' +
+               '<td>'+ tradeLogList[i].seller.name +'</td>' +
+               '<td>'+ tradeLogList[i].orderCount +'</td>' +
+               '<td>'+ tradeLogList[i].item.price +'p</td>' +
+               '<td>'+ (tradeLogList[i].orderCount * tradeLogList[i].item.price) +'p</td>' +
+               '<td>'+ date +'</td>' +
+               '<td><a href = "https://kovan.etherscan.io/tx/'+ tradeLogList[i].transactionId +'" target="_blank">'+ tid +'</a></td>' +
+               '</tr>'
+            );
+            i = i + 1;
+         }
+      });
    </script>
 </body>
 

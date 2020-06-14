@@ -1,8 +1,13 @@
 const Container = new (require('./utils/Container.js'));
 const Model = require('./models');
 const services = require('./services');
+const ContractCaller = require('./dapp/src/ContractCaller');
 
 const ContainerConf = () => {
+    Container.register('contractCaller', [], async () => {
+        const contarctCaller = new ContractCaller();   
+        return contarctCaller;
+    });
     Container.register('userModel', [], () => {
         return Model.User;
     });
@@ -22,12 +27,12 @@ const ContainerConf = () => {
         return Model;
     });
     Container.register('campaignService', [
-        'campaignModel','userModel'
+        'campaignModel', 'userModel'
     ], (campaignModel, userModel) => {
         return new services.Campaign(campaignModel, userModel);
     });
     Container.register('itemService', [
-        'itemModel','userModel'
+        'itemModel', 'userModel'
     ], (itemModel, userModel) => {
         return new services.Item(itemModel, userModel);
     });
@@ -37,5 +42,6 @@ const ContainerConf = () => {
     Container.register('tradeLogs', ['allModels'], (allModels) => {
         return new services.TradeLog(allModels);
     });
+   
 }
 module.exports = ContainerConf;

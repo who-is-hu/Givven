@@ -13,10 +13,10 @@
    <div id="navbar">
       <div id='top_navbar'>
          <div id='logo'>
-            <a href = "charity_mypage_main"><img src="public/images/logo.PNG"></a>
+            <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
          </div>
          <ul id='menu'>
-            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
+            <li><b>사회단체입니다.</b></li>
             <li><a href='/auth/logout'><b>로그아웃</b></a></li>
          </ul>
       </div>
@@ -24,6 +24,7 @@
          <ul id='menu'>
             <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
             <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
          </ul>
          <a href='normal_donation_main' id="change_normal"><b> 홈으로 </b></a>
       </div>
@@ -139,7 +140,7 @@
                   i = i + 1;
                   continue;
                }
-               if(ended_campaign_list.campaigns[i].name.length){
+               if(ended_campaign_list.campaigns[i].name.length > 11){
                   var name = ended_campaign_list.campaigns[i].name.substr(0, 11) + "...";
                }
                $("#finishCampaigns .card_list").append(
@@ -200,6 +201,12 @@
                   }
                }).success(function (response) {
                   console.log(response);
+                  if(response.success == false){
+                     alert("구매 에러 : "+ response.msg );
+                  }
+                  else{
+                     location.href = "charity_mypage_main";
+                  }
                });
             }
          });
