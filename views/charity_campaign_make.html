@@ -166,6 +166,12 @@
                }).success(function (response) {
                   console.log(img_url);
                   console.log(response);
+                  if(response.success == false){
+                     alert("캠페인 등록 에러 : "+ response.msg );
+                  }
+                  else{
+                     location.href = "charity_mypage_main";
+                  }
                });
             }
          });
