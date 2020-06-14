@@ -124,6 +124,7 @@
                '<th scope="col" style="width: 9%;">물품 가격</th>' +
                '<th scope="col" style="width: 9%;">물품 총 가격</th>' +
                '<th scope="col" style="width: 13%;">구매 날짜</th>' +
+               '<th scope="col" style="width: 13%;" class = "tid">트랜잭션 ID</th>' +
                '</tr>' +
                '</thead>' +
                '<tbody class="table_body">' +
@@ -134,6 +135,7 @@
          while (i < order_goods_list.length) {
             var date_tmp = order_goods_list[i].createdAt.split("T");
             var date = date_tmp[0];
+            var tid = order_goods_list[i].transactionkey.substr(0, 4) + "...";;
             $(".table_body").append(
                '<tr>' +
                '<td>'+ order_goods_list[i].consumer.name +'</td>' +
@@ -143,6 +145,7 @@
                '<td>'+ order_goods_list[i].item.price +'p</td>' +
                '<td>'+ (order_goods_list[i].orderCount * order_goods_list[i].item.price) +'p</td>' +
                '<td>'+ date +'</td>' +
+               '<td><a href = "https://kovan.etherscan.id/tx/'+ tid +'">'+ tid +'</a></td>' +
                '</tr>'
             );
             i = i + 1;
