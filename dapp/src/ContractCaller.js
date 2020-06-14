@@ -4,9 +4,9 @@ const decoder = require('abi-decoder');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 const infuraWs = `wss://kovan.infura.io/ws/v3/9226d0db9a7945048c37d6d582e4598f`;
-const ContractAddressPath = '../contractaddress.txt';
-const mnemonicPath = '../.secret';
-const abiPath = '../build/contracts/Givven.json';
+const ContractAddressPath = './dapp/contractaddress.txt';
+const mnemonicPath = './dapp/.secret';
+const abiPath = './dapp/build/contracts/Givven.json';
 
 const blockchain = class {
 

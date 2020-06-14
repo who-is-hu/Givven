@@ -7,7 +7,7 @@
     "dialect": "mysql",
     "operatorsAliases": false,
     "logging" : false,
-    "define": {"charset": "utf8", "dialectOptions": { "collate": "utf8_general_ci" }}
+    "define": { "charset": "utf8", "dialectOptions": { "collate": "utf8_general_ci" } }
   },
   "release": {
     "username": "root",
