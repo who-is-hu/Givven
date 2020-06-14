@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
         },
         transactionId : {
-            type : DataTypes.INTEGER,
+            type : DataTypes.STRING(66),
             allowNull : false,
         }
         //auto create
