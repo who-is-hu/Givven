@@ -244,10 +244,6 @@
   font-size: 30px;
 }
 
-h3{
-  text-overflow: ellipsis;
-}
-
 .card_list{
   margin-top: 20px;
 }
@@ -274,6 +270,7 @@ h3{
 .card .menu{
   padding: 20px;
   text-align: left;
+  text-overflow: ellipsis;
 }
 
 .card .menu h3 {
