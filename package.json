@@ -31,6 +31,7 @@
     "web3": "^1.2.9"
   },
   "devDependencies": {
+    "@truffle/hdwallet-provider": "^1.0.35",
     "nodemon": "^1.19.4",
     "supertest": "^4.0.2"
   },

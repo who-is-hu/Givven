@@ -1,17 +1,29 @@
 const fs = require('fs');
 const Web3 = require('web3');
 const decoder = require('abi-decoder');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+const infuraWs = `wss://kovan.infura.io/ws/v3/9226d0db9a7945048c37d6d582e4598f`;
+const ContractAddressPath = '../contractaddress.txt';
+const mnemonicPath = "../.secret";
+const abiPath = '../build/contracts/Givven.json';
+
 const blockchain = class {
 
-    //이제 생성자에서 다 셋팅함, 추가로 해줘야하는건 [setAccount, setContract] 만 하면됨
-    constructor(path) {
-        var jsonFile = fs.readFileSync(path, 'utf8');
-        var jsonData = JSON.parse(jsonFile);
-        this.provider = new Web3.providers.WebsocketProvider('ws://127.0.0.1:8545');
+    //이제 생성자에서 다 셋팅함 추가로 할거 없음
+    constructor() {
+
+        var mnemonic = fs.readFileSync(mnemonicPath,'utf-8').toString().trim();
+        this.provider = new HDWalletProvider(mnemonic, infuraWs,0);
         this.web3 = new Web3(this.provider);
+        this.account = this.provider.getAddress(0);
+
+        var jsonFile = fs.readFileSync(abiPath, 'utf8');
+        var jsonData = JSON.parse(jsonFile);
         this.abi = jsonData.abi;
-        this.account = '';
-        this.contract = null;
+        this.contractAddress = fs.readFileSync(ContractAddressPath,'utf-8').toString().trim();
+        this.contract = new this.web3.eth.Contract(this.abi, this.contractAddress);
+        
         decoder.addABI(this.abi);
     }
     setProvider(provider) {
@@ -38,8 +50,8 @@ const blockchain = class {
     getContract() {
         return this.contract;
     }
-    setAccount(account) {
-        this.account = account;
+    setAccount(indx) {
+        this.account = this.provider.getAddress(indx);
     }
     getAccount() {
         return this.account;
@@ -49,8 +61,10 @@ const blockchain = class {
     //유저 추가(유저 이메일) => 리턴 : 트랜잭션 해쉬값
     async addUser(userEmail) {
         let hash;
+        console.log('tttt');
         await this.contract.methods.addUser(userEmail).send({ from: this.account }, function (err, result) {
             hash = result;
+            console.log(hash);
         });
         //console.log(hash);
         return hash;
@@ -173,7 +187,7 @@ const blockchain = class {
         let data;
         await this.web3.eth.getTransaction(txHash,function(error,result){
             var rawdata = result.input;
-            data = decoder.decodeMethod(rawdata);
+            data = decoder.decodeMethod(rawdata); 
             //console.log(data);
         })
         return data;
