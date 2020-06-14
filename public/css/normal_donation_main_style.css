@@ -270,7 +270,6 @@
 .card .menu{
   padding: 20px;
   text-align: left;
-  text-overflow: ellipsis;
 }
 
 .card .menu h3 {
