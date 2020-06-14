@@ -258,25 +258,25 @@
                }
          }).success(function (response2) {
             console.log(response2);
-               for (var i in response2.data) {
-                  console.log(response2.data[i].campaigns);
+               for (var i in response2.data.campaign) {
+                  console.log(response2.data.campaign[i]);
                   var img2 = document.createElement("img");
-                  img2.setAttribute("src", response2.data[i].title_img);
+                  img2.setAttribute("src", response2.data.campaign[i].title_img);
 
-                  var cur_var = response2.data[i].current_money / response2.data[i].dest_money * 100;
-                  $("#end_campaign").append("<a href = 'normal_donation_detail?index="+response2.data[i].id+"'>"+
-                  "<div id = 'endcard_"+response2.data[i].id+"'class='card'>"+
-                  "<div id = 'ec_"+response2.data[i].id+"'class = 'image_container'>"+
+                  var cur_var = response2.data.campaign[i].current_money / response2.data.campaign[i].dest_money * 100;
+                  $("#end_campaign").append("<a href = 'normal_donation_detail?index="+response2.data.campaign[i].id+"'>"+
+                  "<div id = 'endcard_"+response2.data.campaign[i].id+"'class='card'>"+
+                  "<div id = 'ec_"+response2.data.campaign[i].id+"'class = 'image_container'>"+
                   "</div>"+
                   "<div class='menu'>"+
-                  "<h3 id = 'camname_"+response2.data[i].id+"'></h3>"+
-                  "<p>"+response2.data[i].current_money+" / "+response2.data[i].dest_money+"</p>"+
+                  "<h3 id = 'camname_"+response2.data.campaign[i].id+"'></h3>"+
+                  "<p>"+response2.data.campaign[i].current_money+" / "+response2.data.campaign[i].dest_money+"</p>"+
                   "<div class='progress'>"+
                   "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+cur_var+"%'"+
                   "aria-valuenow='"+cur_var+"' aria-valuemin='0' aria-valuemax='100'>"+cur_var+"%"+
                   "</div></div></div></div></a>");
-                  $("#camname_"+response2.data[i].id).append( response2.data[i].name);
-                  document.querySelector("#ec_"+response2.data[i].id).appendChild(img2);
+                  $("#camname_"+response2.data.campaign[i].id).append( response2.data.campaign[i].name);
+                  document.querySelector("#ec_"+response2.data.campaign[i].id).appendChild(img2);
                }
          });
    </script>
