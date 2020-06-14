@@ -183,7 +183,7 @@
             var date_tmp = order_goods_list[i].createdAt.split("T");
             var date = date_tmp[0];
             var tidstr = order_goods_list[i].transactionId+" ";
-            var tid = tidstr.substr(0,5) + "..."
+            var tid = tidstr.substr(0,10) + "..."
             $(".table_body").append(
                '<tr>' +
                '<td>'+ order_goods_list[i].consumer.name +'</td>' +
@@ -193,7 +193,7 @@
                '<td>'+ order_goods_list[i].item.price +'p</td>' +
                '<td>'+ (order_goods_list[i].orderCount * order_goods_list[i].item.price) +'p</td>' +
                '<td>'+ date +'</td>' +
-               '<td><a href = "https://kovan.etherscan.id/tx/'+ tid +'">'+ tid +'</a></td>' +
+               '<td><a href = "https://kovan.etherscan.id/tx/'+ tidstr +'">'+ tid +'</a></td>' +
                '</tr>'
             );
             i = i + 1;
