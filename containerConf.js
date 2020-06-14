@@ -4,7 +4,7 @@ const services = require('./services');
 const ContractCaller = require('./dapp/src/ContractCaller');
 
 const ContainerConf = () => {
-    Container.register('contractCaller', [], async () => {
+    Container.register('contractCaller', [], () => {
         const contarctCaller = new ContractCaller();   
         return contarctCaller;
     });
