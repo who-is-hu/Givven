@@ -49,7 +49,35 @@
          <div class="input_explain">캠페인 목표 모금액</div>
          <input type="text" name="price" class="input_data" id="campaign_price">
          <div class="input_explain">캠페인 모금 마감 기한</div>
-         <input type="text" name="endtime" class="input_data" id="campaign_end">
+         <div id = 'campaign_end'>
+            <select name = "year" id = "year">
+               <script>
+                  var i_year = 2020;
+                  while(i_year <= 2025){
+                     document.write('<option value = "'+i_year+'">'+i_year+'</option>');
+                     i_year = i_year+1;
+                  }
+               </script>
+            </select>
+            <select name = "month" id = "month">
+               <script>
+                  var i_month = 1;
+                  while(i_month <= 12){
+                     document.write('<option value = "'+i_month+'">'+i_month+'</option>')
+                     i_month = i_month+1;
+                  }
+               </script>
+            </select>
+            <select name = "day" id = "day">
+               <script>
+                  var i_day = 1;
+                  while(i_day <= 31){
+                     document.write('<option value = "'+i_day+'">'+i_day+'</option>')
+                     i_day = i_day+1;
+                  }
+               </script>
+            </select>
+         </div>
          <div class="input_explain">캠페인 모금 상세 소개</div>
          <textarea id="campaign_detail"></textarea>
 
@@ -115,7 +143,11 @@
                   console.log(img_url);
                });
 
-               var date = new Date($("#campaign_end").val());
+               var year = $("#year option:selected").val();
+               var month = $("#month option:selected").val();
+               var day = $("#day option:selected").val();
+               var date = new Date(year,month,day);
+               
                console.log(img_url);
                $.ajax({
                   type: 'POST',
