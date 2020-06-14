@@ -219,7 +219,7 @@
                   $("#third").css("background-image", imgurl);
                }
 
-               $(".ing_campaign").append(
+               $("#ing_campaign").append(
                   '<a href = "normal_donation_detail?id='+current_campaign_list.campaigns[i].id+'">'+
                   "<div class='card'>" +
                   "<img src='" + imgurl + "'>" +
@@ -257,6 +257,7 @@
                data: {
                }
          }).success(function (response2) {
+            console.log(response2);
                for (var i in response2.data.data) {
                   console.log(response2.data.data[i]);
                   var img2 = document.createElement("img");
