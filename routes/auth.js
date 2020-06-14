@@ -61,8 +61,14 @@ router.get('/logout',isLoggedIn, (req, res, next)=> {
 });
 
 //로그인 했는지 검사
-router.get('/isLoggedIn', isLoggedIn, (req, res, next) => {
-    res.json({result: true, type : req.user.type});
+router.get('/isLoggedIn', (req, res, next) => {
+    let result ={};
+    if(req.user != null){
+        result.type = req.user.type;
+    } else {
+        result.type = 'guest';
+    }
+    return res.json(result);
 });
 
 module.exports = router;

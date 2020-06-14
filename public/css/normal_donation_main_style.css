@@ -156,7 +156,7 @@
    text-align: left;
 
  }
-#first{
+ .carousel-item {
   padding: 30px;
   padding-top: 140px;
   width: 100%;
@@ -164,38 +164,21 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-#second{
-  padding: 30px;
-  padding-top: 140px;
-  width: 100%;
-  height: 450px;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-#third{
-  padding: 30px;
-  padding-top: 140px;
-  width: 100%;
-  height: 450px;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.items{
+.carousel-item{
   border: 0px;
 }
-.items h2{
+.carousel-item h2{
    font-size: 40px;
    font-weight: 800;
  }
 
- .items p{
+ .carousel-item p{
    margin-top: 40px;
    font-weight: 800;
    font-size: 20px;
  }
 
- .items .progress{
+ .carousel-item .progress{
    height: 60px;
    font-size: 30px;
    font-weight: 700;
