@@ -127,9 +127,6 @@
       $.ajax({
          type: 'GET',
          url: "/campaign/campaigns/ing",
-         xhrFields: {
-            withCredentials: true
-         },
       }).success(function (response) {
          current_campaign_list = response.data;
 
@@ -248,9 +245,6 @@
                type: 'GET',
                url: "/campaign/campaigns/end",
                dataType: 'json',
-               xhrFields: {
-                  withCredentials: true
-               },
                data: {
                }
          }).success(function (response2) {
