@@ -182,7 +182,8 @@
          while (i < order_goods_list.length) {
             var date_tmp = order_goods_list[i].createdAt.split("T");
             var date = date_tmp[0];
-            var tid = order_goods_list[i].transactionkey.substr(0, 4) + "...";;
+            var tidstr = order_goods_list[i].transactionkey+" ";
+            var tid = tidstr.substr(0,5) + "..."
             $(".table_body").append(
                '<tr>' +
                '<td>'+ order_goods_list[i].consumer.name +'</td>' +
