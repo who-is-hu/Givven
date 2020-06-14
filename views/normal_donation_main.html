@@ -259,7 +259,7 @@
          }).success(function (response2) {
             console.log(response2);
                for (var i in response2.data) {
-                  console.log(response2.data[i].id);
+                  console.log(response2.data[i].campaigns);
                   var img2 = document.createElement("img");
                   img2.setAttribute("src", response2.data[i].title_img);
 
