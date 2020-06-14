@@ -7,7 +7,54 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link rel="stylesheet" href="public/css/charity_mypage_main_style.css">
+</head>
 
+<body>
+   <div id="navbar">
+      <div id='top_navbar'>
+         <div id='logo'>
+            <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
+         </div>
+         <ul id='menu'>
+            <li><b>사회단체입니다.</b></li>
+            <li><a href='/auth/logout'><b>로그아웃</b></a></li>
+         </ul>
+      </div>
+      <div id="second_navbar">
+         <ul id='menu'>
+            <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
+            <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
+         </ul>
+         <a href='normal_donation_main' id="change_normal"><b> 홈으로 </b></a>
+      </div>
+   </div>
+   <div id=container>
+      <div id=myCampaigns>
+         <b>내 등록 캠페인</b>
+         <div class="card_list">
+         </div>
+      </div>
+      <div id=finishCampaigns>
+         <b>완료된 캠페인</b>
+         <div class="card_list">
+         </div>
+      </div>
+      <div id=orderGoods>
+         <b>주문내역</b>
+      </div>
+   </div>
+
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+   </script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+   </script>
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
    <script>
@@ -135,7 +182,8 @@
          while (i < order_goods_list.length) {
             var date_tmp = order_goods_list[i].createdAt.split("T");
             var date = date_tmp[0];
-            var tid = order_goods_list[i].transactionkey.substr(0, 4) + "...";;
+            var tidstr = order_goods_list[i].transactionId+" ";
+            var tid = tidstr.substr(0,5) + "..."
             $(".table_body").append(
                '<tr>' +
                '<td>'+ order_goods_list[i].consumer.name +'</td>' +
@@ -152,56 +200,6 @@
          }
       });
    </script>
-
-</head>
-
-<body>
-   <div id="navbar">
-      <div id='top_navbar'>
-         <div id='logo'>
-            <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
-         </div>
-         <ul id='menu'>
-            <li><b>사회단체입니다.</b></li>
-            <li><a href='/auth/logout'><b>로그아웃</b></a></li>
-         </ul>
-      </div>
-      <div id="second_navbar">
-         <ul id='menu'>
-            <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
-            <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
-            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
-         </ul>
-         <a href='normal_donation_main' id="change_normal"><b> 홈으로 </b></a>
-      </div>
-   </div>
-   <div id=container>
-      <div id=myCampaigns>
-         <b>내 등록 캠페인</b>
-         <div class="card_list">
-         </div>
-      </div>
-      <div id=finishCampaigns>
-         <b>완료된 캠페인</b>
-         <div class="card_list">
-         </div>
-      </div>
-      <div id=orderGoods>
-         <b>주문내역</b>
-      </div>
-   </div>
-
-
-   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-   </script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-   </script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-   </script>
-
 </body>
 
 </html>
