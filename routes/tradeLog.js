@@ -3,7 +3,7 @@ const router = express.Router();
 const { isLoggedIn, isUserSeller, isUserCharity } = require('./middlewares');
 
 const Container = new (require('../utils/Container.js'));
-router.get('/orderDetail/:orderId', isLoggedIn, async (req, res, next) => {
+router.get('/orderDetail/:orderId', async (req, res, next) => {
     try{
         const tradeLogs = Container.get('tradeLogs');
         let order = await tradeLogs.getOrderDetail(req.params.orderId);
@@ -29,7 +29,7 @@ router.get('/myOrders', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
-router.get('/ordersByCampaign/:campaignId', isLoggedIn, async (req, res, next) => {
+router.get('/ordersByCampaign/:campaignId', async (req, res, next) => {
     try{
         const tradeLogs = Container.get('tradeLogs');
         let order = await tradeLogs.getOrdersByCampaign(req.params.campaignId);
@@ -54,7 +54,7 @@ router.get('/myDonations/:option', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
-router.get('/donationsByCampaign/:campaignId', isLoggedIn, async (req, res, next) => {
+router.get('/donationsByCampaign/:campaignId', async (req, res, next) => {
     try{
         const tradeLogs = Container.get('tradeLogs');
         let donations = await tradeLogs.getDonationsByCampaign(req.params.campaignId);

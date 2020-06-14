@@ -5,31 +5,37 @@ const CampaignService =  class {
     constructor(campaignModel, userModel){
         this.userModel = userModel;
         this.campaignModel = campaignModel;
-        this.contracts = Container.get('contractCaller');s
-
+    }
+    async setContranctCaller(){
+        this.contracts = await Container.get('contractCaller');
     }
     async register(user, campaign){
         let { name , dest_money, content, due_day, title_img} = campaign;
         let result;
+        this.setContranctCaller();
 
         if(title_img == null)
             title_img = "/uploads/default.jpg"
         try{
             const exCampagin = await this.campaignModel.findOne({where : { name }});
-            if(!exCampagin){
+            if(exCampagin == null){
                 await this.campaignModel.create({
                     name,
                     dest_money,
                     title_img,
                     content,
                     owner : user.name,
+                    current_money : 0,
+                    used_money : 0,
                     due_day,
                     userId : user.id
                 });
+                const hash = await this.contracts.createCampaign(name, user.email );   
+                console.log('campaign creation', hash);    
                 result = {success : true, msg : '성공'};
             }
-            const hash = await this.contracts.createCampaign(name, user.name );   
-            console.log(hash);    
+            else
+                result = {success : false, msg : 'duplicate name'};
             return result;
         }
         catch(err){

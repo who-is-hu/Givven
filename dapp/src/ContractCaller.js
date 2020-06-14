@@ -74,7 +74,7 @@ const blockchain = class {
         let balance;
         await this.contract.methods.getBalance(userEmail).call({ from: this.account ,gas :5000000}).then(function (result) {
             balance = result;
-        })
+        });
         return balance;
     }
     //유저 포인트 충전 (유저 이메일, 충전할 포인트) => 리턴 : 트랜잭션 해쉬값
@@ -82,7 +82,7 @@ const blockchain = class {
         let hash;
         await this.contract.methods.chargeUser(userEmail, value).send({ from: this.account }, function (err, result) {
             hash = result;
-        })
+        });
         return hash;
     }
     //유저 포인트 환전 (유저 이메일, 환전할 포인트) => 리턴 : 트랜잭션 해쉬값 
@@ -92,7 +92,7 @@ const blockchain = class {
         try {
             await this.contract.methods.dischargeUser(uid, value).send({ from: this.account }, function (err, result) {
                 hash = result;
-            })
+            });
             return hash;
         }
         catch (err) {
@@ -107,7 +107,7 @@ const blockchain = class {
         let hash;
         await this.contract.methods.createCampaign(campaignid, socialorg_Email).send({ from: this.account }, function (err, result) {
             hash = result;
-        })
+        });
         return hash;
     }
 
@@ -121,7 +121,7 @@ const blockchain = class {
         try {
             await this.contract.methods.donate(userEmail, campaignid, value).send({ from: this.account ,gas : 5000000}, function (err, result) {
                 hash = result;
-            })
+            });
             return hash;
         }
         catch (err) {
@@ -134,7 +134,7 @@ const blockchain = class {
         let balance;
         await this.contract.methods.getCampaignBalance(id).call({ from: this.account }, function (err, result) {
             balance = result;
-        })
+        });
         return balance;
     }
 
@@ -143,7 +143,7 @@ const blockchain = class {
         let socialorg;
         await this.contract.methods.getCampaignOwner(id).call({ from: this.account }, function (err, result) {
             socialorg = result;
-        })
+        });
         return socialorg;
     }
     //기부자가 캠페인에 모금한 액수 조회 (캠페인 고유 id, 유저 이메일) => 리턴 : 모금한 액수 (없을시 0)
@@ -151,23 +151,23 @@ const blockchain = class {
         let value;
         await this.contract.methods.getDonateValueByUser(campaignid, uid).call({ from: this.account }, function (err, result) {
             value = result;
-        })
+        });
         return value;
     }
     //캠페인으로 물건 구매(캠페인 고유 id, 판매자 이메일, 상품명 or id, 상품갯수, 총 금액) => 리턴 : 트랜잭션 해쉬 값
     async purchase(campaignid, sellerEmail, product, productNum, value){
         let hash;
-        await this.contract.methods.purchase(campaignid, sellerEmail, product, productNum, value).send({fromt : this.account},function(err,result){
+        await this.contract.methods.purchase(campaignid, sellerEmail, product, productNum, value).send({from : this.account},function(err,result){
             hash = result;
-        })
+        });
         return hash;
     }
     //캠페인에서 해당 제품을 몇개샀는가(캠페인 고유 id, 제품명) => 리턴 : 구매한 제품 숫자
     async productNumByCampaign(campaignid, productName){
         let num;
-        await this.contract.methods.productNumByCampaign(campaignid, productName).send({fromt : this.account},function(err,result){
+        await this.contract.methods.productNumByCampaign(campaignid, productName).send({from : this.account},function(err,result){
             num = result;
-        })
+        });
         return num;
     }
     
@@ -175,9 +175,9 @@ const blockchain = class {
     //만든 이유 : 돈이 애매하게 남았을 때 필요할듯, 나중에 필요가 있을수도 있다.
     async returnRestPoint(socialorg_Email, campaignid){
         let hash;
-        await this.contract.methods.returnRestPoint(socialorg_Email, campaignid).send({fromt : this.account},function(err,result){
+        await this.contract.methods.returnRestPoint(socialorg_Email, campaignid).send({from : this.account},function(err,result){
             hash = result;
-        })
+        });
         return hash;
     }
     
@@ -189,7 +189,7 @@ const blockchain = class {
             var rawdata = result.input;
             data = decoder.decodeMethod(rawdata); 
             //console.log(data);
-        })
+        });
         return data;
     }
     
