@@ -15,10 +15,10 @@
    <div id="navbar">
       <div id='top_navbar'>
          <div id='logo'>
-            <img src='public/images/logo.png'>
+            <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
          </div>
          <ul id='menu'>
-            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
+            <li><b>사회단체입니다.</b></li>            
             <li><a href='/auth/logout'><b>로그아웃</b></a></li>
          </ul>
       </div>
@@ -26,8 +26,9 @@
          <ul id='menu'>
             <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
             <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
          </ul>
-         <a href='normal_donation_main' id="change_normal"><b> 일반유저로 전환 </b></a>
+         <a href='normal_donation_main' id="change_normal"><b> 홈으로 </b></a>
       </div>
    </div>
 
@@ -49,7 +50,35 @@
          <div class="input_explain">캠페인 목표 모금액</div>
          <input type="text" name="price" class="input_data" id="campaign_price">
          <div class="input_explain">캠페인 모금 마감 기한</div>
-         <input type="text" name="endtime" class="input_data" id="campaign_end">
+         <div id = 'campaign_end'>
+            <select name = "year" id = "year">
+               <script>
+                  var i_year = 2020;
+                  while(i_year <= 2025){
+                     document.write('<option value = "'+i_year+'">'+i_year+'</option>');
+                     i_year = i_year+1;
+                  }
+               </script>
+            </select>
+            <select name = "month" id = "month">
+               <script>
+                  var i_month = 1;
+                  while(i_month <= 12){
+                     document.write('<option value = "'+i_month+'">'+i_month+'</option>')
+                     i_month = i_month+1;
+                  }
+               </script>
+            </select>
+            <select name = "day" id = "day">
+               <script>
+                  var i_day = 1;
+                  while(i_day <= 31){
+                     document.write('<option value = "'+i_day+'">'+i_day+'</option>')
+                     i_day = i_day+1;
+                  }
+               </script>
+            </select>
+         </div>
          <div class="input_explain">캠페인 모금 상세 소개</div>
          <textarea id="campaign_detail"></textarea>
 
@@ -90,8 +119,7 @@
 
       $(function () {
          $('.submit-btn').on("click", function () {
-            if ($("#campaign_name").val() == "" || $("#campaign_price").val() == "" || $("#campaign_end")
-               .val() == "" || $("#campaign_detail").val() == "" || file == "") {
+            if ($("#campaign_name").val() == "" || $("#campaign_price").val() == "" || $("#campaign_detail").val() == "" || file == "") {
                alert("입력을 완료해주세요");
             } else {
                var formData = new FormData();
@@ -108,13 +136,18 @@
                   dataType: 'json',
                   processData: false,
                   contentType: false,
+                  async : false
                }).success(function (response) {
                   console.log(response);
                   img_url = response.url;
                   console.log(img_url);
                });
 
-               var date = new Date($("#campaign_end").val());
+               var year = $("#year option:selected").val();
+               var month = $("#month option:selected").val();
+               var day = $("#day option:selected").val();
+               var date = new Date(year,month,day);
+               
                console.log(img_url);
                $.ajax({
                   type: 'POST',
@@ -125,7 +158,7 @@
                   dataType: 'json',
                   data: {
                      name: $("#campaign_name").val(),
-                     dest_money: $("#campaign_price").val(),
+                     dest_money: $("#campaign_price").val()*1,
                      content: $("#campaign_detail").val(),
                      due_day: date,
                      title_img: img_url
@@ -133,6 +166,12 @@
                }).success(function (response) {
                   console.log(img_url);
                   console.log(response);
+                  if(response.success == false){
+                     alert("캠페인 등록 에러 : "+ response.msg );
+                  }
+                  else{
+                     location.href = "charity_mypage_main";
+                  }
                });
             }
          });

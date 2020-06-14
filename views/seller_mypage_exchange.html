@@ -12,18 +12,19 @@
             <div id = "navbar">
                 <div id = "first_navbar">
                     <div id = "logo">
-                        <a href = "seller_mypage.html"><img src="public/images/logo.PNG"></a>
+                        <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
                     </div>
                     <ul id = "f_menu">
-                        <li><a href="log_in.html"><b>로그아웃</b></a></li>
+                        <li><b>판매자입니다.</b></li>
+                        <li><a href="/auth/logout"><b>로그아웃</b></a></li>
                     </ul>
                 </div>
                 <div id = "second_navbor">
                     <ul id = "s_menu">
-                        <li><a href="seller_add_goods.html" id = "add_goods"><b>상품 등록</b></a></li>
-                        <li><a href="seller_mypage_main.html" id = "go_mypage"><b>My Page</b></a></li>
+                        <li><a href="seller_add_goods" id = "add_goods"><b>상품 등록</b></a></li>
+                        <li><a href="seller_mypage_main" id = "go_mypage"><b>My Page</b></a></li>
                     </ul>
-                    <a href="normal_donation_main.html" id = "change_normal"><b>일반 전환</b></a>
+                    <a href="normal_donation_main" id = "change_normal"><b>홈으로</b></a>
                 </div>
             </div>
             
@@ -33,7 +34,7 @@
                 </div>
                 <p>환전을 원하는 포인트를 입력하세요</p>
                 <input type="text" id="point" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="포인트 입력">
-                <p>내 지갑 : ~~포인트</p>
+                <p id = "my_point">내 지갑 : </p>
                 <button id="exchange"><b>환전하기</b></button>
             </div>
         </div>
@@ -47,14 +48,58 @@
      <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
         <script>
+
+        var point;
+
+         $.ajax({
+         type: 'GET',
+         url: "/point",
+         xhrFields: {
+            withCredentials: true
+         },
+         async: false
+         }).success(function (response) {
+             point = response.point*1;
+            $('#my_point').append(point+"포인트");
+         });
+
+
+
             $(function () {
                $('#exchange').on("click", function () {
                 var price = $('#point').val();
+                price = parseInt(price);
+                console.log(typeof price);
                   if(price == 0){
                      alert('환전을 원하는 포인트를 입력하세요');
                      return ;
                   }
-                  alert(price+'포인트를 환전합니다');
+                  else 
+                  {
+                      if(price > point)
+                      {
+                        alert("잔액이 부족합니다");
+                      }
+                      else
+                      {
+                          $.ajax({
+                            type: 'POST',
+                            url: "/point/change",
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            dataType: 'json',
+                            data:{
+                                value: price
+                            },
+                            async: false
+                            }).success(function (response) {
+                                console.log(response);
+                                alert("환전이 완료되었습니다");
+                                window.location.href = "seller_mypage_main";
+                            });
+                      }
+                  }
                });
             });
          

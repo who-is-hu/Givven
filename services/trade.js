@@ -25,7 +25,6 @@ const TradeService = class {
             const seller = await this.userModel.findOne({ where: { id: item.userId } });
             if (seller == null)
                 throw new Error('seller does not exist');
-
             const finalPrice = item.price * orderCount;
             const balance = await this.contracts.getCampaignBalance(campaign.name);
             if (balance < finalPrice) {
@@ -62,7 +61,6 @@ const TradeService = class {
             result = { success: false, msg: String(err) };
         });
         return result;
-
     }
 
     async donate(user, campaignId, value) {
@@ -107,6 +105,7 @@ const TradeService = class {
         }).catch(err => {
             // Rolled back
             console.error(err);
+
             result = { success: false, msg: String(err) };
             throw new Error(err);
         });
@@ -114,6 +113,7 @@ const TradeService = class {
     }
 
     async buyPoint(user, value) {
+
         let result = {};
         await sequelize.transaction(async (transaction) => {
             await this.setContranctCaller();
@@ -132,7 +132,6 @@ const TradeService = class {
 
     async changePoint(user, value) {
         let result = {};
-        
         await sequelize.transaction(async (transaction) => {
             if(user.point < value){
                 throw new Error('lack of balance');
@@ -150,6 +149,10 @@ const TradeService = class {
             result = { success: false, msg: String(err) };
         });
         return result;
+    }
+
+    async getBalance(user) {
+        return user.point;
     }
 };
 

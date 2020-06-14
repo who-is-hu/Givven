@@ -10,25 +10,92 @@
       <div id = "navbar">
          <div id = 'top_navbar'>
             <div id = 'logo'>
-                <img src='public/images/logo.png'>
+                <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
             </div>
             <ul id='menu'>
-                <li><a href='#'><b>마이페이지</b></a></li>
-                <li><a href='#'><b>로그아웃</b></a></li>
+                <li><b>기부자입니다.</b></li>
+                <li><a href='/auth/logout'><b>로그아웃</b></a></li>
             </ul>
          </div>
          <div id = "second_navbar">
             <ul id='menu'>
-                <li><a href='#' id = "go_donate"><b>기부하기</b></a></li>
-                <li><a href='#' id = "go_purchase"><b>상점가기</b></a></li>
+                <li><a href='normal_donation_main' id = "go_donate"><b>기부하기</b></a></li>
+                <li><a href='normal_shop_main' id = "go_purchase"><b>상점가기</b></a></li>
+                <li><a href='normal_mypage_main' id = "normal_mypage"><b>마이페이지</b></a></li>
             </ul>
          </div>
+      </div>
+
+      <div id ="charge_money">
+         <div id = "state">
+            <b>충전하기</b>
+         </div>
+         <p>충전을 원하는 포인트를 입력하세요</p>
+         <input type="text" id="point" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="포인트 입력">
+         <p id = "my_point">내 지갑 : </p>
+         <button id="charge"><b>충전하기</b></button>
       </div>
       
 
 
-       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+      <script>
+
+        var point;
+
+         $.ajax({
+         type: 'GET',
+         url: "/point",
+         xhrFields: {
+            withCredentials: true
+         },
+         async: false
+         }).success(function (response) {
+             point = response.point*1;
+            $('#my_point').append(point+"포인트");
+         });
+
+
+
+            $(function () {
+               $('#charge').on("click", function () {
+                var price = $('#point').val();
+                price = parseInt(price);
+                console.log(typeof price);
+                  if(price == 0){
+                     alert('충전을 원하는 포인트를 입력하세요');
+                     return ;
+                  }
+                  else 
+                  {
+                     $.ajax({
+                        type: 'POST',
+                        url: "/point/buy",
+                        xhrFields: {
+                           withCredentials: true
+                        },
+                        dataType: 'json',
+                        data:{
+                           value: price
+                        },
+                        async: false
+                        }).success(function (response) {
+                           console.log(response);
+                           alert("충전이 완료되었습니다");
+                           window.location.href = "normal_mypage_main";
+                        });
+                  }
+               });
+            });
+         
+         
+         </script>
    </body>
 </html>

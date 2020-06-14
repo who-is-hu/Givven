@@ -28,7 +28,9 @@ const CampaignService =  class {
                     current_money : 0,
                     used_money : 0,
                     due_day,
-                    userId : user.id
+                    userId : user.id,
+                    used_money : 0,
+                    current_money : 0
                 });
                 const hash = await this.contracts.createCampaign(name, user.email );   
                 console.log('campaign creation', hash);    

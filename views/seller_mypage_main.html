@@ -12,9 +12,10 @@
             <div id = "navbar">
                 <div id = "first_navbar">
                     <div id = "logo">
-                        <a href = "seller_mypage"><img src="public/images/logo.PNG"></a>
+                        <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
                     </div>
                     <ul id = "f_menu">
+                        <li><b>판매자입니다.</b></li>
                         <li><a href="/auth/logout"><b>로그아웃</b></a></li>
                     </ul>
                 </div>
@@ -23,13 +24,13 @@
                         <li><a href="seller_add_goods" id = "add_goods"><b>상품 등록</b></a></li>
                         <li><a href="seller_mypage_main" id = "go_mypage"><b>My Page</b></a></li>
                     </ul>
-                    <a href="normal_donation_main" id = "change_normal"><b>일반 전환</b></a>
+                    <a href="normal_donation_main" id = "change_normal"><b>홈으로</b></a>
                 </div>
             </div>
 
             <div id = "state">
                 <ul id = "pocket">
-                    <li>내 지갑 : ~~포인트</li>
+                    <li id = "my_point">내 지갑 : </li>
                     <li><a href="seller_mypage_exchange"><b>환전</b></a></li>
                 </ul>
             </div>
@@ -154,6 +155,17 @@
                     $("#i_stock"+response.data[i].id).append(response.data[i].orderCount);
                 }
             });
+    
+    $.ajax({
+         type: 'GET',
+         url: "/point",
+         xhrFields: {
+            withCredentials: true
+         },
+         async: false
+         }).success(function (response) {
+            $('#my_point').append(response.point+"포인트");
+         });
         
 
     function item_click(card_id)
