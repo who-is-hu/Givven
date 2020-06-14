@@ -45,10 +45,16 @@
 
    <div id='container'>
       <div id='allCampaigns'>
-         <a href='#'><b>모든 캠페인</b></a>
+         <a href='#'><b>진행중인 캠페인</b></a>
          <div class="card_list">
          </div>
       </div>
+
+      <div id="finishCampaigns">
+            <a href='#'><b>완료된 캠페인 </b></a>
+            <div id ="end_campaign" class="card_list">
+            </div>
+         </div>
    </div>
 
 
@@ -240,6 +246,38 @@
             $(".card_list").append('<div class="clearfix" style="clear: left"></div>');
          }
       });
+
+      $.ajax({
+               type: 'GET',
+               url: "/campaign/campaigns/end",
+               dataType: 'json',
+               xhrFields: {
+                  withCredentials: true
+               },
+               data: {
+               }
+         }).success(function (response2) {
+               for (var i in response2.data.data) {
+                  console.log(response2.data.data[i]);
+                  var img2 = document.createElement("img");
+                  img2.setAttribute("src", response2.data.data[i].campaign.title_img);
+
+                  var cur_var = response2.data.data[i].campaign.current_money / response2.data.data[i].campaign.dest_money * 100;
+                  $("#end_campaign").append("<a href = 'normal_donation_detail?index="+response2.data.data[i].campaign.id+"'>"+
+                  "<div id = 'endcard_"+response2.data.data[i].id+"'class='card'>"+
+                  "<div id = 'ec_"+response2.data.data[i].id+"'class = 'image_container'>"+
+                  "</div>"+
+                  "<div class='menu'>"+
+                  "<h3 id = 'camname_"+response2.data.data[i].id+"'></h3>"+
+                  "<p>"+response2.data.data[i].campaign.current_money+" / "+response2.data.data[i].campaign.dest_money+"</p>"+
+                  "<div class='progress'>"+
+                  "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+cur_var+"%'"+
+                  "aria-valuenow='"+cur_var+"' aria-valuemin='0' aria-valuemax='100'>"+cur_var+"%"+
+                  "</div></div></div></div></a>");
+                  $("#camname_"+response2.data.data[i].id).append( response2.data.data[i].campaign.name);
+                  document.querySelector("#ec_"+response2.data.data[i].id).appendChild(img2);
+               }
+         });
    </script>
 
 </body>
