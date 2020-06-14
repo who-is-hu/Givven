@@ -9,14 +9,12 @@ const TradeService = class {
         this.campaignModel = Campaign;
         this.orderModel = Order;
         this.donationModel = Donation;
-    }
-    async setContranctCaller() {
-        this.contracts = await Container.get('contractCaller');
+        this.contracts = Container.get('contractCaller');
+
     }
     async buyItem(user, addr, itemId, orderCount, campaignId) {
         let result = {};
         await sequelize.transaction(async (transaction) => {
-            await this.setContranctCaller();
             const campaign = await this.campaignModel.findOne({ where: { id: campaignId } });
             const item = await this.itemModel.findOne({ where: { id: itemId } });
             if (item == null) {
@@ -66,7 +64,6 @@ const TradeService = class {
     async donate(user, campaignId, value) {
         let result = {};
         await sequelize.transaction(async (transaction) => {
-            await this.setContranctCaller();
             const balance = await this.contracts.getUserBalance(user.email);
 
             if (balance < value)
@@ -116,7 +113,6 @@ const TradeService = class {
 
         let result = {};
         await sequelize.transaction(async (transaction) => {
-            await this.setContranctCaller();
             const txid = await this.contracts.chargeUser(user.email, value);
             const userBalance = await this.contracts.getUserBalance(user.email);
             await user.update({ point: userBalance }, { transaction });
@@ -149,10 +145,6 @@ const TradeService = class {
             result = { success: false, msg: String(err) };
         });
         return result;
-    }
-
-    async getBalance(user) {
-        return user.point;
     }
 };
 

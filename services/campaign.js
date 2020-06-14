@@ -5,14 +5,12 @@ const CampaignService =  class {
     constructor(campaignModel, userModel){
         this.userModel = userModel;
         this.campaignModel = campaignModel;
-    }
-    async setContranctCaller(){
-        this.contracts = await Container.get('contractCaller');
+        this.contracts = Container.get('contractCaller');
+
     }
     async register(user, campaign){
         let { name , dest_money, content, due_day, title_img} = campaign;
         let result;
-        this.setContranctCaller();
 
         if(title_img == null)
             title_img = "/uploads/default.jpg"
