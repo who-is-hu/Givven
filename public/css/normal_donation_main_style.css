@@ -244,6 +244,10 @@
   font-size: 30px;
 }
 
+#container h3{
+  text-overflow: ellipsis;
+}
+
 .card_list{
   margin-top: 20px;
 }
