@@ -182,7 +182,7 @@
          while (i < order_goods_list.length) {
             var date_tmp = order_goods_list[i].createdAt.split("T");
             var date = date_tmp[0];
-            var tidstr = order_goods_list[i].transactionid+" ";
+            var tidstr = order_goods_list[i].transactionId+" ";
             var tid = tidstr.substr(0,5) + "..."
             $(".table_body").append(
                '<tr>' +
