@@ -201,6 +201,12 @@
                   }
                }).success(function (response) {
                   console.log(response);
+                  if(response.success == false){
+                     alert("구매 에러 : "+ response.msg );
+                  }
+                  else{
+                     location.href = "charity_mypage_main";
+                  }
                });
             }
          });
