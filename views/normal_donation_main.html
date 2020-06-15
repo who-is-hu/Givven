@@ -161,7 +161,7 @@
                      '</div>'
                   );
                   imgurl = current_campaign_list.campaigns[i].title_img;
-                  $("#first").css("background-image", imgurl);
+                  document.getElementById("first").style.backgroundImage = "url("+ imgurl+")";
                } else if (i == 1) {
                   $(".carousel-indicators").append(
                      '<li data-target="#carouselIndicators" data-slide-to="1"></li>'
@@ -184,7 +184,7 @@
                      '</div>'
                   );
                   imgurl = current_campaign_list.campaigns[i].title_img;
-                  $("#second").css("background-image", imgurl);
+                  document.getElementById("second").style.backgroundImage = "url("+ imgurl+")";
                } else if (i == 2) {
                   $(".carousel-indicators").append(
                      '<li data-target="#carouselIndicators" data-slide-to="2"></li>'
@@ -206,8 +206,9 @@
                      '</button>'+
                      '</div>'
                   );
-                  
-                  $("#third").css("background-image", imgurl);
+                  imgurl = current_campaign_list.campaigns[i].title_img;
+                  document.getElementById("third").style.backgroundImage = "url("+ imgurl+")"
+                  //$("#third").css("background-image", imgurl);
                }
 
                $("#ing_campaign").append(
