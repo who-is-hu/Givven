@@ -151,20 +151,15 @@
                   '<img src="' + ended_campaign_list.campaigns[i].title_img + '">' +
                   '<div class="menu">' +
                   '<h3>' + ended_campaign_list.campaigns[i].name + '</h3>' +
-                  '<p>' + ended_campaign_list.campaigns[i].used_money + 'p / ' + ended_campaign_list
-                  .campaigns[i].current_money + 'p</p>' +
+                  '<p>' + ended_campaign_list.campaigns[i].used_money + 'p / ' + ended_campaign_list.campaigns[i].current_money + 'p</p>' +
                   '<div class="progress">' +
                   '<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: ' +
-                  (ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i]
-                     .current_money * 100) + '%"' +
-                  'aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">' + ended_campaign_list.campaigns[
-                     i].used_money / ended_campaign_list.campaigns[i].current_money * 100 + '%</div>' +
-
+                  (ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i].current_money * 100) + '%"' +
+                  'aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">' + 
+                  ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i].current_money * 100 + '%</div>' +
                   '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: ' + (100 - (
-                     ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i]
-                     .current_money * 100)) + '%"' +
-                  'aria-valuenow="' + (100 - (ended_campaign_list.campaigns[i].used_money /
-                     ended_campaign_list.campaigns[i].current_money * 100)) +
+                     ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i].current_money * 100)) + '%"' +
+                  'aria-valuenow="' + (100 - (ended_campaign_list.campaigns[i].used_money / ended_campaign_list.campaigns[i].current_money * 100)) +
                   '" aria-valuemin="0" aria-valuemax="100"></div>' +
                   '</div>' +
                   '</div>' +
@@ -214,4 +209,4 @@
    </script>
 </body>
 
-</html>
+</html>dsad
