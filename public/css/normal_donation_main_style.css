@@ -183,6 +183,8 @@
 
 .items{
   border: 0px;
+  background-size: auto, 450px;
+  opacity: 0.6;
 }
 .items h2{
    font-size: 40px;
