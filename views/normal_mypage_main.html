@@ -91,6 +91,7 @@
          data: {
          }
       }).success(function (response1) {
+         console.log('ing camp', response1.data.data);
          donations = donations.concat(response1.data.data);
          for (var i in response1.data.data) {
             donations = donations.concat(response1.data.data);
@@ -123,9 +124,10 @@
          data: {
          }
       }).success(function (response2) {
+         console.log('end camp', response2.data.data);
          donations = donations.concat(response2.data.data);
          for (var i in response2.data.data) {
-            console.log(response2.data.data[i]);
+            //console.log(response2.data.data[i]);
             var img2 = document.createElement("img");
             img2.setAttribute("src", response2.data.data[i].campaign.title_img);
 
@@ -143,10 +145,11 @@
                "</div></div></div></div></a>");
             $("#camname_" + response2.data.data[i].id).append(response2.data.data[i].campaign.name);
             document.querySelector("#ec_" + response2.data.data[i].id).appendChild(img2);
-            printDonationList();
          }
+         printDonationList();
       });
       function printDonationList() {
+         console.log('all', donations);
          $("#donationList").append(
             '<table class="table">' +
             '<thead>' +
