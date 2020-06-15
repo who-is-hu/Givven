@@ -25,7 +25,7 @@ const TradeLog = class {
                     },
                     {
                         model : this.itemModel,
-                        attributes : [ 'id' , 'name' ]
+                        attributes : [ 'id' , 'name', 'price']
                     },
                     {
                         model : this.userModel,
@@ -94,7 +94,7 @@ const TradeLog = class {
                     },
                     {
                         model: this.itemModel,
-                        attributes: ['id', 'name']
+                        attributes: ['id', 'name', 'price']
                     },
                 ],
             });
@@ -133,7 +133,7 @@ const TradeLog = class {
                     },
                     {
                         model : this.itemModel,
-                        attributes : [ 'id' , 'name' ]
+                        attributes : [ 'id' , 'name', 'price']
                     },
                     {
                         model : this.userModel,

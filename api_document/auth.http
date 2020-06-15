@@ -6,8 +6,8 @@ POST {{baseUrl}}/auth/login  HTTP/1.1
 content-type: application/json
 
 {
-    "email": "seller1",
-    "password": "seller1"
+    "email": "charity2",
+    "password": "1234"
 }
 
 ### regiseer
@@ -15,10 +15,10 @@ POST {{baseUrl}}/auth/join  HTTP/1.1
 content-type: application/json
 
 { 
-    "name" : "normal1",
-    "email" : "normal1",
-    "password" : "normal1",
-    "type" : "normal"
+    "name" : "seller2",
+    "email" : "seller2",
+    "password" : "1234",
+    "type" : "seller"
 }
 
 ### logout

@@ -7,7 +7,54 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link rel="stylesheet" href="public/css/charity_mypage_main_style.css">
+</head>
 
+<body>
+   <div id="navbar">
+      <div id='top_navbar'>
+         <div id='logo'>
+            <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
+         </div>
+         <ul id='menu'>
+            <li><b>사회단체입니다.</b></li>
+            <li><a href='/auth/logout'><b>로그아웃</b></a></li>
+         </ul>
+      </div>
+      <div id="second_navbar">
+         <ul id='menu'>
+            <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
+            <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
+         </ul>
+         <a href='normal_donation_main' id="change_normal"><b> 홈으로 </b></a>
+      </div>
+   </div>
+   <div id=container>
+      <div id=myCampaigns>
+         <b>내 등록 캠페인</b>
+         <div class="card_list">
+         </div>
+      </div>
+      <div id=finishCampaigns>
+         <b>완료된 캠페인</b>
+         <div class="card_list">
+         </div>
+      </div>
+      <div id=orderGoods>
+         <b>주문내역</b>
+      </div>
+   </div>
+
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+   </script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+   </script>
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
    <script>
@@ -79,13 +126,13 @@
                      '<img src="'+ended_campaign_list.campaigns[i].title_img+'">'+
                      '<div class="menu">'+
                         '<h3>'+ ended_campaign_list.campaigns[i].name+'</h3>'+
-                        '<p>'+ ended_campaign_list.campaigns[i].current_money +'p / '+ended_campaign_list.campaigns[i].dest_money+'p</p>'+
+                        '<p>'+ ended_campaign_list.campaigns[i].used_money +'p / '+ended_campaign_list.campaigns[i].current_money+'p</p>'+
                         '<div class="progress">'+
-                        '<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: '+ (ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100)+'%"'+
-                           'aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100+'%</div>'+
+                        '<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: '+ (ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100)+'%"'+
+                           'aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100+'%</div>'+
                            
-                        '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+ (100 - (ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100))+'%"'+
-                           'aria-valuenow="'+ (100 - (ended_campaign_list.campaigns[i].current_money/ended_campaign_list.campaigns[i].dest_money*100))+'" aria-valuemin="0" aria-valuemax="100"></div>'+
+                        '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+ (100 - (ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100))+'%"'+
+                           'aria-valuenow="'+ (100 - (ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100))+'" aria-valuemin="0" aria-valuemax="100"></div>'+
                            
                      '</div>'+
                   '</div>'+
@@ -124,6 +171,7 @@
                '<th scope="col" style="width: 9%;">물품 가격</th>' +
                '<th scope="col" style="width: 9%;">물품 총 가격</th>' +
                '<th scope="col" style="width: 13%;">구매 날짜</th>' +
+               '<th scope="col" style="width: 13%;" class = "tid">트랜잭션 ID</th>' +
                '</tr>' +
                '</thead>' +
                '<tbody class="table_body">' +
@@ -134,6 +182,8 @@
          while (i < order_goods_list.length) {
             var date_tmp = order_goods_list[i].createdAt.split("T");
             var date = date_tmp[0];
+            var tidstr = order_goods_list[i].transactionId+" ";
+            var tid = tidstr.substr(0,10) + "..."
             $(".table_body").append(
                '<tr>' +
                '<td>'+ order_goods_list[i].consumer.name +'</td>' +
@@ -143,61 +193,13 @@
                '<td>'+ order_goods_list[i].item.price +'p</td>' +
                '<td>'+ (order_goods_list[i].orderCount * order_goods_list[i].item.price) +'p</td>' +
                '<td>'+ date +'</td>' +
+               '<td><a href = "https://kovan.etherscan.io/tx/'+ order_goods_list[i].transactionId +'" target="_blank">'+ tid +'</a></td>' +
                '</tr>'
             );
             i = i + 1;
          }
       });
    </script>
-
-</head>
-
-<body>
-   <div id="navbar">
-      <div id='top_navbar'>
-         <div id='logo'>
-            <a href = "charity_mypage_main"><img src="public/images/logo.PNG"></a>
-         </div>
-         <ul id='menu'>
-            <li><a href='charity_mypage_main'><b>마이페이지</b></a></li>
-            <li><a href='/auth/logout'><b>로그아웃</b></a></li>
-         </ul>
-      </div>
-      <div id="second_navbar">
-         <ul id='menu'>
-            <li><a href='charity_campaign_make' id="make_campaign"><b>캠페인 등록</b></a></li>
-            <li><a href='charity_shop_main' id="go_purchase"><b>상점가기</b></a></li>
-         </ul>
-         <a href='normal_donation_main' id="change_normal"><b> 홈으로 </b></a>
-      </div>
-   </div>
-   <div id=container>
-      <div id=myCampaigns>
-         <b>내 등록 캠페인</b>
-         <div class="card_list">
-         </div>
-      </div>
-      <div id=finishCampaigns>
-         <b>완료된 캠페인</b>
-         <div class="card_list">
-         </div>
-      </div>
-      <div id=orderGoods>
-         <b>주문내역</b>
-      </div>
-   </div>
-
-
-   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-   </script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-   </script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-   </script>
-
 </body>
 
 </html>

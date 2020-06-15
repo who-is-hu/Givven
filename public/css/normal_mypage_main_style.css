@@ -116,15 +116,8 @@
   padding: 0px 20px 0px 20px;
 }
 
- #container {
+#container {
   padding: 50px;
-}
-
-#myCampaigns {
-  background-color: white;
-  padding: 20px;
-  text-align: left;
-  border-radius: 20px;
 }
 
 #myCampaigns a {
@@ -138,14 +131,19 @@
   font-size: 30px;
 }
 
-#finishCampaigns {
-  margin-top: 20px;
+#myCampaigns {
   background-color: white;
   padding: 20px;
   text-align: left;
   border-radius: 20px;
 }
-
+#finishCampaigns {
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: left;
+ }
 #finishCampaigns a {
   margin-left: 20px;
   color: black;
@@ -155,6 +153,14 @@
 
 #finishCampaigns a b {
   font-size: 30px;
+}
+
+#donationList {
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: left;
 }
 
 .card_list{

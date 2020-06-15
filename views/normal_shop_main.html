@@ -25,10 +25,12 @@
       </div>
       <div id = "third_bar">
          <div id = "recommand_header"><b>현재 판매중인 기부물품들이에요!</b></div>
+         <!--
          <div id = "search-bar">
             <input type="text" name="search" class="search-keyword" placeholder="어떤 기부 물품이 궁금하신가요?">
             <button type="submit" class="submit-btn"><img src='public/images/search_btn.png'></button>
          </div>
+         -->
       </div>
 
       <div id = 'items'>
@@ -48,13 +50,10 @@
 
    <script>
    
-   var mytype;
+   var mytype = "guest";
    $.ajax({
          type: 'GET',
          url: "/auth/isLoggedIn",
-         xhrFields: {
-            withCredentials: true
-         },
          error : function(error){
             mytype = "guest";
             $('#menu').append("<li><a href='log_in'><b>로그인</b></a></li><li><a href='sign_up'><b>회원가입</b></a></li>");
@@ -102,10 +101,6 @@
       type: 'GET',
       url: "/item/items",
       dataType: 'json',
-      xhrFields: {
-         withCredentials: true
-      },
-      data: {}
    }).success(function (response) {
       for (var i in response.data) {
          console.log(response.data[i]);

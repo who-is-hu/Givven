@@ -9,7 +9,7 @@ POST {{baseUrl}}/point/buy HTTP/1.1
 content-type : application/json
 
 {
-    "value" : 1000
+    "value" : 10000
 }
 
 
@@ -21,7 +21,7 @@ POST {{baseUrl}}/point/change HTTP/1.1
 content-type : application/json
 
 {
-    "value" : 1000
+    "value" : 10000
 }
 
 

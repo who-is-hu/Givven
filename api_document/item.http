@@ -10,9 +10,10 @@ content-type : application/json
     "content" : "content",
     "price" : 1000,
     "stock" : 100,
-    "title_img" : null // 있으면 url( 이미지 올리고 서버에서 받은 path )
+    "title_img" : "/uploads/default.jpg"
 }
 
+###
 <!-- response data format
 { result : true, msg : 'success'}
 -->
@@ -62,8 +63,8 @@ POST {{baseUrl}}/item/buy HTTP/1.1
 content-type : application/json
 
 {
-    "addr" : "경기도 안양시 관양1동",
-    "itemId" : 1,
-    "orderCount" : 5,
-    "campaignId" : 3
+    "addr" : "경기도 안양시 관양2동",
+    "itemId" : 18,
+    "orderCount" : 10,
+    "campaignId" : 10
 }

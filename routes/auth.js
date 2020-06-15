@@ -4,6 +4,7 @@ const { User } = require('../models');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const Container = new (require('../utils/Container.js'));
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
     const {email, name, password, type} = req.body;
@@ -23,11 +24,21 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             type,
             point : 0,
         });
-        return res.json({
-            res: 'success',
-            msg: '회원가입 성공'
-        });
-        
+        const contractCaller = await Container.get('contractCaller');
+        const addUserResultHash = await contractCaller.addUser(email);
+        console.log('join hash' , addUserResultHash);
+        if(addUserResultHash !== undefined ){
+            console.log(addUserResultHash);
+            return res.json({
+                res: 'success',
+                msg: '회원가입 성공'
+            });
+        }else{
+            return res.json({
+                res: 'fail',
+                msg: '회원가입 실패'
+            });
+        }
     } catch (err) {
         console.error(err);
         next(err);
@@ -61,8 +72,14 @@ router.get('/logout',isLoggedIn, (req, res, next)=> {
 });
 
 //로그인 했는지 검사
-router.get('/isLoggedIn', isLoggedIn, (req, res, next) => {
-    res.json({result: true, type : req.user.type});
+router.get('/isLoggedIn', (req, res, next) => {
+    let result ={};
+    if(req.user != null){
+        result.type = req.user.type;
+    } else {
+        result.type = 'guest';
+    }
+    return res.json(result);
 });
 
 module.exports = router;

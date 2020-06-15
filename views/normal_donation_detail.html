@@ -71,14 +71,11 @@
 
    <script>
 
-   var mytype;
+   var mytype = "guest";
    var mypoint;
          $.ajax({
                type: 'GET',
                url: "/auth/isLoggedIn",
-               xhrFields: {
-                  withCredentials: true
-               },
                error : function(error){
                   mytype = "guest";
                   $('#menu').append("<li><a href='log_in'><b>로그인</b></a></li><li><a href='sign_up'><b>회원가입</b></a></li>");
@@ -143,9 +140,6 @@
       $.ajax({
          type: 'GET',
          url: "/campaign/detail/" + id,
-         xhrFields: {
-            withCredentials: true
-         },
       }).success(function (response) {
          console.log(response);
          $("#campaign_name").append(response.data.name);
