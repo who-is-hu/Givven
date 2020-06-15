@@ -183,15 +183,9 @@
 
 .items{
   border: 0px;
+  background-color: rgba(red, green, blue, 0.1);
 }
 
-.items:after{
-  width: auto;
-  height: 450px;
-  content: "";
-  background-position: center;
-  opacity: 0.3!important; filter:alpha(opacity=30);
-}
 
 .items h2{
    font-size: 40px;
