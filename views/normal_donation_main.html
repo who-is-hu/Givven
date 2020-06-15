@@ -37,11 +37,12 @@
       -->
    </div>
 
-   <div id="img_slide" class="carousel slide" data-ride="carousel">
+   <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
-         <li data-target="#img_slide" data-slide-to="1" class="active"></li>
       </ol>
-      <div class="carousel-inner"></div>
+
+      <div class="carousel-inner">
+      </div>
    </div>
 
    <div id='container'>
@@ -125,14 +126,16 @@
    }
 
       var current_campaign_list;
+      var i;
+
       $.ajax({
          type: 'GET',
          url: "/campaign/campaigns/ing",
       }).success(function (response) {
          current_campaign_list = response.data;
-         
+
          if (current_campaign_list.campaigns.length == 0) {
-            $(".carousel-inner").append("<p class = " + "no_data" + ">모금중인 캠페인이 없어요..</p>");
+            $("#carouselIndicators").append("<p class = " + "no_data" + ">모금중인 캠페인이 없어요..</p>");
          } else {
             i = 0;
             var imgurl;
@@ -193,11 +196,10 @@
                      '<h2>'+current_campaign_list.campaigns[i].name+'</h2>'+
                      '<p>현재 '+current_campaign_list.campaigns[i].current_money+' 포인트! '+
                          '목표 모금 금액까지 '+
-                         (camapginInfo.dest_money - camapginInfo.current_money)+
+                         (current_campaign_list.campaigns[i].dest_money - current_campaign_list.campaigns[i].current_money)+
                          '포인트 남았습니다!</p>'+
                      '<div class="progress">'+
                      '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+
-
                      (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%"'+
                      'aria-valuenow="'+(current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'" aria-valuemin="0" aria-valuemax="100">'+
                      (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%달성</div>'+
@@ -242,6 +244,8 @@
                type: 'GET',
                url: "/campaign/campaigns/end",
                dataType: 'json',
+               data: {
+               }
          }).success(function (response2) {
             console.log(response2);
                for (var i in response2.data.campaigns) {
@@ -250,7 +254,7 @@
                   img2.setAttribute("src", response2.data.campaigns[i].title_img);
 
                   var cur_var = response2.data.campaigns[i].current_money / response2.data.campaigns[i].dest_money * 100;
-                  $("#end_campaign").append("<a href = 'charity_campaign_detail?index="+response2.data.campaigns[i].id+"'>"+
+                  $("#end_campaign").append("<a href = 'normal_donation_detail?index="+response2.data.campaigns[i].id+"'>"+
                   "<div id = 'endcard_"+response2.data.campaigns[i].id+"'class='card'>"+
                   "<div id = 'ec_"+response2.data.campaigns[i].id+"'class = 'image_container'>"+
                   "</div>"+
