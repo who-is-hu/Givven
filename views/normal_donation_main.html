@@ -250,7 +250,7 @@
                   img2.setAttribute("src", response2.data.campaigns[i].title_img);
 
                   var cur_var = response2.data.campaigns[i].current_money / response2.data.campaigns[i].dest_money * 100;
-                  $("#end_campaign").append("<a href = 'normal_donation_detail?index="+response2.data.campaigns[i].id+"'>"+
+                  $("#end_campaign").append("<a href = 'charity_campaign_detail?index="+response2.data.campaigns[i].id+"'>"+
                   "<div id = 'endcard_"+response2.data.campaigns[i].id+"'class='card'>"+
                   "<div id = 'ec_"+response2.data.campaigns[i].id+"'class = 'image_container'>"+
                   "</div>"+

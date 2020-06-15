@@ -45,6 +45,7 @@
             <div id ="end_campaign" class="card_list">
             </div>
          </div>
+         <div id="donationList"></div>
       </div>
 
    </div>
@@ -136,7 +137,58 @@
                   document.querySelector("#ec_"+response2.data.data[i].id).appendChild(img2);
                }
          });
-
+         
+         $.ajax({
+         type: 'GET',
+         url: "/tradeLog/ordersByCampaign/" + id,
+         }).success(function (response) {
+         //console.log(response);
+         tradeLogList = response.data;
+         if (tradeLogList.length === 0) {
+            $("#campaign_detail").append(
+               '<p>거래 내역이 없습니다.</p>' +
+               '<div class="clearfix" style="clear: left"></div>'
+            );
+         } else {
+            $("#campaign_detail").append(
+               '<table class="table">' +
+               '<thead>' +
+               '<tr>' +
+               '<th scope="col" style="width: 10%;">거래 순서</th>' +
+               '<th scope="col">거래 품목</th>' +
+               '<th scope="col" style="width: 13%;">거래처</th>' +
+               '<th scope="col" style="width: 9%;">물품 개수</th>' +
+               '<th scope="col" style="width: 9%;">물품 가격</th>' +
+               '<th scope="col" style="width: 9%;">물품 총 가격</th>' +
+               '<th scope="col" style="width: 13%;">거래 날짜</th>' +
+               '<th scope="col" style="width: 13%;" class = "tid">트랜잭션 ID</th>' +
+               '</tr>' +
+               '</thead>' +
+               '<tbody class="table_body">' +
+               '</tbody>' +
+               '</table>');
+         }
+         i = 0;
+         while (i < tradeLogList.length) {
+            var date_tmp = tradeLogList[i].createdAt.split("T");
+            var date = date_tmp[0];
+            var tidstr = tradeLogList[i].transactionId+" ";
+            var tid = tidstr.substr(0,10) + "..."
+            $(".table_body").append(
+               '<tr>' +
+               '<th scope="row">'+ i +'</th>' +
+               '<td>'+ tradeLogList[i].item.name +'</td>' +
+               '<td>'+ tradeLogList[i].seller.name +'</td>' +
+               '<td>'+ tradeLogList[i].orderCount +'</td>' +
+               '<td>'+ tradeLogList[i].item.price +'p</td>' +
+               '<td>'+ (tradeLogList[i].orderCount * tradeLogList[i].item.price) +'p</td>' +
+               '<td>'+ date +'</td>' +
+               '<td><a href = "https://kovan.etherscan.io/tx/'+ tradeLogList[i].transactionId +'" target="_blank">'+ tid +'</a></td>' +
+               '</tr>'
+            );
+            i = i + 1;
+         }
+      });
          
       
       </script>
