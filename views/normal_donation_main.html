@@ -29,10 +29,12 @@
    </div>
    <div id="third_bar">
       <div id="recommand_header"><b>이런 캠페인은 어때요?</b></div>
+      <!--
       <div id="search-bar">
          <input type="text" name="search" class="search-keyword" placeholder="어떤 기부를 원하시나요?">
          <button type="submit" class="submit-btn"><img src='public/images/search_btn.png'></button>
       </div>
+      -->
    </div>
 
    <div id="img_slide" class="carousel slide" data-ride="carousel">
@@ -127,36 +129,108 @@
          if (current_campaign_list.campaigns.length == 0) {
             $(".carousel-inner").append("<p class = " + "no_data" + ">모금중인 캠페인이 없어요..</p>");
          } else {
-            var slideIdx = 1;
-            current_campaign_list.campaigns.forEach(camapginInfo => {
-               if(slideIdx > 1)
-                  $(".carousel-indicators").append(`<li data-target="#img_slide" data-slide-to="${slideIdx}"></li>`);
-         
-               var id = "item" + camapginInfo.id;
-               var itemactive;
-               if(slideIdx == 1){
-                  itemactive = `<div class="carousel-item active" href = "normal_donation_detail?id=${camapginInfo.id}">`;
-               }else{
-                  itemactive = `<div class="carousel-item" href = "normal_donation_detail?id=${camapginInfo.id}">`;
-               }
-               $(".carousel-inner").append(
-                     itemactive +
-                     '<h2>'+camapginInfo.name+'</h2>'+
-                     '<p>현재 '+camapginInfo.current_money+' 포인트! '+
+            i = 0;
+            var imgurl;
+            while (i < current_campaign_list.campaigns.length) {imgurl = current_campaign_list.campaigns[i].title_img;
+               if (i == 0) {
+                  $(".carousel-indicators").append(
+                     '<li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>'
+                  );
+                  $(".carousel-inner").append(
+                     '<div class="carousel-item no1 active">'+
+                     '<button class="items" alt="First slide" id="first" onclick = "linkPage('+current_campaign_list.campaigns[i].id+')">'+
+                     '<h2>'+current_campaign_list.campaigns[i].name+'</h2>'+
+                     '<p>현재 '+current_campaign_list.campaigns[i].current_money+' 포인트! '+
+                         '목표 모금 금액까지 '+
+                         (current_campaign_list.campaigns[i].dest_money - current_campaign_list.campaigns[i].current_money)+
+                         '포인트 남았습니다!</p>'+
+                     '<div class="progress">'+
+                     '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+
+                     (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%"'+
+                     'aria-valuenow="'+(current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'" aria-valuemin="0" aria-valuemax="100">'+
+                     (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%달성</div>'+
+                     '</div>'+
+                     '</button>'+
+                     '</div>'
+                  );
+                  imgurl = current_campaign_list.campaigns[i].title_img;
+                  document.getElementById("first").style.backgroundImage = "url("+ imgurl+")";
+               } else if (i == 1) {
+                  $(".carousel-indicators").append(
+                     '<li data-target="#carouselIndicators" data-slide-to="1"></li>'
+                  );
+                  $(".carousel-inner").append(
+                     '<div class="carousel-item no2">'+
+                     '<button class="items" alt="Second slide" id="second" onclick = "linkPage('+current_campaign_list.campaigns[i].id+')">'+
+                     '<h2>'+current_campaign_list.campaigns[i].name+'</h2>'+
+                     '<p>현재 '+current_campaign_list.campaigns[i].current_money+' 포인트! '+
+                         '목표 모금 금액까지 '+
+                         (current_campaign_list.campaigns[i].dest_money - current_campaign_list.campaigns[i].current_money)+
+                         '포인트 남았습니다!</p>'+
+                     '<div class="progress">'+
+                     '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+
+                     (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%"'+
+                     'aria-valuenow="'+(current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'" aria-valuemin="0" aria-valuemax="100">'+
+                     (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%달성</div>'+
+                     '</div>'+
+                     '</button>'+
+                     '</div>'
+                  );
+                  imgurl = current_campaign_list.campaigns[i].title_img;
+                  document.getElementById("second").style.backgroundImage = "url("+ imgurl+")";
+               } else if (i == 2) {
+                  $(".carousel-indicators").append(
+                     '<li data-target="#carouselIndicators" data-slide-to="2"></li>'
+                  );
+                  $(".carousel-inner").append(
+                     '<div class="carousel-item no3">'+
+                     '<button class="items" alt="Third slide" id="third" onclick = "linkPage('+current_campaign_list.campaigns[i].id+')">'+
+                     '<h2>'+current_campaign_list.campaigns[i].name+'</h2>'+
+                     '<p>현재 '+current_campaign_list.campaigns[i].current_money+' 포인트! '+
                          '목표 모금 금액까지 '+
                          (camapginInfo.dest_money - camapginInfo.current_money)+
                          '포인트 남았습니다!</p>'+
                      '<div class="progress">'+
                      '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+
-                     (camapginInfo.current_money / camapginInfo.dest_money * 100)+'%"'+
-                     'aria-valuenow="'+(camapginInfo.current_money / camapginInfo.dest_money * 100)+'" aria-valuemin="0" aria-valuemax="100">'+
-                     (camapginInfo.current_money / camapginInfo.dest_money * 100)+'%달성</div>'+
+
+                     (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%"'+
+                     'aria-valuenow="'+(current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'" aria-valuemin="0" aria-valuemax="100">'+
+                     (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%달성</div>'+
                      '</div>'+
+                     '</button>'+
                      '</div>'
                   );
-               slideIdx += 1;
-            });            
-         } 
+                  imgurl = current_campaign_list.campaigns[i].title_img;
+                  document.getElementById("third").style.backgroundImage = "url("+ imgurl+")"
+                  //$("#third").css("background-image", imgurl);
+               }
+
+               $("#ing_campaign").append(
+                  '<a href = "normal_donation_detail?id='+current_campaign_list.campaigns[i].id+'">'+
+                  "<div class='card'>" +
+                  "<img src='" + imgurl + "'>" +
+                  "<div class='menu'>" +
+                  "<h3>" + current_campaign_list.campaigns[i].name + "</h3>" +
+                  "<p>" + current_campaign_list.campaigns[i].current_money + "p / " + current_campaign_list
+                  .campaigns[i].dest_money + "p</p>" +
+                  "<div class='progress'>" +
+                  "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: " +
+                  current_campaign_list.campaigns[i].current_money / current_campaign_list.campaigns[i]
+                  .dest_money * 100 + "%'" +
+                  "aria-valuenow='" + current_campaign_list.campaigns[i].current_money /
+                  current_campaign_list.campaigns[i].dest_money * 100 +
+                  "' aria-valuemin='0' aria-valuemax='100'>" + current_campaign_list.campaigns[i]
+                  .current_money / current_campaign_list.campaigns[i].dest_money * 100 + "%</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>"+
+                  '</a>'
+               );
+
+               i = i + 1;
+            }
+            $("#ing_campaign").append('<div class="clearfix" style="clear: left"></div>');
+         }
       });
 
       $.ajax({
@@ -187,6 +261,10 @@
                }
                $("#end_campaign").append('<div class="clearfix" style="clear: left"></div>');
          });
+
+         function linkPage (id){
+            location.href = 'normal_donation_detail?id='+id;
+         }
    </script>
 
 </body>
