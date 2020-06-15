@@ -144,7 +144,6 @@
                      '<li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>'
                   );
                   $(".carousel-inner").append(
-                     '<a href = "normal_donation_detail?id='+current_campaign_list.campaigns[0].id+'">'+
                      '<div class="carousel-item no1 active">'+
                      '<button class="items" alt="First slide" id="first">'+
                      '<h2>'+current_campaign_list.campaigns[i].name+'</h2>'+
@@ -159,17 +158,15 @@
                      (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%달성</div>'+
                      '</div>'+
                      '</button>'+
-                     '</div>'+
-                     '</a>'
+                     '</div>'
                   );
                   imgurl = current_campaign_list.campaigns[i].title_img;
-                  $("#first").css("background-image", url(imgurl));
+                  $("#first").css("background-image", imgurl);
                } else if (i === 1) {
                   $(".carousel-indicators").append(
                      '<li data-target="#carouselIndicators" data-slide-to="1"></li>'
                   );
                   $(".carousel-inner").append(
-                     '<a href = "normal_donation_detail?id='+current_campaign_list.campaigns[1].id+'">'+
                      '<div class="carousel-item no2">'+
                      '<button class="items" alt="Second slide" id="second">'+
                      '<h2>'+current_campaign_list.campaigns[i].name+'</h2>'+
@@ -184,17 +181,15 @@
                      (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%달성</div>'+
                      '</div>'+
                      '</button>'+
-                     '</div>'+
-                     '</a>'
+                     '</div>'
                   );
                   imgurl = current_campaign_list.campaigns[i].title_img;
-                  $("#second").css("background-image", url(imgurl));
+                  $("#second").css("background-image", imgurl);
                } else if (i === 2) {
                   $(".carousel-indicators").append(
                      '<li data-target="#carouselIndicators" data-slide-to="2"></li>'
                   );
                   $(".carousel-inner").append(
-                     '<a href = "normal_donation_detail?id='+current_campaign_list.campaigns[2].id+'">'+
                      '<div class="carousel-item no3">'+
                      '<button class="items" alt="Third slide" id="third">'+
                      '<h2>'+current_campaign_list.campaigns[i].name+'</h2>'+
@@ -209,11 +204,10 @@
                      (current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100)+'%달성</div>'+
                      '</div>'+
                      '</button>'+
-                     '</div>'+
-                     '</a>'
+                     '</div>'
                   );
                   
-                  $("#third").css("background-image", url(imgurl));
+                  $("#third").css("background-image", imgurl);
                }
 
                $("#ing_campaign").append(
