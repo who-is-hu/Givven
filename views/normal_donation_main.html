@@ -21,8 +21,8 @@
       </div>
       <div id="second_navbar">
          <ul id='menu'>
-            <li><a href='normal_donation_main' id="go_donate"><b>기부하기</b></a></li>
-            <li><a href='normal_shop_main' id="go_purchase"><b>상점가기</b></a></li>
+            <li><a href='#none' id="go_donate"><b>기부하기</b></a></li>
+            <li><a href='#none'  onclick="shopPage()" id="go_purchase"><b>상점가기</b></a></li>
             <li><a href ="#none" onclick="mypage()" id="go_myapage"><b>My Page</b></a></li>
          </ul>
       </div>
@@ -117,7 +117,12 @@
          window.location.href = "charity_mypage_main"
       }
    }
-
+   function shopPage(){
+      if(mytype == "guest" || mytype == "seller" || mytype == "normal")
+         window.location.href ="normal_shop_main";
+      if(mytype == "charity")
+         window.location.href = "charity_shop_main"
+   }
 
       var current_campaign_list;
       $.ajax({
