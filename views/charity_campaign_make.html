@@ -119,8 +119,7 @@
 
       $(function () {
          $('.submit-btn').on("click", function () {
-            if ($("#campaign_name").val() == "" || $("#campaign_price").val() == "" || $("#campaign_end")
-               .val() == "" || $("#campaign_detail").val() == "" || file == "") {
+            if ($("#campaign_name").val() == "" || $("#campaign_price").val() == "" || $("#campaign_detail").val() == "" || file == "") {
                alert("입력을 완료해주세요");
             } else {
                var formData = new FormData();
@@ -167,6 +166,12 @@
                }).success(function (response) {
                   console.log(img_url);
                   console.log(response);
+                  if(response.success == false){
+                     alert("캠페인 등록 에러 : "+ response.msg );
+                  }
+                  else{
+                     location.href = "charity_mypage_main";
+                  }
                });
             }
          });
