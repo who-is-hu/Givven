@@ -184,6 +184,7 @@
 .items{
   border: 0px;
   background-size: auto, 450px;
+  background-color: rgba(auto, auto, auto, 0.7);
 }
 
 .items img{
