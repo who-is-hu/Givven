@@ -138,8 +138,7 @@
   font-size: 30px;
 }
 
-#finishCampaigns {
-  margin-top: 20px;
+#myCampaigns {
   background-color: white;
   padding: 20px;
   text-align: left;
@@ -155,6 +154,13 @@
 
 #finishCampaigns a b {
   font-size: 30px;
+}
+
+#donationList {
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .card_list{

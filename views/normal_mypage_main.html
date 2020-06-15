@@ -48,8 +48,9 @@
          <div id="end_campaign" class="card_list">
          </div>
       </div>
-      <div id="donationList"></div>
    </div>
+
+   <div id="donationList"></div>
 
    </div>
 
@@ -90,8 +91,9 @@
          data: {
          }
       }).success(function (response1) {
-         donations.append(response1.data.data);
+         donations = donations.concat(response1.data.data);
          for (var i in response1.data.data) {
+            donations = donations.concat(response1.data.data);
             console.log(response1.data.data[i]);
             var img1 = document.createElement("img");
             img1.setAttribute("src", response1.data.data[i].campaign.title_img);
@@ -121,7 +123,7 @@
          data: {
          }
       }).success(function (response2) {
-         donations.append(response2.data.data);
+         donations = donations.concat(response2.data.data);
          for (var i in response2.data.data) {
             console.log(response2.data.data[i]);
             var img2 = document.createElement("img");
@@ -150,13 +152,10 @@
             '<thead>' +
             '<tr>' +
             '<th scope="col" style="width: 10%;">거래 순서</th>' +
-            '<th scope="col">거래 품목</th>' +
-            '<th scope="col" style="width: 13%;">거래처</th>' +
-            '<th scope="col" style="width: 9%;">물품 개수</th>' +
-            '<th scope="col" style="width: 9%;">물품 가격</th>' +
-            '<th scope="col" style="width: 9%;">물품 총 가격</th>' +
-            '<th scope="col" style="width: 13%;">거래 날짜</th>' +
-            '<th scope="col" style="width: 13%;" class = "tid">트랜잭션 ID</th>' +
+            '<th scope="col" style="width: 25%;">기부 캠페인</th>' +
+            '<th scope="col" style="width: 20%;">기부 금액</th>' +
+            '<th scope="col" style="width: 25%;">거래 날짜</th>' +
+            '<th scope="col" style="width: 20%;" class = "tid">트랜잭션 ID</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody class="table_body">' +
@@ -164,21 +163,18 @@
             '</table>'
          );
          var i = 0;
-         while (i < tradeLogList.length) {
-            var date_tmp = tradeLogList[i].createdAt.split("T");
+         while (i < donations.length) {
+            var date_tmp = donations[i].createdAt.split("T");
             var date = date_tmp[0];
-            var tidstr = tradeLogList[i].transactionId + " ";
+            var tidstr = donations[i].transactionId + " ";
             var tid = tidstr.substr(0, 10) + "..."
             $(".table_body").append(
                '<tr>' +
                '<th scope="row">' + i + '</th>' +
-               '<td>' + tradeLogList[i].item.name + '</td>' +
-               '<td>' + tradeLogList[i].seller.name + '</td>' +
-               '<td>' + tradeLogList[i].orderCount + '</td>' +
-               '<td>' + tradeLogList[i].item.price + 'p</td>' +
-               '<td>' + (tradeLogList[i].orderCount * tradeLogList[i].item.price) + 'p</td>' +
+               '<td>' + donations[i].campaign.name + '</td>' +
+               '<td>' + donations[i].value + 'p</td>' +
                '<td>' + date + '</td>' +
-               '<td><a href = "https://kovan.etherscan.io/tx/' + tradeLogList[i].transactionId + '" target="_blank">' + tid + '</a></td>' +
+               '<td><a href = "https://kovan.etherscan.io/tx/' + donations[i].transactionId + '" target="_blank">' + tid + '</a></td>' +
                '</tr>'
             );
             i = i + 1;
