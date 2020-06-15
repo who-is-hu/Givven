@@ -162,7 +162,7 @@
   width: 100%;
   height: 450px;
   background-repeat: no-repeat;
-  background-size: auto 450px;
+  background-size: 100% 450px;
 }
 #second{
   padding: 30px;
@@ -170,7 +170,7 @@
   width: 100%;
   height: 450px;
   background-repeat: no-repeat;
-  background-size: auto 450px;
+  background-size: 100% 450px;
 }
 #third{
   padding: 30px;
@@ -178,7 +178,7 @@
   width: 100%;
   height: 450px;
   background-repeat: no-repeat;
-  background-size: auto 450px;
+  background-size: 100% 450px;
 }
 
 .items{
