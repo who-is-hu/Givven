@@ -94,7 +94,6 @@
          console.log('ing camp', response1.data.data);
          donations = donations.concat(response1.data.data);
          for (var i in response1.data.data) {
-            donations = donations.concat(response1.data.data);
             console.log(response1.data.data[i]);
             var img1 = document.createElement("img");
             img1.setAttribute("src", response1.data.data[i].campaign.title_img);
