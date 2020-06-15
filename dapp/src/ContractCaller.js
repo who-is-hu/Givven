@@ -2,8 +2,8 @@ const fs = require('fs');
 const Web3 = require('web3');
 const decoder = require('abi-decoder');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+const infuraWs = 'wss://kovan.infura.io/ws/v3/0e8dae6ea8ef4bb5b2c6de6c67ed9263';
 
-const infuraWs = `wss://kovan.infura.io/ws/v3/9226d0db9a7945048c37d6d582e4598f`;
 const ContractAddressPath = './dapp/contractaddress.txt';
 const mnemonicPath = './dapp/.secret';
 const abiPath = './dapp/build/contracts/Givven.json';
