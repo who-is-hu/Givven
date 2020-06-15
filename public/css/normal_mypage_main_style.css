@@ -137,7 +137,13 @@
   text-align: left;
   border-radius: 20px;
 }
-
+#finishCampaigns {
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: left;
+ }
 #finishCampaigns a {
   margin-left: 20px;
   color: black;
