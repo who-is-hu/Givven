@@ -185,9 +185,11 @@
   border: 0px;
   background-size: auto, 450px;
 }
-.items:after{
+
+.items img{
   opacity: 0.7;
 }
+
 .items h2{
    font-size: 40px;
    font-weight: 800;
