@@ -34,12 +34,13 @@ const TradeService = class {
 
             // blockchain 거래 트랜잭션 요청
             const txid = await this.contracts.purchase(campaign.name, seller.email, item.name, orderCount, finalPrice);
-            const campaignBalance = await this.contracts.getCampaignBalance(user.email);
+            //const campaignBalance = await this.contracts.getCampaignBalance(campaign.name);
             const sellerBalance = await this.contracts.getUserBalance(seller.email);
-
+            //console.log(typeof (campaign.current_money - campaignBalance));
+            //console.log(campaign.current_money - campaignBalance);
             await item.update({ stock: item.stock - orderCount }, { transaction });
             await user.update({point : user.point - finalPrice}, { transaction });
-            await campaign.update({ used_money : campaign.current_money - campaignBalance}, { transaction });
+            await campaign.update({ used_money : campaign.used_money + finalPrice}, { transaction });
             await seller.update({ point: sellerBalance }, { transaction })
             await this.orderModel.create({
                 from: user.id,
