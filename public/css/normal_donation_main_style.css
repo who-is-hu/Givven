@@ -156,7 +156,7 @@
    text-align: left;
 
  }
-#first{
+ .carousel-item {
   padding: 30px;
   padding-top: 140px;
   width: 100%;
@@ -191,13 +191,13 @@
    font-weight: 800;
  }
 
- .items p{
+ .carousel-item p{
    margin-top: 40px;
    font-weight: 800;
    font-size: 20px;
  }
 
- .items .progress{
+ .carousel-item .progress{
    height: 60px;
    font-size: 30px;
    font-weight: 700;

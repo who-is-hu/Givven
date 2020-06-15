@@ -1,4 +1,5 @@
 const { sequelize } = require('../models');
+const Container = new (require('../utils/Container.js'));
 
 const TradeService = class {
     constructor(allModels) {
@@ -8,22 +9,22 @@ const TradeService = class {
         this.campaignModel = Campaign;
         this.orderModel = Order;
         this.donationModel = Donation;
-    }
+        this.contracts = Container.get('contractCaller');
 
+    }
     async buyItem(user, addr, itemId, orderCount, campaignId) {
         let result = {};
         await sequelize.transaction(async (transaction) => {
-            const item = await this.itemModel.findOne({ where: { id: itemId } }, { transaction });
+            const campaign = await this.campaignModel.findOne({ where: { id: campaignId } });
+            const item = await this.itemModel.findOne({ where: { id: itemId } });
             if (item == null) {
                 throw new Error('item does not exist');
             }
             const seller = await this.userModel.findOne({ where: { id: item.userId } });
             if (seller == null)
                 throw new Error('seller does not exist');
-            const campaign = await this.campaignModel.findOne({ where: { id: campaignId } });
             const finalPrice = item.price * orderCount;
-            // 원장에 저장된 유저 point 잔액 가져오기
-            const balance = campaign.current_money - campaign.used_money; //우선 웹서버 db에 있는값으로 성공했다 가정
+            const balance = await this.contracts.getCampaignBalance(campaign.name);
             if (balance < finalPrice) {
                 throw new Error("lack of balance");
             }
@@ -32,22 +33,20 @@ const TradeService = class {
             }
 
             // blockchain 거래 트랜잭션 요청
-            // 트랜잭션 키값 받기
-            const transactionId = 1234; //성공 가정
-            const consumerBalance = user.point - finalPrice; //원장의 구매자 point 가져오기 성공했다 가정
-            const camp_used_money = campaign.used_money + finalPrice;
-            const sellerBalance = seller.point + finalPrice; //원장의 판매자 point 가져오기 성공했다 가정
+            const txid = await this.contracts.purchase(campaign.name, seller.email, item.name, orderCount, finalPrice);
+            const campaignBalance = await this.contracts.getCampaignBalance(user.email);
+            const sellerBalance = await this.contracts.getUserBalance(seller.email);
 
             await item.update({ stock: item.stock - orderCount }, { transaction });
-            await user.update({ point: consumerBalance }, { transaction });
-            await seller.update({ point: sellerBalance }, { transaction });
-            await campaign.update({ used_money: camp_used_money }, { transaction });
+            await user.update({point : user.point - finalPrice}, { transaction });
+            await campaign.update({ used_money : campaign.current_money - campaignBalance}, { transaction });
+            await seller.update({ point: sellerBalance }, { transaction })
             await this.orderModel.create({
                 from: user.id,
                 to: item.userId,
                 itemId: item.id,
                 orderCount,
-                transactionId,
+                transactionId: txid,
                 campaignId,
                 addr,
             }, { transaction });
@@ -56,8 +55,8 @@ const TradeService = class {
             result = { success: true, msg: "success" };
         }).catch(err => {
             // Rolled back
-            result = { success: false, msg: String(err) };
             console.error(err);
+            result = { success: false, msg: String(err) };
         });
         return result;
     }
@@ -65,8 +64,8 @@ const TradeService = class {
     async donate(user, campaignId, value) {
         let result = {};
         await sequelize.transaction(async (transaction) => {
-            // 원장의 user point 잔액 져오기
-            const balance = user.point; // 가져왔다고 가정 
+            const balance = await this.contracts.getUserBalance(user.email);
+
             if (balance < value)
                 throw new Error('lack of balance');
             const campaign = await this.campaignModel.findOne({ where: { id: campaignId } }, { transaction });
@@ -77,16 +76,17 @@ const TradeService = class {
                 throw new Error('wrong campaign');
 
             // 기부 트랜잭션 요청
-            // 트랜잭션 키값 저장 
-            const transactionId = 123213; // 성공 가정
+            // 트랜잭션 키값 저장
+            const transactionId = await this.contracts.donate(user.email, campaign.name, value);
 
-            const donatorBalance = user.point - value; // 원장에서 기부자 잔액 가져오기
-            const campaignCurrMoney = parseInt(campaign.current_money) + value; //원장에서 캠페인 현재 모금액 가져오기
-            const charityBalance = parseInt(charityUser.point) + value;
+            const donatorBalance = await this.contracts.getUserBalance(user.name);
+            const campaignCurrMoney = await this.contracts.getCampaignBalance(campaign.name);
+            const charityBalance = charityUser.point + value;
 
             await campaign.update({ current_money: campaignCurrMoney }, { transaction });
             await user.update({ point: donatorBalance }, { transaction });
             await charityUser.update({ point: charityBalance }, { transaction });
+
             const donation = await this.donationModel.create({
                 userId: user.id,
                 campaignId,
@@ -102,53 +102,49 @@ const TradeService = class {
         }).catch(err => {
             // Rolled back
             console.error(err);
-            result = { success: false, msg: err };
-            //throw new Error(err);
+
+            result = { success: false, msg: String(err) };
+            throw new Error(err);
         });
         return result;
     }
 
     async buyPoint(user, value) {
-        try {
-            let result = {};
-            await sequelize.transaction(async (transaction) => {
-                //web3 js 충전 트랜잭션 요청
-                //get balance
-                const userBalance = parseInt(user.point) + value //임시
-                await user.update({ point: userBalance }, { transaction });
-            })
-                .then(() => {
-                    result = { success: true, msg: "success" };
-                }).catch(err => {
-                    throw new Error(err);
-                });
-            return result;
-        } catch (err) {
+
+        let result = {};
+        await sequelize.transaction(async (transaction) => {
+            const txid = await this.contracts.chargeUser(user.email, value);
+            const userBalance = await this.contracts.getUserBalance(user.email);
+            await user.update({ point: userBalance }, { transaction });
+            console.log('buy point', txid);
+        }).then(() => {
+            result = { success: true, msg: "success" };
+        }).catch(err => {
             console.error(err);
-            return { success: false, msg: String(err) }
-        }
+            result = { success: false, msg: String(err) }
+        });
+        return result;
     }
 
     async changePoint(user, value) {
         let result = {};
         await sequelize.transaction(async (transaction) => {
-            //get balance
-            console.log('user point', typeof user.point);
-            console.log('value', typeof value);
-            const userBalance = user.point - value;
-            console.log('balacne', typeof userBalance);
+            if(user.point < value){
+                throw new Error('lack of balance');
+            }
+            await this.setContranctCaller();
+            const txid = await this.contracts.dischargeUser(user.email, value);
+            const userBalance = await this.contracts.getUserBalance(user.email);
             await user.update({ point: userBalance }, { transaction });
-        })
-            .then(() => {
-                result = { success: true, msg: "success" };
-            }).catch(err => {
-                throw new Error(err);
-            });
-        return result;
-    }
+            console.log('change point', txid);
 
-    async getBalance(user) {
-        return user.point;
+        }).then(() => {
+            result = { success: true, msg: "success" };
+        }).catch(err => {
+            console.error(err);
+            result = { success: false, msg: String(err) };
+        });
+        return result;
     }
 };
 

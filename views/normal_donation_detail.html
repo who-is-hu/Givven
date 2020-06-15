@@ -140,9 +140,6 @@
       $.ajax({
          type: 'GET',
          url: "/campaign/detail/" + id,
-         xhrFields: {
-            withCredentials: true
-         },
       }).success(function (response) {
          console.log(response);
          $("#campaign_name").append(response.data.name);
