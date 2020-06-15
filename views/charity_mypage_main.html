@@ -13,7 +13,7 @@
    <div id="navbar">
       <div id='top_navbar'>
          <div id='logo'>
-            <a href = "normal_donation_main"><img src="public/images/logo.PNG"></a>
+            <a href="normal_donation_main"><img src="public/images/logo.PNG"></a>
          </div>
          <ul id='menu'>
             <li><b>사회단체입니다.</b></li>
@@ -73,36 +73,40 @@
          console.log(response);
          current_campaign_list = response.data;
          console.log(current_campaign_list);
-         
-         if(current_campaign_list.campaigns.length == 0){
-            $("#myCampaigns .card_list").append("<p class = "+"no_data"+">모금중인 캠페인이 없어요..</p>");
-         }
-         
-         else{
+
+         if (current_campaign_list.campaigns.length == 0) {
+            $("#myCampaigns .card_list").append("<p class = " + "no_data" + ">모금중인 캠페인이 없어요..</p>");
+         } else {
             i = 0;
-            while ( i < current_campaign_list.campaigns.length) {
+            while (i < current_campaign_list.campaigns.length) {
                $("#myCampaigns .card_list").append(
-               "<a href = 'charity_campaign_detail?id="+current_campaign_list.campaigns[i].id+"'>"+
-               "<div class='card'>"+
-                  "<img src='"+current_campaign_list.campaigns[i].title_img+"'>"+
-                  "<div class='menu'>"+
-                     "<h3>"+current_campaign_list.campaigns[i].name+"</h3>"+
-                     "<p>"+current_campaign_list.campaigns[i].current_money+"p / "+current_campaign_list.campaigns[i].dest_money+"p</p>"+
-                     "<div class='progress'>"+
-                        "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: "+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"%'"+
-                           "aria-valuenow='"+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"' aria-valuemin='0' aria-valuemax='100'>"+current_campaign_list.campaigns[i].current_money/current_campaign_list.campaigns[i].dest_money*100+"%</div>"+
-                     "</div>"+
-                  "</div>"+
-               "</div>"+
-               "<a>");
-               
+                  "<a href = 'charity_campaign_detail?id=" + current_campaign_list.campaigns[i].id + "'>" +
+                  "<div class='card'>" +
+                  "<img src='" + current_campaign_list.campaigns[i].title_img + "'>" +
+                  "<div class='menu'>" +
+                  "<h3>" + current_campaign_list.campaigns[i].name + "</h3>" +
+                  "<p>" + current_campaign_list.campaigns[i].current_money + "p / " + current_campaign_list
+                  .campaigns[i].dest_money + "p</p>" +
+                  "<div class='progress'>" +
+                  "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: " +
+                  current_campaign_list.campaigns[i].current_money / current_campaign_list.campaigns[i]
+                  .dest_money * 100 + "%'" +
+                  "aria-valuenow='" + current_campaign_list.campaigns[i].current_money / current_campaign_list
+                  .campaigns[i].dest_money * 100 + "' aria-valuemin='0' aria-valuemax='100'>" +
+                  current_campaign_list.campaigns[i].current_money / current_campaign_list.campaigns[i]
+                  .dest_money * 100 + "%</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>" +
+                  "<a>");
+
                i = i + 1;
             }
-            $(".card_list").append('<div class="clearfix" style="clear: left"></div>'); 
+            $(".card_list").append('<div class="clearfix" style="clear: left"></div>');
          }
-         
+
       });
-      
+
       $.ajax({
          type: 'GET',
          url: "/campaign/myCampaigns/end",
@@ -113,35 +117,61 @@
          console.log(response);
          ended_campaign_list = response.data;
          console.log(ended_campaign_list);
-         
-         if(ended_campaign_list.campaigns.length == 0){
-            $("#finishCampaigns .card_list").append("<p class = "+"no_data"+">모금종료된 캠페인이 없어요..</p>");
-         }
-         else{
+
+         if (ended_campaign_list.campaigns.length == 0) {
+            $("#finishCampaigns .card_list").append("<p class = " + "no_data" + ">모금종료된 캠페인이 없어요..</p>");
+         } else {
             i = 0;
-            while ( i < ended_campaign_list.campaigns.length) {  
-               $("#finishCampaigns .card_list").append(
-                  '<a href = "charity_campaign_detail?id='+ended_campaign_list.campaigns[i].id+' ">'+
-                  '<div class="card">'+
-                     '<img src="'+ended_campaign_list.campaigns[i].title_img+'">'+
-                     '<div class="menu">'+
-                        '<h3>'+ ended_campaign_list.campaigns[i].name+'</h3>'+
-                        '<p>'+ ended_campaign_list.campaigns[i].used_money +'p / '+ended_campaign_list.campaigns[i].current_money+'p</p>'+
-                        '<div class="progress">'+
-                        '<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: '+ (ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100)+'%"'+
-                           'aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100+'%</div>'+
-                           
-                        '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+ (100 - (ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100))+'%"'+
-                           'aria-valuenow="'+ (100 - (ended_campaign_list.campaigns[i].used_money/ended_campaign_list.campaigns[i].current_money*100))+'" aria-valuemin="0" aria-valuemax="100"></div>'+
-                           
-                     '</div>'+
-                  '</div>'+
-               '</div>'+
-               '</a>'
-               );
-            i= i+1;
+            while (i < ended_campaign_list.campaigns.length) {
+               var used_money = ended_campaign_list.campaigns[i].used_money;
+               var current_money = ended_campaign_list.campaigns[i].current_money;
+               if (current_money == 0) {
+                  $("#finishCampaigns .card_list").append(
+                     '<a href = "charity_campaign_detail?id=' + ended_campaign_list.campaigns[i].id + ' ">' +
+                     '<div class="card">' +
+                     '<img src="' + ended_campaign_list.campaigns[i].title_img + '">' +
+                     '<div class="menu">' +
+                     '<h3>' + ended_campaign_list.campaigns[i].name + '</h3>' +
+                     '<p>' + ended_campaign_list.campaigns[i].current_money + 'p / ' + ended_campaign_list
+                     .campaigns[i].dest_money + 'p</p>' +
+                     "<div class='progress'>" +
+                     "<div class='progress-bar progress-bar-striped' role='progressbar' style='width: " +
+                     ended_campaign_list.campaigns[i].current_money / ended_campaign_list.campaigns[i].dest_money * 100 + "%'" +
+                     "aria-valuenow='" + ended_campaign_list.campaigns[i].current_money / ended_campaign_list.campaigns[i].dest_money * 100 + 
+                     "' aria-valuemin='0' aria-valuemax='100'>" +
+                     ended_campaign_list.campaigns[i].current_money / ended_campaign_list.campaigns[i].dest_money * 100 + "%</div>" +
+                     "</div>" +
+                     '</div>' +
+                     '</div>' +
+                     '</a>'
+                  );
+               } else {
+                  $("#finishCampaigns .card_list").append(
+                     '<a href = "charity_campaign_detail?id=' + ended_campaign_list.campaigns[i].id + ' ">' +
+                     '<div class="card">' +
+                     '<img src="' + ended_campaign_list.campaigns[i].title_img + '">' +
+                     '<div class="menu">' +
+                     '<h3>' + ended_campaign_list.campaigns[i].name + '</h3>' +
+                     '<p>' + used_money + 'p / ' + current_money + 'p</p>' +
+                     '<div class="progress">' +
+                     '<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: ' +
+                     (used_money / current_money * 100) + '%"' +
+                     'aria-valuenow="' + (used_money / current_money * 100) +
+                     '" aria-valuemin="0" aria-valuemax="100">' +
+                     (used_money / current_money * 100) + '%</div>' +
+                     '<div class="progress-bar progress-bar-striped" role="progressbar" style="width: ' +
+                     (100 - (used_money / current_money * 100)) + '%"' +
+                     'aria-valuenow="' + (100 - (used_money / current_money * 100)) +
+                     '" aria-valuemin="0" aria-valuemax="100"></div>' +
+                     '</div>' +
+                     '</div>' +
+                     '</div>' +
+                     '</a>'
+                  );
+               }
+               i = i + 1;
             }
-            $(".card_list").append('<div class="clearfix" style="clear: left"></div>'); 
+            $(".card_list").append('<div class="clearfix" style="clear: left"></div>');
          }
       });
 
@@ -182,18 +212,19 @@
          while (i < order_goods_list.length) {
             var date_tmp = order_goods_list[i].createdAt.split("T");
             var date = date_tmp[0];
-            var tidstr = order_goods_list[i].transactionId+" ";
-            var tid = tidstr.substr(0,10) + "..."
+            var tidstr = order_goods_list[i].transactionId + " ";
+            var tid = tidstr.substr(0, 10) + "..."
             $(".table_body").append(
                '<tr>' +
-               '<td>'+ order_goods_list[i].consumer.name +'</td>' +
-               '<td>'+ order_goods_list[i].item.name +'</td>' +
-               '<td>'+ order_goods_list[i].seller.name +'</td>' +
-               '<td>'+ order_goods_list[i].orderCount +'</td>' +
-               '<td>'+ order_goods_list[i].item.price +'p</td>' +
-               '<td>'+ (order_goods_list[i].orderCount * order_goods_list[i].item.price) +'p</td>' +
-               '<td>'+ date +'</td>' +
-               '<td><a href = "https://kovan.etherscan.io/tx/'+ order_goods_list[i].transactionId +'" target="_blank">'+ tid +'</a></td>' +
+               '<td>' + order_goods_list[i].consumer.name + '</td>' +
+               '<td>' + order_goods_list[i].item.name + '</td>' +
+               '<td>' + order_goods_list[i].seller.name + '</td>' +
+               '<td>' + order_goods_list[i].orderCount + '</td>' +
+               '<td>' + order_goods_list[i].item.price + 'p</td>' +
+               '<td>' + (order_goods_list[i].orderCount * order_goods_list[i].item.price) + 'p</td>' +
+               '<td>' + date + '</td>' +
+               '<td><a href = "https://kovan.etherscan.io/tx/' + order_goods_list[i].transactionId +
+               '" target="_blank">' + tid + '</a></td>' +
                '</tr>'
             );
             i = i + 1;
