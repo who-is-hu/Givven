@@ -59,8 +59,6 @@ const TradeService = class {
             console.error(err);
             result = { success: false, msg: String(err) };
         });
-        console.log('trade transaction');
-        console.log(this.contracts.getTransactionData(txid));
         return result;
     }
 
@@ -80,7 +78,7 @@ const TradeService = class {
 
             // 기부 트랜잭션 요청
             // 트랜잭션 키값 저장
-            const transactionId = await this.contracts.donate(user.email, campaign.name, value);
+            const txid = await this.contracts.donate(user.email, campaign.name, value);
 
             const donatorBalance = await this.contracts.getUserBalance(user.name);
             const campaignCurrMoney = await this.contracts.getCampaignBalance(campaign.name);
@@ -94,7 +92,7 @@ const TradeService = class {
                 userId: user.id,
                 campaignId,
                 value,
-                transactionId,
+                transactionId : txid,
             }, { transaction });
             if (donation == null) {
                 throw new Error('create donation log failed');
@@ -109,8 +107,6 @@ const TradeService = class {
             result = { success: false, msg: String(err) };
             throw new Error(err);
         });
-        console.log('donate transaction');
-        console.log(this.contracts.getTransactionData(transactionId));
         return result;
     }
 
@@ -128,6 +124,7 @@ const TradeService = class {
             console.error(err);
             result = { success: false, msg: String(err) }
         });
+        console.log('buy point : ', txid);
         return result;
     }
 
@@ -148,6 +145,7 @@ const TradeService = class {
             console.error(err);
             result = { success: false, msg: String(err) };
         });
+        console.log('change point : ', txid);
         return result;
     }
 };
