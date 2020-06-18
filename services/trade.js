@@ -59,6 +59,8 @@ const TradeService = class {
             console.error(err);
             result = { success: false, msg: String(err) };
         });
+        console.log('trade transaction');
+        console.log(this.contracts.getTransactionData(txid));
         return result;
     }
 
@@ -107,6 +109,8 @@ const TradeService = class {
             result = { success: false, msg: String(err) };
             throw new Error(err);
         });
+        console.log('donate transaction');
+        console.log(this.contracts.getTransactionData(transactionId));
         return result;
     }
 
@@ -133,7 +137,6 @@ const TradeService = class {
             if(user.point < value){
                 throw new Error('lack of balance');
             }
-            await this.setContranctCaller();
             const txid = await this.contracts.dischargeUser(user.email, value);
             const userBalance = await this.contracts.getUserBalance(user.email);
             await user.update({ point: userBalance }, { transaction });
