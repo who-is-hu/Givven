@@ -124,7 +124,6 @@ const TradeService = class {
             console.error(err);
             result = { success: false, msg: String(err) }
         });
-        console.log('buy point : ', txid);
         return result;
     }
 
