@@ -19,7 +19,7 @@ PR 과 1:1 대응시키기
 * 작업 단위로 `commit` 하기 ( 너무 작은 작업들은 `squash` )
 * 생각없이 `git add . ` 하지말고 커밋내용에 알맞는 작업만 추가하기
 <br/>
-##### message
+#### message
     // 기능 추가 등의 커밋  
     feat: message
     // 수정 사항 
@@ -29,7 +29,6 @@ PR 과 1:1 대응시키기
 
 ****
 #### Pull Request
-1. PR 이름은 issue 이름으로 
 1. master를 `pull` 하여 업데이트
 2. `merge` 할 브랜치를 master 에 `rebase` 
     - confilct 를 미리 해결하고 로그를 깔끔하게 유지 하기 위함
