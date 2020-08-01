@@ -19,16 +19,14 @@ PR 과 1:1 대응시키기
 * 작업 단위로 `commit` 하기 ( 너무 작은 작업들은 `squash` )
 * 생각없이 `git add . ` 하지말고 커밋내용에 알맞는 작업만 추가하기
 <br/>
-    ##### message
-    * 기능 추가 등의 커밋  
-        `feat: message`
-    * 수정 사항 
-        `fix: message`
-    * 삭제
-    `remove: message`
+##### message
+    // 기능 추가 등의 커밋  
+    feat: message
+    // 수정 사항 
+    fix: message
+    // 삭제
+    remove: message
 
-<b>마지막 커밋 메시지에  `close #issue-number` 추가하기!</b>
-ex ) `feat: add signup function /close #12` 
 ****
 #### Pull Request
 1. PR 이름은 issue 이름으로 
@@ -36,13 +34,18 @@ ex ) `feat: add signup function /close #12`
 2. `merge` 할 브랜치를 master 에 `rebase` 
     - confilct 를 미리 해결하고 로그를 깔끔하게 유지 하기 위함
 3. Reviewer 설정
-4. 변경 사항 / 특이사항 작성
+4. 변경 사항 / 특이사항 Description에 작성
+5. <b>PR description 에 `close #issue-number` 추가하기!</b> 
 
 * 전원 리뷰 완료시 `merge`
 * 이해가 안되는 코드는 변경사항을 보고 플젝에 어떤 영향을 미칠지 생각하여 리뷰 남기기
 * 도움 요청은 Draft PR 로 올리기
+
+
 ****
 
-##%쉬엄쉬엄 꾸준히% 하면서 소공전 수상하고
-##졸업 요건도 채우고
-##Git 사용법도 배웁시다. 빠이팅~
+#### 마무리 말
+
+쉬엄쉬엄 꾸준히하면서 소공전 수상하고
+졸업 요건도 채우고
+Git 사용법도 배웁시다. 빠이팅~
