@@ -3,4 +3,3 @@
 \uploads
 .DS_Store  
 /dapp/.secret
-package-lock.json
