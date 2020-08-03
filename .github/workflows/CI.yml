@@ -17,14 +17,13 @@ jobs:
       - name: Install node packages
         run: npm install
       - name: Check ESLint
-        run: npm run lint
         uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           level: warning
           reporter: github-pr-review
           eslint_flags: '**/*.js'
-        
+
   build:
     name: Build
     runs-on: ubuntu-18.04
@@ -36,5 +35,5 @@ jobs:
           node-version: 10.x
       - name: Install node packages
         run: npm install
-      - name: Build project 
+      - name: Build project
         run: npm build
