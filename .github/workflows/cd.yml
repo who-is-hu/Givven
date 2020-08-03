@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd ~/Givven/
+            cd ~/Givven
             git pull origin master
             npm install 
-            pm2 restart app.js
+            pm2 restart givven-app
