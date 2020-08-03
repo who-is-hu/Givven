@@ -1,6 +1,6 @@
 {
   "name": "givven",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "abi-decoder": "^2.3.0",
@@ -26,14 +26,26 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "sequelize": "^5.21.2",
-    "should": "^13.2.3",
     "truffle": "^5.1.29",
     "web3": "^1.2.9"
   },
   "devDependencies": {
     "@truffle/hdwallet-provider": "^1.0.35",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
     "nodemon": "^1.19.4",
+    "should": "^13.2.3",
     "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "start": "nodemon ./app.js",
+    "lint": "node ./node_modules/eslint/bin/eslint.js **/*.js"
   },
   "main": "app.js",
   "repository": {
