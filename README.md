@@ -7,8 +7,8 @@ asana task 와 PR을 1:1 대응시키기
 ****
 
 #### branch
-    feat/<issue#>-branchName
-    fix/<issue#>-branchName
+    feat/branchName
+    fix/branchName
 ****
 
 #### Commit
