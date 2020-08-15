@@ -1,4 +1,4 @@
-# Givven_React_App
+# Givven API server
 블록체인 기부 플랫폼
 
 ## 협업 규칙 
