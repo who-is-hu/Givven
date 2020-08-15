@@ -1,13 +1,9 @@
-# Givven
+# Givven_React_App
 블록체인 기부 플랫폼
 
-## How to use
-http://ec2-18-191-88-208.us-east-2.compute.amazonaws.com:8080
-
 ## 협업 규칙 
-#### issue
-할당 받은 업무는 모두 issue로 등록 
-PR 과 1:1 대응시키기
+#### Task
+asana task 와 PR을 1:1 대응시키기 
 ****
 
 #### branch
@@ -33,9 +29,9 @@ PR 과 1:1 대응시키기
 1. master를 `pull` 하여 업데이트
 2. `merge` 할 브랜치를 master 에 `rebase` 
     - confilct 를 미리 해결하고 로그를 깔끔하게 유지 하기 위함
-3. Reviewer 설정
-4. 변경 사항 / 특이사항 Description에 작성
-5. <b>PR description 에 `close #issue-number` 추가하기!</b> 
+3. PR 이름은 **asana** task 이름과 같게
+4. 변경 사항 / 특이사항/ asana task link 를 Description에 작성
+5. Reviewer 설정 / asana에서 mention 하여  리뷰요청
 
 * 전원 리뷰 완료시 `merge`
 * 이해가 안되는 코드는 변경사항을 보고 플젝에 어떤 영향을 미칠지 생각하여 리뷰 남기기
@@ -43,9 +39,3 @@ PR 과 1:1 대응시키기
 
 
 ****
-
-#### 마무리 말
-
-쉬엄쉬엄 꾸준히하면서 소공전 수상하고
-졸업 요건도 채우고
-Git 사용법도 배웁시다. 빠이팅~
