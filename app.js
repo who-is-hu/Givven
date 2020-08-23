@@ -11,7 +11,7 @@ const flash = require('connect-flash');
 const cors = require('cors');
 const app = express();
 
-//app.use(cors({credentials: true, origin: true}));
+app.use(cors({ credentials: true, origin: true }));
 
 const pageRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -34,15 +34,17 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(session({
-  resave: false,
-  saveUninitialized: false,
-  secret: process.env.COOKIE_SECRET,
-  cookie:{
-    httpOnly: true,
-    secure: false,
-  },
-}));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  }),
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -63,10 +65,10 @@ app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
-})
+});
 
 // error handler
-app.use((err, req, res)=> {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -76,8 +78,8 @@ app.use((err, req, res)=> {
   res.render('error');
 });
 
-const server = app.listen(app.get('port'), () =>{
-  console.log(app.get('port'),  ': is waitting...');
+const server = app.listen(app.get('port'), () => {
+  console.log(app.get('port'), ': is waitting...');
 });
 
 module.exports = app;
