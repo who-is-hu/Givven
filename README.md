@@ -66,14 +66,7 @@ ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com
 
 ### logout
 
-`POST auth/logout`
-
-| Param    | type   | desc                      |
-| -------- | ------ | ------------------------- |
-| name     | string | 유저 이름                 |
-| email    | string | 유저 계정 이메일          |
-| password | string | 비밀번호                  |
-| type     | string | normaml /seller / charity |
+`GET auth/logout`
 
 ## 2. 캠페인
 
