@@ -1,8 +1,7 @@
 # Givven API Server
 
 # usage
-
-ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com
+http://ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com:8080
 
 # index
 
