@@ -53,7 +53,10 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
     }
     return req.login(user, () => {
       return res.status(200).json({
-        user: user.email,
+        user: {
+          email: user.email,
+          type: user.type,
+        },
         message: 'success',
       });
     });

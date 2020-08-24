@@ -51,10 +51,10 @@ http://ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com:8080
 
 response
 
-| Param   | success     | fail      |
-| ------- | ----------- | --------- |
-| message | 성공 메시지 | 실패 이유 |
-| user    | user email  | `null`    |
+| Param   | success         | fail      |
+| ------- | --------------- | --------- |
+| message | 성공 메시지     | 실패 이유 |
+| user    | user email/type | `null`    |
 
 <hr />
 
