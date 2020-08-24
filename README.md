@@ -1,6 +1,7 @@
 # Givven API Server
 
 # usage
+
 http://ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com:8080
 
 # index
@@ -48,6 +49,13 @@ http://ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com:8080
 | email    | string | 유저 계정 이메일 |
 | password | string | 비밀번호         |
 
+response
+
+| Param   | success     | fail      |
+| ------- | ----------- | --------- |
+| message | 성공 메시지 | 실패 이유 |
+| user    | user email  | `null`    |
+
 <hr />
 
 ### join
@@ -60,6 +68,12 @@ http://ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com:8080
 | email    | string | 유저 계정 이메일          |
 | password | string | 비밀번호                  |
 | type     | string | normaml /seller / charity |
+
+response
+
+| Param   | success     | fail      |
+| ------- | ----------- | --------- |
+| message | 성공 메시지 | 실패 이유 |
 
 <hr />
 
