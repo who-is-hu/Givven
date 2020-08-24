@@ -11,9 +11,8 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
-      return res.json({
-        res: 'fail',
-        msg: '이미 존재하는 계정',
+      return res.status(402).json({
+        message: '이미 존재하는 계정',
       });
     }
     const hash = await bcrypt.hash(password, 12);
@@ -44,22 +43,15 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
 });
 
 router.post('/login', isNotLoggedIn, (req, res, next) => {
-  passport.authenticate('local', (authError, user, info) => {
+  passport.authenticate('local', (authError, user) => {
     if (authError) {
       console.error(authError);
-      next(authError);
-    }
-    if (!user) {
       return res.status(400).json({
         user: null,
-        message: info.msg,
+        message: authError.toString(),
       });
     }
-    return req.login(user, logginError => {
-      if (logginError) {
-        console.error(logginError);
-        next(logginError);
-      }
+    return req.login(user, () => {
       return res.status(200).json({
         user: user.email,
         message: 'success',
