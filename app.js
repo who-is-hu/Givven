@@ -8,10 +8,10 @@ require('dotenv').config();
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 const flash = require('connect-flash');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 
-app.use(cors({ credentials: true, origin: true }));
+// app.use(cors({ credentials: true, origin: true }));
 
 const pageRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
