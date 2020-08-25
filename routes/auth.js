@@ -66,7 +66,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 router.get('/logout', isLoggedIn, (req, res, next) => {
   req.logout();
   req.session.destroy();
-  return res.status(204).redirect('/');
+  return res.status(204).send('logout');
 });
 
 //로그인 했는지 검사

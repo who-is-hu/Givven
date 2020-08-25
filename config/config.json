@@ -6,17 +6,20 @@
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false,
-    "logging" : false,
-    "define": { "charset": "utf8", "dialectOptions": { "collate": "utf8_general_ci" } }
+    "logging": false,
+    "define": {
+      "charset": "utf8",
+      "dialectOptions": { "collate": "utf8_general_ci" }
+    }
   },
   "release": {
     "username": "root",
-    "password": "given123!@#",
-    "host" : "104.196.68.14",
+    "password": "givven123!@#",
+    "host": "ec2-54-180-160-14.ap-northeast-2.compute.amazonaws.com",
     "database": "givven",
     "dialect": "mysql",
     "operatorsAliases": false,
-    "logging" : false
+    "logging": false
   },
   "production": {
     "username": "root",
