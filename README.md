@@ -154,7 +154,7 @@ Response
 
 ### 상품 상세
 
-`GET /item/:id`
+`GET /item/detail/:id` 
 
 <hr />
 
