@@ -46,79 +46,67 @@ const CampaignService = class {
   }
 
   async getUserCampaigns(user, option) {
-    try {
-      let searchOption = {};
-      if (option == 'end') {
-        searchOption = {
-          where: {
-            [Op.or]: [
-              { due_day: { [Op.lte]: new Date() } },
-              { current_money: { [Op.gte]: sequelize.col('dest_money') } },
-            ],
-            userId: user.id,
-          },
-        };
-      } else if (option == 'ing') {
-        searchOption = {
-          where: {
-            [Op.and]: [
-              { due_day: { [Op.gt]: new Date() } },
-              { current_money: { [Op.lt]: sequelize.col('dest_money') } },
-            ],
-            userId: user.id,
-          },
-        };
-      }
-      const campaigns = await user.getCampaigns(searchOption);
-      return campaigns;
-    } catch (err) {
-      console.error(err);
+    let searchOption = {};
+    if (option == 'end') {
+      searchOption = {
+        where: {
+          [Op.or]: [
+            { due_day: { [Op.lte]: new Date() } },
+            { current_money: { [Op.gte]: sequelize.col('dest_money') } },
+          ],
+          userId: user.id,
+        },
+      };
+    } else if (option == 'ing') {
+      searchOption = {
+        where: {
+          [Op.and]: [
+            { due_day: { [Op.gt]: new Date() } },
+            { current_money: { [Op.lt]: sequelize.col('dest_money') } },
+          ],
+          userId: user.id,
+        },
+      };
     }
+    const campaigns = await user.getCampaigns(searchOption);
+    return campaigns;
   }
 
   async getAllCampaigns(option) {
-    try {
-      let searchOption = {};
-      if (option == 'end') {
-        searchOption = {
-          where: {
-            [Op.or]: [
-              { due_day: { [Op.lte]: new Date() } },
-              { current_money: { [Op.gte]: sequelize.col('dest_money') } },
-            ],
-          },
-        };
-      } else if (option == 'ing') {
-        searchOption = {
-          where: {
-            [Op.and]: [
-              { due_day: { [Op.gt]: new Date() } },
-              { current_money: { [Op.lt]: sequelize.col('dest_money') } },
-            ],
-          },
-        };
-      }
-      const end_campaigns = await this.campaignModel.findAll(searchOption);
-      return end_campaigns;
-    } catch (err) {
-      console.error(err);
+    let searchOption = {};
+    if (option == 'end') {
+      searchOption = {
+        where: {
+          [Op.or]: [
+            { due_day: { [Op.lte]: new Date() } },
+            { current_money: { [Op.gte]: sequelize.col('dest_money') } },
+          ],
+        },
+      };
+    } else if (option == 'ing') {
+      searchOption = {
+        where: {
+          [Op.and]: [
+            { due_day: { [Op.gt]: new Date() } },
+            { current_money: { [Op.lt]: sequelize.col('dest_money') } },
+          ],
+        },
+      };
     }
+    const end_campaigns = await this.campaignModel.findAll(searchOption);
+    return end_campaigns;
   }
 
   async getCampaignDetail(campaignId) {
-    try {
-      let result = {};
-      const campaign = await this.campaignModel.findOne({
-        where: { id: campaignId },
-      });
-      if (campaign == null) {
-        (result.success = false), (result.msg = 'wrong id');
-        return result;
-      }
-      return campaign;
-    } catch (err) {
-      console.error(err);
+    let result = {};
+    const campaign = await this.campaignModel.findOne({
+      where: { id: campaignId },
+    });
+    if (campaign == null) {
+      (result.success = false), (result.msg = 'wrong id');
+      return result;
     }
+    return campaign;
   }
 };
 
