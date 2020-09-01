@@ -56,6 +56,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         user: {
           email: user.email,
           type: user.type,
+          name: user.name,
         },
         message: 'success',
       });
