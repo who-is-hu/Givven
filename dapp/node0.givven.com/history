@@ -1,0 +1,15 @@
+admin.peers
+eth.accounts
+eth.getBalance(eth.accounts[0])
+admin.peers
+eth.getBalance(eth.accounts[0])
+admin.peers
+eth.getBalance(eth.accounts[0])
+eth.accounts
+eth.getBalance(eth.accounts[0])
+admin.peers
+eth.accounts
+ls
+web3.getBalance(eth.accounts[0])
+personal.getBalance(eth.accounts[0])
+eth.getBalance(eth.accounts[0])

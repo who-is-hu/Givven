@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+    kovan_node:
+        image: ethereum/client-go
+        tty: true
+        ports:
+            - 8545:8545
+            - 30303:30303
+        container_name: node0.givven.com
+        volumes: 
+            - ./node0.givven.com:/root/.ethereum
+        command: --datadir /root/.ethereum --rinkeby --syncmode=light --allow-insecure-unlock --rpc --rpcaddr "0.0.0.0" --rpcport 8545 --rpccorsdomain "*"  --rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3" 
