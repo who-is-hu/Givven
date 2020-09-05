@@ -15,7 +15,7 @@
   "release": {
     "username": "root",
     "password": "givven123!@#",
-    "host": "ec2-15-164-103-255.ap-northeast-2.compute.amazonaws.com",
+    "host": "127.0.0.1",
     "database": "givven",
     "dialect": "mysql",
     "operatorsAliases": false,
