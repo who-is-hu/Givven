@@ -8,12 +8,8 @@ require('dotenv').config();
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 const flash = require('connect-flash');
-// const cors = require('cors');
 const app = express();
 
-// app.use(cors({ credentials: true, origin: true }));
-
-const pageRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const campaignRouter = require('./routes/campaign');
 const itemRouter = require('./routes/item');
@@ -22,9 +18,6 @@ const tradeLogRouter = require('./routes/tradeLog');
 const pointRouter = require('./routes/point');
 
 // middleware setup
-app.set('views', __dirname + '/views');
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
 app.set('port', process.env.PORT || 8080);
 app.use(express.static(path.join(__dirname, '/')));
 app.use(flash());
@@ -49,7 +42,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //router
-// app.use('/', pageRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/campaign', campaignRouter);
 app.use('/api/item', itemRouter);
