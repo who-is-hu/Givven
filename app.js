@@ -49,13 +49,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //router
-app.use('/', pageRouter);
-app.use('/auth', authRouter);
-app.use('/campaign', campaignRouter);
-app.use('/item', itemRouter);
-app.use('/img', imgRouter);
-app.use('/tradeLog', tradeLogRouter);
-app.use('/point', pointRouter);
+// app.use('/', pageRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/campaign', campaignRouter);
+app.use('/api/item', itemRouter);
+app.use('/api/img', imgRouter);
+app.use('/api/tradeLog', tradeLogRouter);
+app.use('/api/point', pointRouter);
 
 //Container
 require('./containerConf')();

@@ -1,62 +1,41 @@
 const { Op } = require('sequelize');
 
 const ItemService = class {
-    constructor(itemModel, userModel){
-        this.itemModel = itemModel;
-        this.userModel = userModel;
+  constructor(itemModel, userModel) {
+    this.itemModel = itemModel;
+    this.userModel = userModel;
+  }
+  async register(user, item) {
+    let { name, price, content, stock, title_img } = item;
+    let result = {};
+    if (item.title_img == null) title_img = '/uploads/default.jpg';
+
+    const exItem = await this.itemModel.create({
+      name,
+      content,
+      stock,
+      owner: user.name,
+      price,
+      title_img,
+      userId: user.id,
+    });
+    if (exItem) {
+      return true;
     }
-    async register(user, item){
-        let { name , price, content, stock, title_img } = item;
-        let result ={};
-        if(item.title_img == null)
-            title_img = "/uploads/default.jpg"
-        try{
-            const exItem = await this.itemModel.create({
-                name,
-                content,
-                stock,
-                owner : user.name,
-                price,
-                title_img,
-                userId : user.id,
-            });
-            if(exItem){
-                result = { success : true, msg : "success"};
-            }
-            return result;   
-        }catch(err){
-            console.error(err);
-            result = { success : false, msg : err};
-            return result;
-        }
-    }
-    async getItemList(){
-        try{
-            const items = await this.itemModel.findAll();
-            return items;
-        } catch (err) {
-            console.error(err);
-            return err;
-        }
-    }
-    async getItem(itemId){
-        try{
-            const item = await this.itemModel.findOne({where : { id : itemId}});
-            return item;
-        } catch (err) {
-            console.error(err);
-            return err;
-        }
-    }
-    async getMyItems(user){
-        try{
-            const items = await user.getItems();
-            return items;
-        } catch (err) {
-            console.error(err);
-            return err;
-        }
-    }
+    return false;
+  }
+  async getItemList() {
+    const items = await this.itemModel.findAll();
+    return items;
+  }
+  async getItem(itemId) {
+    const item = await this.itemModel.findOne({ where: { id: itemId } });
+    return item;
+  }
+  async getMyItems(user) {
+    const items = await user.getItems();
+    return items;
+  }
 };
 
 module.exports = ItemService;
