@@ -1,13 +1,13 @@
 const Container = new (require('./utils/Container.js'));
 const Model = require('./models');
 const services = require('./services');
-const ContractCaller = require('./dapp/src/ContractCaller');
+// const ContractCaller = require('./dapp/src/ContractCaller');
 
 const ContainerConf = () => {
-    Container.register('contractCaller', [], () => {
-        const contarctCaller = new ContractCaller();   
-        return contarctCaller;
-    });
+    // Container.register('contractCaller', [], () => {
+    //     const contarctCaller = new ContractCaller();   
+    //     return contarctCaller;
+    // });
     Container.register('userModel', [], () => {
         return Model.User;
     });
