@@ -1,10 +1,6 @@
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV;
 const config = require(__dirname + '/../config/config.json')[env];
-
-// config.username = process.env.DB_USER;
-// config.password = process.env.DB_PASSWORD;
-
 const db = {};
 
 sequelize = new Sequelize(config.database, process.env.DB_USER, process.env.DB_PASSWORD, config);

@@ -1,7 +1,7 @@
 {
   "development": {
-    "database": "givven",
     "host": "givven.cyucihz6valb.ap-northeast-2.rds.amazonaws.com",
+    "database": "givven",
     "dialect": "mysql",
     "operatorsAliases": false,
     "logging": true,
