@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
@@ -19,6 +20,7 @@ const tradeLogRouter = require('./routes/tradeLog');
 const pointRouter = require('./routes/point');
 
 // middleware setup
+app.use(cors());
 app.set('port', process.env.PORT || 8080);
 app.use(express.static(path.join(__dirname, '/')));
 app.use(flash());
