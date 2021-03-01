@@ -8,6 +8,7 @@ require('dotenv').config();
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 const flash = require('connect-flash');
+const dns = require('dns');
 const app = express();
 
 const authRouter = require('./routes/auth');

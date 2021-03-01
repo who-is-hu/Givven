@@ -1,32 +1,22 @@
 {
   "development": {
-    "username": "root",
-    "password": "givven123!@#",
     "database": "givven",
-    "host": "127.0.0.1",
+    "host": "givven.cyucihz6valb.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "operatorsAliases": false,
-    "logging": false,
+    "logging": true,
     "define": {
       "charset": "utf8",
-      "dialectOptions": { "collate": "utf8_general_ci" }
+      "dialectOptions": {
+        "collate": "utf8_general_ci"
+      }
     }
   },
   "release": {
-    "username": "root",
-    "password": "givven123!@#",
-    "host": "127.0.0.1",
+    "host": "givven.cyucihz6valb.ap-northeast-2.rds.amazonaws.com",
     "database": "givven",
     "dialect": "mysql",
     "operatorsAliases": false,
     "logging": false
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
   }
 }
