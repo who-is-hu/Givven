@@ -2,10 +2,10 @@ const fs = require('fs');
 const Web3 = require('web3');
 const decoder = require('abi-decoder');
 const rpcaddr = 'http://127.0.0.1:8545';
-const ContractAddressPath = './contractaddress.txt';
-const passPath = './.secret';
-const accountPath = './node0.givven.com/keystore/UTC--2020-08-31T14-58-16.298786100Z--28ed7664c338e162b13d69580c095f6281288c86'
-const abiPath = './build/contracts/Givven.json';
+const ContractAddressPath = './dapp/contractaddress.txt';
+const passPath = './dapp/.secret';
+const accountPath = './dapp/node0.givven.com/keystore/UTC--2021-03-01T10-50-21.334654400Z--2049cdf1346d88a1a06d37322ef298858bab84f4';
+const abiPath = './dapp/build/contracts/Givven.json';
 
 const blockchain = class {
 

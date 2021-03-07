@@ -886,56 +886,7 @@
     "name": "solc",
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
-  "networks": {
-    "4": {
-      "events": {},
-      "links": {},
-      "address": "0x1F3E4a7Ab3b294e52C24B4b5AF3F1D4A7f912951",
-      "transactionHash": "0x885fb5b4ddcc2b212f1cb3f8463b5848559a543c7f68f6a489ffaec7736d7d96"
-    },
-    "42": {
-      "events": {},
-      "links": {},
-      "address": "0x290CfF3a1907b7a1E8ACD4224EA29fB1F2950391",
-      "transactionHash": "0xe9c9fe39145daa94b925513f644f2599aabc301e9541dfa041d623453add33f3"
-    },
-    "1591889300671": {
-      "events": {},
-      "links": {},
-      "address": "0x4b18aD684274040D0556e749f4777f5E8efD97C5",
-      "transactionHash": "0xc8a8e5e658048f1e03d6f50dfec290392104b9fecc1afd58dd0a1b27f5ec7bf4"
-    },
-    "1591889622923": {
-      "events": {},
-      "links": {},
-      "address": "0x181CEFF6510e6FB87EbcF26D0a926fdd6C20ecBE",
-      "transactionHash": "0x95c46271eae38bab5e81e28208c863fc4fcad7b650625345da028fd9a6dabadd"
-    },
-    "1591889738755": {
-      "events": {},
-      "links": {},
-      "address": "0x4BfD5f63903C596D53Cc9D3D5D536204f00124a9",
-      "transactionHash": "0xefe42326b1645720401d78c3410f7c28ef174ea07a49c9d4e2df297d4705a124"
-    },
-    "1591890943381": {
-      "events": {},
-      "links": {},
-      "address": "0x9BAacB22166eE9AE31C43E53FEB7d83Deb534b4A",
-      "transactionHash": "0x20f8c196726b765571853ac0db7e7a6246fe101ec7e537ab68bfb82fd3bc63a6"
-    },
-    "1591891639836": {
-      "events": {},
-      "links": {},
-      "address": "0x6Fa8838228CD1788690712a4FaaB2f932fF630Fd",
-      "transactionHash": "0x52131375d3db83027b6096c1ba3c4cce6891af461d9b9a0c9aca2825ebce5b11"
-    },
-    "1591969037525": {
-      "events": {},
-      "links": {},
-      "address": "0x9637aDDc94a040ecEa60b8EC58846c7F89eB8033",
-      "transactionHash": "0x0c21bb5628d21ba5cb043f61b936213090104a35fc6c735be9c735fc527adc52"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.2.4",
   "updatedAt": "2020-09-01T15:57:00.146Z",
   "networkType": "ethereum",

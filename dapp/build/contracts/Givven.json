@@ -8014,56 +8014,7 @@
     "name": "solc",
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
-  "networks": {
-    "4": {
-      "events": {},
-      "links": {},
-      "address": "0x9FA1c510e55239D0F403AF0a1a1Fe0372Ba4Eff5",
-      "transactionHash": "0x27e0976b65182c79d07010b4084a220784c781cb6de20ab77d9e04ad3254abb2"
-    },
-    "42": {
-      "events": {},
-      "links": {},
-      "address": "0x22943E10238c35fe5B5C4f07a649a77521962ba9",
-      "transactionHash": "0x1532cee98efdfa3d309cb8135495f8da7bb7abcdd43b39da65fdf08786064ba7"
-    },
-    "1591889300671": {
-      "events": {},
-      "links": {},
-      "address": "0xf0aC60f9cF08470fC41840926C11DBD513F9C4b8",
-      "transactionHash": "0xdab5909f906e06d605eb3d4e1e79fbcba6431ba39ef28074e7a159902eeea813"
-    },
-    "1591889622923": {
-      "events": {},
-      "links": {},
-      "address": "0x809c803b64e588Ffde7A6924Cb53E629E2958170",
-      "transactionHash": "0xd9c2ba3953f3440f31b938a225624452701fd9099f007c7636c7b68f82291eb0"
-    },
-    "1591889738755": {
-      "events": {},
-      "links": {},
-      "address": "0x314d2A1d35A347E50B1f65E2e7F704f7D973eBE7",
-      "transactionHash": "0xc0e34df82d6ca7b2c2259fb683b9e44e2f56e6d3d26de331de232c2ed690e5d0"
-    },
-    "1591890943381": {
-      "events": {},
-      "links": {},
-      "address": "0x334aEA80F7B648709FD239FE38f19CC91706AfEc",
-      "transactionHash": "0x26069c5888a1cdc14e2b7e26af6a5c5ef59113b03f78a7f3b6fa009c28e46fbc"
-    },
-    "1591891639836": {
-      "events": {},
-      "links": {},
-      "address": "0xED2634F2a12c9CAA25c43aDB218fb83Ff5818B0e",
-      "transactionHash": "0xbb47e1b1784cab98f4f30f6d8cef4f28eb23fa2ebab8f253cb0001ef13741b08"
-    },
-    "1591969037525": {
-      "events": {},
-      "links": {},
-      "address": "0x8f4Bb8f3E6e0CD5e6F0E29200985744237839FE5",
-      "transactionHash": "0xa2f8f3055aa3c3c6ed7c39388a34b3cbd767b6818be29de3865b1c890bac30ad"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.2.4",
   "updatedAt": "2020-09-01T15:57:00.140Z",
   "networkType": "ethereum",

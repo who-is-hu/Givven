@@ -37,7 +37,7 @@ module.exports = {
     //
     development: {
      host: "127.0.0.1",     // Localhost (default: none)
-     port: 8545,            // Standard Ethereum port (default: none)
+     port: 8546,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
     
@@ -63,6 +63,15 @@ module.exports = {
       timeoutBlocks: 100,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
+    // ropsten: {
+    //   host: "127.0.0.1",  //rinkeby node rpc address
+    //   port: 8545,
+    //   network_id: 3,       // Rinkeby's id
+    //   gas: 5000000,        // Ropsten has a lower block limit than mainnet
+    //   confirmations: 0,    // # of confs to wait between deployments. (default: 0)
+    //   timeoutBlocks: 100,  // # of blocks before a deployment times out  (minimum/default: 50)
+    //   skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    // },
 
     // Useful for private networks
     // private: {

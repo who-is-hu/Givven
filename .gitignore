@@ -5,3 +5,5 @@
 /dapp/.secret
 *.pem
 *.ppk
+
+dapp/node0.givven.com/geth/
