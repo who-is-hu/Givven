@@ -4,7 +4,7 @@
     "database": "givven",
     "dialect": "mysql",
     "operatorsAliases": false,
-    "logging": true,
+    "logging": false,
     "define": {
       "charset": "utf8",
       "dialectOptions": {
