@@ -51,7 +51,7 @@ Givven은 기부를 하는 기부자, 캠페인을 등록하여 관리하고 기
 
 
 
-### Transaction inquriy
+### Transaction inquiry
 
 ![System Architecture](./readme_images/txqry.png)
 
@@ -61,4 +61,5 @@ Givven은 기부를 하는 기부자, 캠페인을 등록하여 관리하고 기
 
 # Thanks to
 
-숭실대학교 김익수 교수님
+<p>숭실대학교 김익수 교수님</p>
+<p>숭실대학교 김혜빈 학우님</p>
